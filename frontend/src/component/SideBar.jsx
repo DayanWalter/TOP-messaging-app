@@ -1,13 +1,55 @@
 import { Link } from 'react-router-dom';
 import styles from './SideBar.module.css';
+import Person from './Person';
+import Chat from './Chat';
 
 export default function SideBar() {
+  const people = [
+    {
+      id: 1,
+      name: 'Pete',
+    },
+    {
+      id: 2,
+      name: 'Fred',
+    },
+    {
+      id: 3,
+      name: 'Jeff',
+    },
+    {
+      id: 4,
+      name: 'Melissa',
+    },
+    {
+      id: 5,
+      name: 'Tina',
+    },
+  ];
+  const chatroom = [
+    {
+      id: 1,
+      name: 'Global',
+    },
+    {
+      id: 2,
+      name: 'Regional',
+    },
+    {
+      id: 3,
+      name: 'Nordlichter',
+    },
+    {
+      id: 4,
+      name: 'Lowcarb',
+    },
+  ];
   return (
     <>
       <div className={styles.sidebar}>
-        <div className={styles.userIcon}>
-          <Link to={'/home/viewprofile'}>ViewProfile</Link>
-        </div>
+        <Link to={'/home/viewprofile'}>
+          <div className={styles.userIcon}></div>
+        </Link>
         <div className={styles.searchSection}>
           <input type="text" placeholder="Search User" />
           <button>Search</button>
@@ -16,42 +58,42 @@ export default function SideBar() {
         <h1>People</h1>
 
         <div className={styles.personContainer}>
-          <div className={styles.person}>User1</div>
-          <div className={styles.person}>User2</div>
-          <div className={styles.person}>User2</div>
-          <div className={styles.person}>User2</div>
-          <div className={styles.person}>User2</div>
-          <div className={styles.person}>User2</div>
-          <div className={styles.person}>User2</div>
-          <Link to={'/home/privatechat'}>PrivateChat</Link>
+          <ul>
+            {people.map(({ id, name }) => (
+              <li key={id}>
+                {/* Add ${id} for real people */}
+                <Link to={`/home/privatechat`}>
+                  <Person name={name} />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <h1>Chatroom</h1>
 
         <div className={styles.chatroomContainer}>
-          <div className={styles.chatroom}>Chat1</div>
-          <div className={styles.chatroom}>Chat2</div>
-          <div className={styles.chatroom}>Chat2</div>
-          <div className={styles.chatroom}>Chat2</div>
-          <div className={styles.chatroom}>Chat2</div>
-          <div className={styles.chatroom}>Chat2</div>
-          <div className={styles.chatroom}>Chat2</div>
-          <Link to={'/home/chatroom'}>ChatRoom</Link>
+          <ul>
+            {chatroom.map(({ id, name }) => (
+              <li key={id}>
+                {/* Add ${id} for real rooms*/}
+                <Link to={`/home/chatroom`}>
+                  <Chat name={name} />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className={styles.editLogoutContainer}>
-          <button>
-            Edit Profile
-            <Link to={'/home/editprofile'}>EditProfile</Link>
-          </button>
+          <Link to={'/home/editprofile'}>
+            <button>Edit Profile</button>
+          </Link>
 
-          <button>
-            Logout
-            <Link to={'/logout'}>Logout</Link>
-          </button>
+          <Link to={'/logout'}>
+            <button>Logout</button>
+          </Link>
         </div>
-
-        {/* <Link to={'/home'}>Home</Link> */}
       </div>
     </>
   );
