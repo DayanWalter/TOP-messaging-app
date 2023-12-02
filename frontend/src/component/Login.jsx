@@ -24,9 +24,8 @@ export default function Login() {
           />
           <button type="submit">Login</button>
           <Link to={'/signup'}>Sign Up</Link>
+          <Link to={'/home'}>Home</Link>
         </form>
-        {/* <p>Login</p>
-        <Link to={'/home'}>Home</Link> */}
       </main>
     </>
   );

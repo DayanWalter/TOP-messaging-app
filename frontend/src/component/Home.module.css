@@ -1,6 +1,12 @@
+.site {
+  display: flex;
+}
 .sidebar {
   background-color: aqua;
+  width: 300px;
+  height: 100vh;
 }
 .main {
   background-color: green;
+  flex: 1;
 }
