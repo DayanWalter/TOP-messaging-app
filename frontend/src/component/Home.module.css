@@ -2,7 +2,7 @@
   display: flex;
 }
 .sidebar {
-  background-color: aqua;
+  /* background-color: aqua; */
   width: 300px;
   height: 100vh;
 }
