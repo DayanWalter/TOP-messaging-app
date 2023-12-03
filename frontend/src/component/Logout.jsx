@@ -1,10 +1,32 @@
 import { Link } from 'react-router-dom';
-
+import styles from './Logout.module.css';
+import logo from '/logo.svg';
 export default function Logout() {
   return (
     <>
-      <p>Logout</p>
-      <Link to={'/'}>Login</Link>
+      <main className={styles.main}>
+        <div className={styles.companyLogo}>
+          <img src={logo} alt="" />
+          <h1>Bye, see you soon at Chatty</h1>
+        </div>
+        <form className={styles.loginForm}>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+          />
+          <button type="submit">Login</button>
+          <Link to={'/signup'}>Sign Up</Link>
+          <Link to={'/home'}>Home</Link>
+        </form>
+      </main>
     </>
   );
 }
