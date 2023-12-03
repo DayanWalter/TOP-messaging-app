@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ChatRoomMessage from './ChatRoomMessage';
 import { useState } from 'react';
 
+// Offline
 const exampleMessages = [
   {
     id: 1,
@@ -37,7 +38,8 @@ let minutes = new Date().getMinutes();
 export default function ChatRoom() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState(exampleMessages);
-  // Offline messages
+
+  // Offline
   const onFormSubmit = (e) => {
     e.preventDefault();
     setMessages([
@@ -54,8 +56,6 @@ export default function ChatRoom() {
   console.log(messages);
   return (
     <>
-      {/* <p>ChatRoom</p>
-      <Link to={'/home'}>Home</Link> */}
       <div className={styles.site}>
         <div className={styles.content}>
           <header className={styles.header}>
