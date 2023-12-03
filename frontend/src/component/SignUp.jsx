@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './Login.module.css';
+import styles from './SignUp.module.css';
 import logo from '/logo.svg';
 export default function SignUp() {
   return (

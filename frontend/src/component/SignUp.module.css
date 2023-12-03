@@ -32,11 +32,14 @@
 }
 .loginForm input,
 .loginForm button {
-  font-size: 1rem;
-  padding: 0.75rem;
-  border: 0;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.16);
+  font-size: 1.5rem;
+  color: black;
+  background-color: white;
+  outline: none;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all 0.25s;
 }
 .loginForm button {
   cursor: pointer;
