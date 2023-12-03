@@ -17,8 +17,9 @@
 }
 .main {
   flex: 1;
+  padding: 15px;
 }
-.footer {
+.footer form {
   height: 80px;
   background-color: rgb(208, 208, 208);
   display: flex;

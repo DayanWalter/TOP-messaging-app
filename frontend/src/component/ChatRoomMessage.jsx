@@ -1,11 +1,21 @@
-import styles from './ChatRoom.module.css';
+import { Link } from 'react-router-dom';
+import styles from './ChatRoomMessage.module.css';
 
-export default function ChatRoomMessage({ from, message }) {
+export default function ChatRoomMessage({ from, message, time }) {
   return (
     <>
-      <div className={styles.container}></div>
-      <p>{from}</p>
-      <p>{message}</p>
+      <p>
+        {/* Add ${id} for real people */}
+        <Link to={`/home/privatechat`}>{from}</Link>:
+      </p>
+      <div className={styles.container}>
+        <div className={styles.left}>
+          <p>&quot;{message}&quot;</p>
+        </div>
+        <div className={styles.right}>
+          <p>{time}</p>
+        </div>
+      </div>
     </>
   );
 }
