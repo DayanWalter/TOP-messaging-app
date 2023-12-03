@@ -6,7 +6,7 @@ export default function ChatRoomMessage({ from, message, time }) {
     <>
       <p>
         {/* Add ${id} for real people */}
-        <Link to={`/home/privatechat`}>{from}</Link>:
+        <Link to={`/home/viewprofile`}>{from}</Link>:
       </p>
       <div className={styles.container}>
         <div className={styles.left}>

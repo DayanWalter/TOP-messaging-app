@@ -31,6 +31,9 @@ const exampleMessages = [
   },
 ];
 let nextMessageId = 5;
+let hours = new Date().getHours();
+let minutes = new Date().getMinutes();
+
 export default function ChatRoom() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState(exampleMessages);
@@ -43,9 +46,10 @@ export default function ChatRoom() {
         id: nextMessageId++,
         from: 'Me',
         message,
-        time: '12:35',
+        time: `${hours}:${minutes}`,
       },
     ]);
+    setMessage('');
   };
   console.log(messages);
   return (
@@ -75,7 +79,6 @@ export default function ChatRoom() {
                 value={message}
                 onChange={(e) => setMessage(e.currentTarget.value)}
               />
-              <button type="submit">Submit</button>
             </form>
           </footer>
         </div>
