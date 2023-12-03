@@ -7,3 +7,6 @@ body {
   /* background-color: red; */
   height: 100%;
 }
+li {
+  list-style-type: none;
+}
