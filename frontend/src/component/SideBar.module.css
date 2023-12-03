@@ -28,13 +28,12 @@
 }
 .sidebar button:hover {
   background-color: rgb(227, 227, 227);
+  cursor: pointer;
 }
 .searchSection input {
   width: 150px;
 }
-.searchSection button {
-  cursor: pointer;
-}
+
 .searchSection button:active {
   background-color: white;
 }
