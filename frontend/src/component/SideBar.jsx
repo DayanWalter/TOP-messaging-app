@@ -4,7 +4,7 @@ import Person from './Person';
 import Chat from './Chat';
 
 export default function SideBar() {
-  const people = [
+  const friends = [
     {
       id: 1,
       name: 'Pete',
@@ -55,11 +55,11 @@ export default function SideBar() {
           <button>Search</button>
         </div>
 
-        <h1>People</h1>
+        <h1>Friends</h1>
 
         <div className={styles.personContainer}>
           <ul>
-            {people.map(({ id, name }) => (
+            {friends.map(({ id, name }) => (
               <li key={id}>
                 {/* Add ${id} for real people */}
                 <Link to={`/home/privatechat`}>

@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   username: { type: String },
   password: { type: String },
   role: { type: String },
-  people: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+  friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
   chats: [{ type: Schema.Types.ObjectId, ref: 'chat' }],
 });
 
