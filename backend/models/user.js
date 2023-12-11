@@ -9,9 +9,13 @@ const UserSchema = new Schema({
   },
   username: { type: String },
   password: { type: String },
-  role: { type: String },
+  role: {
+    type: String,
+    enum: ['Visitor', 'Member', 'Admin'],
+    default: 'Visitor',
+  },
   friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
-  chats: [{ type: Schema.Types.ObjectId, ref: 'chat' }],
+  chatrooms: [{ type: Schema.Types.ObjectId, ref: 'chat' }],
 });
 
 module.exports = mongoose.model('user', UserSchema);
