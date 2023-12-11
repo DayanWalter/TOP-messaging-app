@@ -1,12 +1,29 @@
 const createError = require('http-errors');
 const express = require('express');
+// What is cors for?(Multiple req...)
+const cors = require('cors');
+
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 
+// Hide sensible data
+require('dotenv').config();
+
 const app = express();
+
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
+
+const mongoDB = process.env.MONGODB_URI || process.env.DEV_DB_URL;
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
