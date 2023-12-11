@@ -16,6 +16,7 @@ const UserSchema = new Schema({
   },
   friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
   chatrooms: [{ type: Schema.Types.ObjectId, ref: 'chat' }],
+  reg_time: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('user', UserSchema);
