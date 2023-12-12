@@ -17,8 +17,8 @@ exports.user_get = asyncHandler(async (req, res, next) => {
 exports.user_post = asyncHandler(async (req, res, next) => {
   const user = new User({
     profile: {
-      description: req.body.description,
-      name: req.body.name,
+      description: req.body.profile.description,
+      name: req.body.profile.name,
     },
     username: req.body.username,
     password: req.body.password,
@@ -45,5 +45,10 @@ exports.chat_get = asyncHandler(async (req, res, next) => {
 });
 // POST chat
 exports.chat_post = asyncHandler(async (req, res, next) => {
-  res.json({ chat: 'POST' });
+  const chat = new Chat({
+    name: req.body.name,
+    user: req.body.user,
+  });
+  await chat.save();
+  res.json({ chat });
 });
