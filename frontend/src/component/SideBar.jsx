@@ -2,28 +2,56 @@ import { Link } from 'react-router-dom';
 import styles from './SideBar.module.css';
 import Person from './Person';
 import Chat from './Chat';
+import { useEffect, useState } from 'react';
 
 export default function SideBar() {
+  // Get all friends and display them in the sidebar
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getFriends = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/user`);
+        if (!response.ok) {
+          console.error('Error:', response.statusText);
+        }
+
+        const users = await response.json();
+
+        setUser(users);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getFriends();
+  }, []);
+
   const friends = [
     {
-      id: 1,
-      name: 'Pete',
+      _id: 1,
+      username: 'Pete',
     },
     {
-      id: 2,
-      name: 'Fred',
+      _id: 2,
+      username: 'Fred',
     },
     {
-      id: 3,
-      name: 'Jeff',
+      _id: 3,
+      username: 'Jeff',
     },
     {
-      id: 4,
-      name: 'Melissa',
+      _id: 4,
+      username: 'Melissa',
     },
     {
-      id: 5,
-      name: 'Tina',
+      _id: 5,
+      username: 'Tina',
     },
   ];
   const chatroom = [
@@ -58,16 +86,20 @@ export default function SideBar() {
         <h1>Friends</h1>
 
         <div className={styles.personContainer}>
-          <ul>
-            {friends.map(({ id, name }) => (
-              <li key={id}>
-                {/* Add ${id} for real people */}
-                <Link to={`/home/privatechat`}>
-                  <Person name={name} />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {loading && <p>Loading...</p>}
+          {error && <p>Error</p>}
+          {user && (
+            <ul>
+              {user.allUser.map(({ _id, username }) => (
+                <li key={_id}>
+                  {/* Add ${id} for real people */}
+                  <Link to={`/home/privatechat`}>
+                    <Person name={username} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <h1>Chatroom</h1>

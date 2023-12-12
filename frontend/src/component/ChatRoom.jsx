@@ -53,7 +53,7 @@ export default function ChatRoom() {
     ]);
     setMessage('');
   };
-  console.log(messages);
+  // console.log(messages);
   return (
     <>
       <div className={styles.site}>

@@ -16,10 +16,6 @@ exports.user_get = asyncHandler(async (req, res, next) => {
 // POST user/Create user
 exports.user_post = asyncHandler(async (req, res, next) => {
   const user = new User({
-    profile: {
-      description: req.body.profile.description,
-      name: req.body.profile.name,
-    },
     username: req.body.username,
     password: req.body.password,
   });
@@ -29,17 +25,28 @@ exports.user_post = asyncHandler(async (req, res, next) => {
 });
 // GET messages
 exports.message_get = asyncHandler(async (req, res, next) => {
-  const allMessages = await Message.find().exec();
+  const allMessages = await Message.find()
+    .populate('from')
+    .populate('to')
+    .exec();
 
   res.json({ allMessages });
 });
 // POST message
 exports.message_post = asyncHandler(async (req, res, next) => {
-  res.json({ message: 'POST' });
+  const message = new Message({
+    text: req.body.text,
+    from: req.body.from,
+    to: req.body.to,
+  });
+  await message.save();
+  res.json({ message });
+
+  // res.json({ message: 'POST' });
 });
 // GET chats
 exports.chat_get = asyncHandler(async (req, res, next) => {
-  const allChats = await Chat.find().exec();
+  const allChats = await Chat.find().populate('user').exec();
 
   res.json({ allChats });
 });
