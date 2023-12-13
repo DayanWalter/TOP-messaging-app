@@ -1,16 +1,19 @@
 import { Link } from 'react-router-dom';
 import styles from './SignUp.module.css';
 import logo from '/logo.svg';
+import { useState } from 'react';
 export default function SignUp() {
+  const [user, setUser] = useState();
+
   const handleSubmit = async () => {
     // POST the signup values from input
     try {
       const response = await fetch(`http://localhost:3000/user/`, {
         method: 'POST',
         body: JSON.stringify({
-          username: 'username',
-          email: 'email',
-          password: 'password',
+          username: user.username,
+          email: user.email,
+          password: user.password,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -27,6 +30,17 @@ export default function SignUp() {
     }
   };
 
+  const handleInputChange = (fieldname) => (e) => {
+    const newUser = {
+      ...user,
+      [fieldname]: e.target.value,
+    };
+    setUser(newUser);
+  };
+  const handleAddUsername = handleInputChange('username');
+  const handleAddEmail = handleInputChange('email');
+  const handleAddPassword = handleInputChange('password');
+
   return (
     <>
       <main className={styles.main}>
@@ -40,12 +54,23 @@ export default function SignUp() {
             name="username"
             id="username"
             placeholder="Choose Username"
+            onChange={handleAddUsername}
           />
+
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Choose Email"
+            onChange={handleAddEmail}
+          />
+
           <input
             type="password"
             name="password"
             id="password"
             placeholder="Choose Password"
+            onChange={handleAddPassword}
           />
           <input
             type="password"
