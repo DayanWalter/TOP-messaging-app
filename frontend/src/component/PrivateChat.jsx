@@ -1,6 +1,6 @@
-import styles from './ChatRoom.module.css';
-import { Link } from 'react-router-dom';
-import ChatRoomMessage from './ChatRoomMessage';
+import { useLoaderData } from 'react-router-dom';
+import styles from './Group.module.css';
+import Message from './Message';
 import { useState } from 'react';
 
 // Offline
@@ -31,6 +31,13 @@ let hours = new Date().getHours();
 let minutes = new Date().getMinutes();
 
 export default function ChatRoom() {
+  // Get params
+  const loaderData = useLoaderData();
+  console.log(loaderData);
+
+  // create chatroom
+  // POST params to backend
+
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState(exampleMessages);
 
@@ -48,7 +55,6 @@ export default function ChatRoom() {
     ]);
     setMessage('');
   };
-  console.log(messages);
   return (
     <>
       <div className={styles.site}>
@@ -61,7 +67,7 @@ export default function ChatRoom() {
             <ul>
               {messages.map(({ id, from, message, time }) => (
                 <li key={id}>
-                  <ChatRoomMessage from={from} message={message} time={time} />
+                  <Message from={from} message={message} time={time} />
                 </li>
               ))}
             </ul>

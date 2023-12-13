@@ -5,12 +5,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.jsx';
 import Login from './component/Login.jsx';
 import Home from './component/Home.jsx';
-import ChatRoom from './component/ChatRoom.jsx';
 import EditProfile from './component/EditProfile.jsx';
 import PrivateChat from './component/PrivateChat.jsx';
 import ViewProfile from './component/ViewProfile.jsx';
 import Logout from './component/Logout.jsx';
 import SignUp from './component/SignUp.jsx';
+import Group from './component/Group.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,19 +36,22 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <ChatRoom />,
+            element: <Group />,
           },
           {
-            path: '/home/chatroom',
-            element: <ChatRoom />,
+            path: '/home/group',
+            element: <Group />,
           },
           {
             path: '/home/editprofile',
             element: <EditProfile />,
           },
           {
-            path: '/home/privatechat',
+            path: '/home/privatechat/:id',
             element: <PrivateChat />,
+            loader({ params }) {
+              return params;
+            },
           },
           {
             path: '/home/viewprofile',

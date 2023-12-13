@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import styles from './ChatRoomMessage.module.css';
+import styles from './Message.module.css';
 
-export default function ChatRoomMessage({ from, message, time }) {
+export default function Message({ from, message, time }) {
   return (
     <>
       <p>

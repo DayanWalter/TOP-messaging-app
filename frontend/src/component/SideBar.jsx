@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './SideBar.module.css';
-import Person from './Person';
-import Chat from './Chat';
 import { useEffect, useState } from 'react';
+import ListCard from './ListCard';
 
 export default function SideBar() {
   // Get all friends and display them in the sidebar
@@ -100,7 +99,7 @@ export default function SideBar() {
                 <li key={_id}>
                   {/* Add ${id} for real people */}
                   <Link to={`/home/privatechat/${_id}`}>
-                    <Person name={username} />
+                    <ListCard name={username} />
                   </Link>
                 </li>
               ))}
@@ -118,8 +117,8 @@ export default function SideBar() {
               {chat.allChats.map(({ _id, name }) => (
                 <li key={_id}>
                   {/* Add ${id} for real rooms*/}
-                  <Link to={`/home/chatroom/${_id}`}>
-                    <Chat name={name} />
+                  <Link to={`/home/chatroom/$`}>
+                    <ListCard name={name} />
                   </Link>
                 </li>
               ))}

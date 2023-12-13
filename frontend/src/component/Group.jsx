@@ -1,6 +1,5 @@
-import styles from './ChatRoom.module.css';
-import { Link } from 'react-router-dom';
-import ChatRoomMessage from './ChatRoomMessage';
+import styles from './Group.module.css';
+import Message from './Message';
 import { useState } from 'react';
 
 // Offline
@@ -35,7 +34,7 @@ let nextMessageId = 5;
 let hours = new Date().getHours();
 let minutes = new Date().getMinutes();
 
-export default function ChatRoom() {
+export default function Group() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState(exampleMessages);
 
@@ -66,7 +65,7 @@ export default function ChatRoom() {
             <ul>
               {messages.map(({ id, from, message, time }) => (
                 <li key={id}>
-                  <ChatRoomMessage from={from} message={message} time={time} />
+                  <Message from={from} message={message} time={time} />
                 </li>
               ))}
             </ul>
