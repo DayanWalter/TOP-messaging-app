@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const Message = require('../models/message');
-const Chat = require('../models/chat');
+const Group = require('../models/group');
 
 const asyncHandler = require('express-async-handler');
 
@@ -24,38 +24,41 @@ exports.user_post = asyncHandler(async (req, res, next) => {
   res.json({ user });
 });
 // GET messages
-exports.message_get = asyncHandler(async (req, res, next) => {
+exports.message_user_get = asyncHandler(async (req, res, next) => {
   const allMessages = await Message.find()
-    .populate('from')
-    .populate('to')
+    .populate('sender')
+    .populate('receiver')
     .exec();
 
   res.json({ allMessages });
 });
 // POST message
-exports.message_post = asyncHandler(async (req, res, next) => {
+exports.message_user_post = asyncHandler(async (req, res, next) => {
   const message = new Message({
+    sender: req.body.sender,
+    receiver: {
+      user: req.body.receiver,
+    },
     text: req.body.text,
-    from: req.body.from,
-    to: req.body.to,
   });
   await message.save();
   res.json({ message });
 
   // res.json({ message: 'POST' });
 });
-// GET chats
-exports.chat_get = asyncHandler(async (req, res, next) => {
-  const allChats = await Chat.find().populate('user').exec();
+// GET groups
+exports.group_get = asyncHandler(async (req, res, next) => {
+  const allGroups = await Group.find().exec();
 
-  res.json({ allChats });
+  res.json({ allGroups });
 });
-// POST chat
-exports.chat_post = asyncHandler(async (req, res, next) => {
-  const chat = new Chat({
+// POST group
+exports.group_post = asyncHandler(async (req, res, next) => {
+  const group = new Group({
     name: req.body.name,
-    user: req.body.user,
+    members: req.body.members,
+    messages: req.body.messages,
   });
-  await chat.save();
-  res.json({ chat });
+  await group.save();
+  res.json({ group });
 });

@@ -39,7 +39,7 @@ export default function SideBar() {
   useEffect(() => {
     const getGroups = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/chat`);
+        const response = await fetch(`http://localhost:3000/group`);
         if (!response.ok) {
           console.error('Error:', response.statusText);
         }
@@ -114,7 +114,7 @@ export default function SideBar() {
           {groupError && <p>Error</p>}
           {group && (
             <ul>
-              {group.allChats.map(({ _id, name }) => (
+              {group.allGroups.map(({ _id, name }) => (
                 <li key={_id}>
                   {/* Add ${id} for real rooms*/}
                   <Link to={`/home/group/${_id}`}>
