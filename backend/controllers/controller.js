@@ -60,10 +60,25 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
     },
     text: req.body.text,
   });
-  await userMessage.save();
-  res.json({ userMessage });
 
-  // res.json({ message: 'POST' });
+  // save message in backend
+  const savedMessage = await userMessage.save();
+
+  // add message._id to sender
+  await User.findByIdAndUpdate(
+    req.body.sender,
+    { $push: { messages: savedMessage._id } },
+    { new: true }
+  );
+
+  // add message._id to receiver
+  await User.findByIdAndUpdate(
+    req.body.receiver,
+    { $push: { messages: savedMessage._id } },
+    { new: true }
+  );
+
+  res.json({ userMessage: savedMessage });
 });
 // GET messages from group
 exports.message_group_get = asyncHandler(async (req, res, next) => {
@@ -85,8 +100,16 @@ exports.message_group_post = asyncHandler(async (req, res, next) => {
     },
     text: req.body.text,
   });
-  await groupMessage.save();
-  res.json({ groupMessage });
 
-  // res.json({ message: 'POST' });
+  // save message in backend
+  const savedMessage = await groupMessage.save();
+
+  // add message to group
+  await Group.findByIdAndUpdate(
+    req.body.receiver,
+    { $push: { messages: savedMessage._id } },
+    { new: true }
+  );
+
+  res.json({ groupMessage: savedMessage });
 });

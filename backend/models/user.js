@@ -17,6 +17,7 @@ const UserSchema = new Schema({
   },
   profileImage: { type: String },
   friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+  messages: [{ type: Schema.Types.ObjectId, ref: 'messages' }],
   reg_time: { type: Date, default: Date.now },
 });
 
