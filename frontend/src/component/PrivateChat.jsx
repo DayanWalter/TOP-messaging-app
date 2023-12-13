@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import styles from './Group.module.css';
 import Message from './Message';
 import { useState } from 'react';
@@ -6,23 +6,22 @@ import { useState } from 'react';
 // Offline
 const exampleMessages = [
   {
-    id: 1,
-    from: 'Pete',
-    message: 'Hey there!',
+    _id: 1,
+    sender: 'Pete',
+    text: 'Hey there!',
     time: '12:30',
   },
   {
-    id: 2,
-    from: 'Pete',
-    message: 'Hello?!',
+    _id: 2,
+    sender: 'Pete',
+    text: 'Hello?!',
     time: '12:30',
   },
 
   {
-    id: 3,
-    from: 'Pete',
-    message:
-      'Thanks, I am fine! Where are you from? What ist your favourite dish?',
+    _id: 3,
+    sender: 'Pete',
+    text: 'Thanks, I am fine! Where are you from? What ist your favourite dish?',
     time: '12:30',
   },
 ];
@@ -38,7 +37,7 @@ export default function ChatRoom() {
   // create chatroom
   // POST params to backend
 
-  const [message, setMessage] = useState('');
+  const [text, setText] = useState('');
   const [messages, setMessages] = useState(exampleMessages);
 
   // Offline
@@ -47,13 +46,13 @@ export default function ChatRoom() {
     setMessages([
       ...messages,
       {
-        id: nextMessageId++,
-        from: 'Me',
-        message,
+        _id: nextMessageId++,
+        sender: 'Me',
+        text,
         time: `${hours}:${minutes}`,
       },
     ]);
-    setMessage('');
+    setText('');
   };
   return (
     <>
@@ -65,9 +64,10 @@ export default function ChatRoom() {
           <main className={styles.main}>
             {/* Map over the messages */}
             <ul>
-              {messages.map(({ id, from, message, time }) => (
-                <li key={id}>
-                  <Message from={from} message={message} time={time} />
+              {messages.map(({ _id, sender, text, time }) => (
+                <li key={_id}>
+                  <Link to={`/home/viewprofile/${_id}`}>{sender}</Link>
+                  <Message text={text} time={time} />
                 </li>
               ))}
             </ul>
@@ -77,8 +77,8 @@ export default function ChatRoom() {
               <input
                 type="text"
                 placeholder="Enter message..."
-                value={message}
-                onChange={(e) => setMessage(e.currentTarget.value)}
+                value={text}
+                onChange={(e) => setText(e.currentTarget.value)}
               />
             </form>
           </footer>

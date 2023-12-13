@@ -57,8 +57,11 @@ const router = createBrowserRouter([
             },
           },
           {
-            path: '/home/viewprofile',
+            path: '/home/viewprofile/:id',
             element: <ViewProfile />,
+            loader({ params }) {
+              return params;
+            },
           },
         ],
       },

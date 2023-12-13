@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Group.module.css';
 import Message from './Message';
 import { useState } from 'react';
@@ -5,28 +6,27 @@ import { useState } from 'react';
 // Offline
 const exampleMessages = [
   {
-    id: 1,
-    from: 'Pete',
-    message: 'Hey there!',
+    _id: 1,
+    sender: 'Pete',
+    text: 'Hey there!',
     time: '12:30',
   },
   {
-    id: 2,
-    from: 'Pete',
-    message: 'Hello?!',
+    _id: 2,
+    sender: 'Pete',
+    text: 'Hello?!',
     time: '12:30',
   },
   {
-    id: 3,
-    from: 'Fred',
-    message: 'Hey Pete, how are you?',
+    _id: 3,
+    sender: 'Fred',
+    text: 'Hey Pete, how are you?',
     time: '12:30',
   },
   {
-    id: 4,
-    from: 'Pete',
-    message:
-      'Thanks Fred, I am fine! Where are you from? What ist your favourite dish?',
+    _id: 4,
+    sender: 'Pete',
+    text: 'Thanks Fred, I am fine! Where are you from? What ist your favourite dish?',
     time: '12:30',
   },
 ];
@@ -35,7 +35,7 @@ let hours = new Date().getHours();
 let minutes = new Date().getMinutes();
 
 export default function Group() {
-  const [message, setMessage] = useState('');
+  const [text, setText] = useState('');
   const [messages, setMessages] = useState(exampleMessages);
 
   // Offline
@@ -44,13 +44,13 @@ export default function Group() {
     setMessages([
       ...messages,
       {
-        id: nextMessageId++,
-        from: 'Me',
-        message,
+        _id: nextMessageId++,
+        sender: 'Me',
+        text,
         time: `${hours}:${minutes}`,
       },
     ]);
-    setMessage('');
+    setText('');
   };
   // console.log(messages);
   return (
@@ -63,9 +63,11 @@ export default function Group() {
           <main className={styles.main}>
             {/* Map over the messages */}
             <ul>
-              {messages.map(({ id, from, message, time }) => (
-                <li key={id}>
-                  <Message from={from} message={message} time={time} />
+              {messages.map(({ _id, sender, text, time }) => (
+                <li key={_id}>
+                  {/* Add ${id} for real people */}
+                  <Link to={`/home/viewprofile/${_id}`}>{sender}</Link>
+                  <Message text={text} time={time} />
                 </li>
               ))}
             </ul>
@@ -75,8 +77,8 @@ export default function Group() {
               <input
                 type="text"
                 placeholder="Enter message..."
-                value={message}
-                onChange={(e) => setMessage(e.currentTarget.value)}
+                value={text}
+                onChange={(e) => setText(e.currentTarget.value)}
               />
             </form>
           </footer>
