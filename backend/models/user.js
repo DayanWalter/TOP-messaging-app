@@ -8,14 +8,15 @@ const UserSchema = new Schema({
     name: { type: String },
   },
   username: { type: String },
+  email: { type: String },
   password: { type: String },
   role: {
     type: String,
     enum: ['Visitor', 'Member', 'Admin'],
     default: 'Visitor',
   },
+  profileImage: { type: String },
   friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
-  chatrooms: [{ type: Schema.Types.ObjectId, ref: 'chat' }],
   reg_time: { type: Date, default: Date.now },
 });
 

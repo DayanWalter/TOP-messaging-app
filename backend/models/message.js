@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MessageSchema = new Schema({
+  sender: { type: Schema.Types.ObjectId, ref: 'user' },
+  receiver: { type: Schema.Types.ObjectId, ref: 'user' },
   text: { type: String },
   timestamp: { type: Date, default: Date.now },
   status: {
@@ -10,8 +12,6 @@ const MessageSchema = new Schema({
     enum: ['read', 'unread'],
     default: 'unread',
   },
-  from: { type: Schema.Types.ObjectId, ref: 'user' },
-  to: { type: Schema.Types.ObjectId, ref: 'chat' },
 });
 
 module.exports = mongoose.model('message', MessageSchema);

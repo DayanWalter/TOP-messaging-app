@@ -38,7 +38,7 @@
   background-color: white;
 }
 .personContainer,
-.chatroomContainer {
+.groupContainer {
   overflow-y: auto;
   border: 1px solid black;
   border-radius: 0.25rem;

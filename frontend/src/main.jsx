@@ -39,8 +39,11 @@ const router = createBrowserRouter([
             element: <Group />,
           },
           {
-            path: '/home/group',
+            path: '/home/group/:id',
             element: <Group />,
+            loader({ params }) {
+              return params;
+            },
           },
           {
             path: '/home/editprofile',

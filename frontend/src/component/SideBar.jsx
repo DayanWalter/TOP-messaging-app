@@ -9,10 +9,10 @@ export default function SideBar() {
   const [userError, setUserError] = useState(null);
   const [userLoading, setUserLoading] = useState(true);
 
-  // Get all chats and display them in the sidebar
-  const [chat, setChat] = useState(null);
-  const [chatError, setChatError] = useState(null);
-  const [chatLoading, setChatLoading] = useState(true);
+  // Get all groups and display them in the sidebar
+  const [group, setGroup] = useState(null);
+  const [groupError, setGroupError] = useState(null);
+  const [groupLoading, setGroupLoading] = useState(true);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -37,25 +37,25 @@ export default function SideBar() {
   }, []);
 
   useEffect(() => {
-    const getChats = async () => {
+    const getGroups = async () => {
       try {
         const response = await fetch(`http://localhost:3000/chat`);
         if (!response.ok) {
           console.error('Error:', response.statusText);
         }
 
-        const chats = await response.json();
+        const groups = await response.json();
 
-        setChat(chats);
-        setChatError(null);
+        setGroup(groups);
+        setGroupError(null);
       } catch (error) {
-        setChatError(error.message);
-        setChat(null);
+        setGroupError(error.message);
+        setGroup(null);
       } finally {
-        setChatLoading(false);
+        setGroupLoading(false);
       }
     };
-    getChats();
+    getGroups();
   }, []);
 
   const chatroom = [
@@ -87,7 +87,7 @@ export default function SideBar() {
           <button>Search</button>
         </div>
 
-        <h1>Friends</h1>
+        <h1>User</h1>
 
         <div className={styles.personContainer}>
           {userLoading && <p>Loading...</p>}
@@ -107,17 +107,17 @@ export default function SideBar() {
           )}
         </div>
 
-        <h1>Chatroom</h1>
+        <h1>Group</h1>
 
-        <div className={styles.chatroomContainer}>
-          {chatLoading && <p>Loading...</p>}
-          {chatError && <p>Error</p>}
-          {chat && (
+        <div className={styles.groupContainer}>
+          {groupLoading && <p>Loading...</p>}
+          {groupError && <p>Error</p>}
+          {group && (
             <ul>
-              {chat.allChats.map(({ _id, name }) => (
+              {group.allChats.map(({ _id, name }) => (
                 <li key={_id}>
                   {/* Add ${id} for real rooms*/}
-                  <Link to={`/home/chatroom/$`}>
+                  <Link to={`/home/group/${_id}`}>
                     <ListCard name={name} />
                   </Link>
                 </li>
