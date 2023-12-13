@@ -7,8 +7,13 @@ import { useEffect, useState } from 'react';
 export default function SideBar() {
   // Get all friends and display them in the sidebar
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [userError, setUserError] = useState(null);
+  const [userLoading, setUserLoading] = useState(true);
+
+  // Get all chats and display them in the sidebar
+  const [chat, setChat] = useState(null);
+  const [chatError, setChatError] = useState(null);
+  const [chatLoading, setChatLoading] = useState(true);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -21,39 +26,39 @@ export default function SideBar() {
         const users = await response.json();
 
         setUser(users);
-        setError(null);
+        setUserError(null);
       } catch (error) {
-        setError(error.message);
+        setUserError(error.message);
         setUser(null);
       } finally {
-        setLoading(false);
+        setUserLoading(false);
       }
     };
     getFriends();
   }, []);
 
-  const friends = [
-    {
-      _id: 1,
-      username: 'Pete',
-    },
-    {
-      _id: 2,
-      username: 'Fred',
-    },
-    {
-      _id: 3,
-      username: 'Jeff',
-    },
-    {
-      _id: 4,
-      username: 'Melissa',
-    },
-    {
-      _id: 5,
-      username: 'Tina',
-    },
-  ];
+  useEffect(() => {
+    const getChats = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/chat`);
+        if (!response.ok) {
+          console.error('Error:', response.statusText);
+        }
+
+        const chats = await response.json();
+
+        setChat(chats);
+        setChatError(null);
+      } catch (error) {
+        setChatError(error.message);
+        setChat(null);
+      } finally {
+        setChatLoading(false);
+      }
+    };
+    getChats();
+  }, []);
+
   const chatroom = [
     {
       id: 1,
@@ -86,14 +91,15 @@ export default function SideBar() {
         <h1>Friends</h1>
 
         <div className={styles.personContainer}>
-          {loading && <p>Loading...</p>}
-          {error && <p>Error</p>}
+          {userLoading && <p>Loading...</p>}
+          {userError && <p>Error</p>}
           {user && (
             <ul>
+              {/* Map over all user an display them */}
               {user.allUser.map(({ _id, username }) => (
                 <li key={_id}>
                   {/* Add ${id} for real people */}
-                  <Link to={`/home/privatechat`}>
+                  <Link to={`/home/privatechat/${_id}`}>
                     <Person name={username} />
                   </Link>
                 </li>
@@ -105,16 +111,20 @@ export default function SideBar() {
         <h1>Chatroom</h1>
 
         <div className={styles.chatroomContainer}>
-          <ul>
-            {chatroom.map(({ id, name }) => (
-              <li key={id}>
-                {/* Add ${id} for real rooms*/}
-                <Link to={`/home/chatroom`}>
-                  <Chat name={name} />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {chatLoading && <p>Loading...</p>}
+          {chatError && <p>Error</p>}
+          {chat && (
+            <ul>
+              {chat.allChats.map(({ _id, name }) => (
+                <li key={_id}>
+                  {/* Add ${id} for real rooms*/}
+                  <Link to={`/home/chatroom/${_id}`}>
+                    <Chat name={name} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div className={styles.editLogoutContainer}>
