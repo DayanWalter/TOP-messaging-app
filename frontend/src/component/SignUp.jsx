@@ -1,45 +1,52 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './SignUp.module.css';
 import logo from '/logo.svg';
 import { useState } from 'react';
 export default function SignUp() {
-  const [user, setUser] = useState();
+  const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const [formdata, setFormdata] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     // POST the signup values from input
     try {
       const response = await fetch(`http://localhost:3000/user/`, {
         method: 'POST',
-        body: JSON.stringify({
-          username: user.username,
-          email: user.email,
-          password: user.password,
-        }),
+        body: JSON.stringify(formdata),
         headers: {
           'Content-Type': 'application/json',
         },
       });
+
       if (!response.ok) {
         console.error('Error:', response.statusText);
       }
+      // else: successfull signup
       const json = await response.json();
-
       console.log(json);
+      // Navigate after successful SignUp to login page
+      navigate('/');
     } catch (error) {
       console.error('Error', error);
     }
   };
 
-  const handleInputChange = (fieldname) => (e) => {
-    const newUser = {
-      ...user,
-      [fieldname]: e.target.value,
+  const handleInputChange = (e) => {
+    // Destructure e.target.value and fieldname
+    const { name, value } = e.target;
+    // Create new object
+    const newFormdata = {
+      ...formdata,
+      [name]: value,
     };
-    setUser(newUser);
+    // set Formdata to new object
+    setFormdata(newFormdata);
   };
-  const handleAddUsername = handleInputChange('username');
-  const handleAddEmail = handleInputChange('email');
-  const handleAddPassword = handleInputChange('password');
 
   return (
     <>
@@ -54,7 +61,8 @@ export default function SignUp() {
             name="username"
             id="username"
             placeholder="Choose Username"
-            onChange={handleAddUsername}
+            value={formdata.username}
+            onChange={handleInputChange}
           />
 
           <input
@@ -62,7 +70,8 @@ export default function SignUp() {
             name="email"
             id="email"
             placeholder="Choose Email"
-            onChange={handleAddEmail}
+            value={formdata.email}
+            onChange={handleInputChange}
           />
 
           <input
@@ -70,8 +79,10 @@ export default function SignUp() {
             name="password"
             id="password"
             placeholder="Choose Password"
-            onChange={handleAddPassword}
+            value={formdata.password}
+            onChange={handleInputChange}
           />
+          {/* TODO: Compare the entered passwords */}
           <input
             type="password"
             name="repeatPassword"
@@ -81,8 +92,6 @@ export default function SignUp() {
           <button type="submit">Sign Up</button>
           <Link to={'/'}>Login</Link>
         </form>
-        {/* <p>Login</p>
-        <Link to={'/home'}>Home</Link> */}
       </main>
     </>
   );
