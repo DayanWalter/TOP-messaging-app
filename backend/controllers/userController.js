@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 const asyncHandler = require('express-async-handler');
 
@@ -36,7 +37,13 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 
 // POST User Login
 exports.user_login = asyncHandler(async (req, res, next) => {
-  res.send({ user_login: 'Login' });
+  const { username, password } = req.body;
+
+  const user = await User.findOne({ username });
+  if (user.password === password) {
+    res.send({ user_login: 'Success' });
+  }
+  res.send({ user_login: 'Failure' });
 });
 
 ///TODO///
