@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from 'react-router-dom';
-import styles from './Group.module.css';
+import styles from './PrivateChat.module.css';
 import Message from './Message';
 import { useState } from 'react';
 

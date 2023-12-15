@@ -38,3 +38,7 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 exports.user_login = asyncHandler(async (req, res, next) => {
   res.send({ user_login: 'Login' });
 });
+
+///TODO///
+// user_put for users
+// user_delete for admins
