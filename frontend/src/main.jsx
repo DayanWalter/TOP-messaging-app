@@ -11,6 +11,7 @@ import ViewProfile from './component/ViewProfile.jsx';
 import Logout from './component/Logout.jsx';
 import SignUp from './component/SignUp.jsx';
 import Group from './component/Group.jsx';
+import Greeting from './component/Greeting.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Group />,
+            element: <Greeting />,
           },
           {
             path: '/home/group/:id',

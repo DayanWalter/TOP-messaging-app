@@ -41,7 +41,11 @@ exports.user_login = asyncHandler(async (req, res, next) => {
 
   const user = await User.findOne({ username });
   if (user.password === password) {
-    res.send({ user_login: 'Success' });
+    const opts = {};
+    const secret = 'SECRET';
+    const token = jwt.sign({ username }, secret, opts);
+
+    res.send({ user_login: 'Success', token });
   }
   res.send({ user_login: 'Failure' });
 });

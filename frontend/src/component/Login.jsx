@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 import logo from '/logo.svg';
 import { useState } from 'react';
+
 export default function Login() {
+  const navigate = useNavigate();
   // Save input from form
   const [formData, setFormData] = useState({
     username: '',
@@ -31,9 +33,9 @@ export default function Login() {
       if (response.ok) {
         const json = await response.json();
         // save jwt in localstorage
-        // localStorage.setItem('jwtoken', json.token);
+        localStorage.setItem('jwtoken', json.token);
         console.log('Successful login', json);
-        // navigate('/posts');
+        navigate('/home');
       } else {
         console.error('Failed to login');
       }
