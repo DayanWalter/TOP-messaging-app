@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import styles from './PrivateChat.module.css';
 import Message from './Message';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Offline
 const exampleMessages = [
@@ -32,9 +32,37 @@ let minutes = new Date().getMinutes();
 export default function ChatRoom() {
   // Get params
   const loaderData = useLoaderData();
-  console.log(loaderData);
+  // console.log(loaderData.id);
+
+  const [friend, setFriend] = useState();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // create chatroom
+  useEffect(() => {
+    const getDetailsFromFriend = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/user/${loaderData.id}`
+        );
+        if (!response.ok) {
+          console.error('Error:', response.statusText);
+        }
+
+        const data = await response.json();
+
+        setFriend(data.user);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+        setFriend(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getDetailsFromFriend();
+  }, []);
+  console.log(friend);
   // POST params to backend
 
   const [text, setText] = useState('');
@@ -59,7 +87,7 @@ export default function ChatRoom() {
       <div className={styles.site}>
         <div className={styles.content}>
           <header className={styles.header}>
-            <h1>PrivateChat Person Name</h1>
+            {friend && <h1>{friend.username}</h1>}
           </header>
           <main className={styles.main}>
             {/* Map over the messages */}
