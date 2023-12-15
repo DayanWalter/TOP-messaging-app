@@ -4,6 +4,12 @@ import { useEffect, useState } from 'react';
 import ListCard from './ListCard';
 
 export default function SideBar() {
+  const token = localStorage.getItem('jwtoken');
+  // Split the payload of the jwt and convert the username-part
+  const payload = JSON.parse(atob(token.split('.')[1]));
+  // Define the username you are looking for
+  const username = payload.username;
+
   // Get all friends and display them in the sidebar
   const [user, setUser] = useState(null);
   const [userError, setUserError] = useState(null);
@@ -58,29 +64,11 @@ export default function SideBar() {
     getGroups();
   }, []);
 
-  const chatroom = [
-    {
-      id: 1,
-      name: 'Global',
-    },
-    {
-      id: 2,
-      name: 'Regional',
-    },
-    {
-      id: 3,
-      name: 'Nordlichter',
-    },
-    {
-      id: 4,
-      name: 'Lowcarb',
-    },
-  ];
   return (
     <>
       <div className={styles.sidebar}>
-        <Link to={'/home/viewprofile'}>
-          <div className={styles.userIcon}></div>
+        <Link to={'/home/viewprofile/:id'}>
+          <div className={styles.userIcon}>{username}</div>
         </Link>
         <div className={styles.searchSection}>
           <input type="text" placeholder="Search User" />

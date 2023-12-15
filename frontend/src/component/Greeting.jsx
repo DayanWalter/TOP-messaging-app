@@ -1,4 +1,4 @@
-import styles from './ViewProfile.module.css';
+import styles from './Greeting.module.css';
 
 export default function Greeting() {
   const token = localStorage.getItem('jwtoken');
