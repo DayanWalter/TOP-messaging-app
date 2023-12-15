@@ -61,9 +61,8 @@ export default function ChatRoom() {
       }
     };
     getDetailsFromFriend();
-  }, []);
+  }, [loaderData]);
   console.log(friend);
-  // POST params to backend
 
   const [text, setText] = useState('');
   const [messages, setMessages] = useState(exampleMessages);
@@ -95,6 +94,8 @@ export default function ChatRoom() {
               {messages.map(({ _id, sender, text, time }) => (
                 <li key={_id}>
                   <Link to={`/home/viewprofile/${_id}`}>{sender}</Link>
+                  {friend && <p>{friend.messages}</p>}
+
                   <Message text={text} time={time} />
                 </li>
               ))}
