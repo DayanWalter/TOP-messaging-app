@@ -15,7 +15,7 @@ export default function SignUp() {
     e.preventDefault();
     // POST the signup values from input
     try {
-      const response = await fetch(`http://localhost:3000/user/`, {
+      const response = await fetch(`http://localhost:3000/api/user/create`, {
         method: 'POST',
         body: JSON.stringify(formdata),
         headers: {

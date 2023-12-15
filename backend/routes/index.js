@@ -1,16 +1,33 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/controller');
-// GET home page
-router.get('/', controller.index_get);
-// GET ALL users
-router.get('/user', controller.user_get);
+const user_controller = require('../controllers/userController');
+
+// GET home page(test)
+router.get('/api', controller.index_get);
+// POST home page(test)
+router.post('/api', controller.index_post);
+
+/// USER ROUTES ///
+
+// POST request for creating User
+router.post('/api/user/create', user_controller.user_post);
+
+// GET request for one User
+router.get('/api/user/:id', user_controller.user_detail);
+// Get request for list of all Users
+router.get('/api/users', user_controller.user_list);
 
 // POST request for User Login
-router.get('/user/login', controller.user_login);
+router.post('/api/user/login', user_controller.user_login);
 
-// POST user/Create user
-router.post('/user', controller.user_post);
+///TODO///
+// // DELETE request for delete User
+// router.delete('/api/user/:id/delete', user_controller.user_delete);
+// // PUT request for update User
+// router.put('/api/user/:id/update', user_controller.user_put);
+///TODO END///
+
 // GET message
 router.get('/messageUser', controller.message_user_get);
 // POST message

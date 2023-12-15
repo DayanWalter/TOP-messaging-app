@@ -1,35 +1,16 @@
-const User = require('../models/user');
 const Message = require('../models/message');
 const Group = require('../models/group');
 
 const asyncHandler = require('express-async-handler');
-
+// GET home page(test)
 exports.index_get = function (req, res, next) {
-  res.send({ title: 'Express' });
+  res.json({ index: 'GET' });
 };
-// GET users
-exports.user_get = asyncHandler(async (req, res, next) => {
-  const allUser = await User.find().exec();
+// POST home page(test)
+exports.index_post = function (req, res, next) {
+  res.json({ index: 'POST' });
+};
 
-  res.json({ allUser });
-});
-
-// POST User Login
-exports.user_login = asyncHandler(async (req, res, next) => {
-  res.send({ user_login: 'Login' });
-});
-
-// POST user/Create user
-exports.user_post = asyncHandler(async (req, res, next) => {
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-  });
-  await user.save();
-
-  res.json({ user });
-});
 // GET groups
 exports.group_get = asyncHandler(async (req, res, next) => {
   const allGroups = await Group.find().populate('members').exec();

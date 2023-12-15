@@ -17,7 +17,7 @@ export default function SideBar() {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/user`);
+        const response = await fetch(`http://localhost:3000/api/users`);
         if (!response.ok) {
           console.error('Error:', response.statusText);
         }
