@@ -25,19 +25,43 @@ const exampleMessages = [
     time: '12:30',
   },
 ];
-let nextMessageId = 4;
-let hours = new Date().getHours();
-let minutes = new Date().getMinutes();
 
 export default function ChatRoom() {
-  // Get params
+  // Get params for receiver
   const loaderData = useLoaderData();
   // console.log(loaderData.id);
+
+  const token = localStorage.getItem('jwtoken');
+  // Split the payload of the jwt and convert the username-part
+  const payload = JSON.parse(atob(token.split('.')[1]));
+  // Define the Username you are looking for
+  const searchedUsername = payload.username;
 
   const [friend, setFriend] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [text, setText] = useState('');
+  const [messages, setMessages] = useState(exampleMessages);
 
+  // Save input from form
+  const [formData, setFormData] = useState({
+    username: '',
+    text: '',
+  });
+
+  // hardcore the _id first
+  const sender = { _id: 'Dave._id' };
+  // at every keystroke, change the formdata
+  const handleChange = (e) => {
+    const newMessage = {
+      ...formData,
+      text: e.currentTarget.value,
+      // _id from the sender
+      username: sender._id,
+    };
+    setFormData(newMessage);
+  };
+  console.log(formData);
   // create chatroom
   useEffect(() => {
     const getDetailsFromFriend = async () => {
@@ -62,24 +86,12 @@ export default function ChatRoom() {
     };
     getDetailsFromFriend();
   }, [loaderData]);
-  console.log(friend);
-
-  const [text, setText] = useState('');
-  const [messages, setMessages] = useState(exampleMessages);
+  // console.log(friend);
 
   // Offline
-  const onFormSubmit = (e) => {
+  const formSubmit = (e) => {
     e.preventDefault();
-    setMessages([
-      ...messages,
-      {
-        _id: nextMessageId++,
-        sender: 'Me',
-        text,
-        time: `${hours}:${minutes}`,
-      },
-    ]);
-    setText('');
+    // send text, sender and receiver to backend
   };
   return (
     <>
@@ -102,12 +114,12 @@ export default function ChatRoom() {
             </ul>
           </main>
           <footer className={styles.footer}>
-            <form onSubmit={onFormSubmit}>
+            <form onSubmit={formSubmit}>
               <input
                 type="text"
                 placeholder="Enter message..."
-                value={text}
-                onChange={(e) => setText(e.currentTarget.value)}
+                value={formData.text}
+                onChange={handleChange}
               />
             </form>
           </footer>
