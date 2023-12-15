@@ -11,6 +11,15 @@ const cookieParser = require('cookie-parser');
 // What is logger for?
 const logger = require('morgan');
 
+// get passport
+const passport = require('passport');
+
+// define jwt strategy
+const JwtStrategy = require('./strategies/jwt');
+
+// passport uses now jwtStrategy
+passport.use(JwtStrategy);
+
 // Define routes
 const indexRouter = require('./routes/index');
 

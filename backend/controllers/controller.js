@@ -13,6 +13,12 @@ exports.user_get = asyncHandler(async (req, res, next) => {
 
   res.json({ allUser });
 });
+
+// POST User Login
+exports.user_login = asyncHandler(async (req, res, next) => {
+  res.send({ user_login: 'Login' });
+});
+
 // POST user/Create user
 exports.user_post = asyncHandler(async (req, res, next) => {
   const user = new User({
