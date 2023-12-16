@@ -17,7 +17,7 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
   const userMessage = new Message({
     sender: req.body.sender,
     receiver: {
-      user: req.body.receiver,
+      user: req.params.receiver,
     },
     text: req.body.text,
   });
@@ -31,10 +31,11 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
     { $push: { messages: savedMessage._id } },
     { new: true }
   );
+  // console.log(req.body.sender);
 
   // add message._id to receiver
   await User.findByIdAndUpdate(
-    req.body.receiver,
+    req.params.receiver,
     { $push: { messages: savedMessage._id } },
     { new: true }
   );
