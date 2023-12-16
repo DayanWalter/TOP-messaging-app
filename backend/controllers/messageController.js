@@ -1,4 +1,5 @@
 const Message = require('../models/message');
+const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 
 // GET messages from user
@@ -14,7 +15,7 @@ exports.message_user_get = asyncHandler(async (req, res, next) => {
 });
 // POST message to user
 exports.message_user_post = asyncHandler(async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const senderId = req.body.sender;
   // console.log(senderId);
   const receiverId = req.params.receiver;
@@ -29,14 +30,15 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
 
   // save message in backend
   const savedMessage = await userMessage.save();
+  console.log(savedMessage);
 
   // add message._id to sender
-  await User.findByIdAndUpdate(
+  const updatedSender = await User.findByIdAndUpdate(
     senderId,
     { $push: { messages: savedMessage._id } },
     { new: true }
   );
-  // console.log(req.body.sender);
+  console.log(updatedSender);
 
   // add message._id to receiver
   await User.findByIdAndUpdate(
