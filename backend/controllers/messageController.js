@@ -14,10 +14,15 @@ exports.message_user_get = asyncHandler(async (req, res, next) => {
 });
 // POST message to user
 exports.message_user_post = asyncHandler(async (req, res, next) => {
+  console.log(req.body);
+  const senderId = req.body.sender;
+  // console.log(senderId);
+  const receiverId = req.params.receiver;
+
   const userMessage = new Message({
-    sender: req.body.sender,
+    sender: senderId,
     receiver: {
-      user: req.params.receiver,
+      user: receiverId,
     },
     text: req.body.text,
   });
@@ -27,7 +32,7 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
 
   // add message._id to sender
   await User.findByIdAndUpdate(
-    req.body.sender,
+    senderId,
     { $push: { messages: savedMessage._id } },
     { new: true }
   );
@@ -35,7 +40,7 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
 
   // add message._id to receiver
   await User.findByIdAndUpdate(
-    req.params.receiver,
+    receiverId,
     { $push: { messages: savedMessage._id } },
     { new: true }
   );

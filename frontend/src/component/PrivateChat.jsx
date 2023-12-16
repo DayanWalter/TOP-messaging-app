@@ -36,7 +36,7 @@ export default function ChatRoom() {
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the Username you are looking for
-  const senderUsername = payload.username;
+  const senderId = payload._id;
 
   const [receiver, setReceiver] = useState();
   const [error, setError] = useState(null);
@@ -57,13 +57,13 @@ export default function ChatRoom() {
     const newMessage = {
       ...formData,
       [name]: value,
+      sender: senderId,
       receiver: receiverId,
-      sender: senderUsername,
     };
     setFormData(newMessage);
   };
   console.log(formData);
-  
+
   // create chatroom
   useEffect(() => {
     const getDetailsFromReceiver = async () => {
@@ -110,7 +110,7 @@ export default function ChatRoom() {
         const json = await response.json();
         console.log(json);
       } else {
-        console.error('Failed to login');
+        console.error('Failed to send message');
       }
     } catch (error) {
       console.error('Error:', error);
