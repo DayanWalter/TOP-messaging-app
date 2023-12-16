@@ -17,15 +17,21 @@ exports.user_post = asyncHandler(async (req, res, next) => {
 
 // GET one user
 exports.user_detail = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.params.id).exec();
-
+  const user = await User.findById(req.params.id)
+    .populate({
+      path: 'messages',
+      model: 'message',
+    })
+    .exec();
+  console.log(user);
   if (user === null) {
     // No results.
     const err = new Error('User not found');
     err.status = 404;
     return next(err);
   }
-  res.json({ user, message: 'User detail' });
+
+  res.json({ username: user.username, messages: user.messages });
 });
 
 // GET all users

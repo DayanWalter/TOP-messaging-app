@@ -7,17 +7,16 @@ exports.message_user_get = asyncHandler(async (req, res, next) => {
   const allUserMessages = await Message.find({
     'receiver.user': { $exists: true },
   })
-    .populate('sender')
-    .populate('receiver.user')
+    // .populate('sender')
+    // .populate('receiver.user')
+    // .populate('messages')
     .exec();
 
   res.json({ allUserMessages });
 });
 // POST message to user
 exports.message_user_post = asyncHandler(async (req, res, next) => {
-  // console.log(req.body);
   const senderId = req.body.sender;
-  // console.log(senderId);
   const receiverId = req.params.receiver;
 
   const userMessage = new Message({
@@ -30,15 +29,13 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
 
   // save message in backend
   const savedMessage = await userMessage.save();
-  console.log(savedMessage);
 
   // add message._id to sender
-  const updatedSender = await User.findByIdAndUpdate(
+  await User.findByIdAndUpdate(
     senderId,
     { $push: { messages: savedMessage._id } },
     { new: true }
   );
-  console.log(updatedSender);
 
   // add message._id to receiver
   await User.findByIdAndUpdate(
@@ -49,6 +46,8 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
 
   res.json({ userMessage: savedMessage });
 });
+
+///TODO: ALL FOR GROUP AS WELL///
 // GET messages from group
 exports.message_group_get = asyncHandler(async (req, res, next) => {
   const allGroupMessages = await Message.find({

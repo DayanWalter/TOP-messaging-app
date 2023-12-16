@@ -62,7 +62,7 @@ export default function ChatRoom() {
     };
     setFormData(newMessage);
   };
-  console.log(formData);
+  // console.log(formData);
 
   // create chatroom
   useEffect(() => {
@@ -76,8 +76,7 @@ export default function ChatRoom() {
         }
 
         const data = await response.json();
-
-        setReceiver(data.user);
+        setReceiver(data);
         setError(null);
       } catch (error) {
         setError(error.message);
@@ -88,9 +87,9 @@ export default function ChatRoom() {
     };
     getDetailsFromReceiver();
   }, [loaderData]);
-  // console.log(Receiver);
+  // console.log(receiver);
 
-  // Offline
+  // Post message to receiver
   const formSubmit = async (e) => {
     e.preventDefault();
     // POST text, sender and receiver to backend
@@ -116,6 +115,7 @@ export default function ChatRoom() {
       console.error('Error:', error);
     }
   };
+  console.log(receiver);
   return (
     <>
       <div className={styles.site}>
@@ -126,14 +126,15 @@ export default function ChatRoom() {
           <main className={styles.main}>
             {/* Map over the messages */}
             <ul>
-              {messages.map(({ _id, sender, text, time }) => (
-                <li key={_id}>
-                  <Link to={`/home/viewprofile/${_id}`}>{sender}</Link>
-                  {receiver && <p>{receiver.messages}</p>}
+              {receiver &&
+                receiver.messages.map(({ _id, sender, text, time }) => (
+                  <li key={_id}>
+                    <Link to={`/home/viewprofile/${_id}`}>{sender}</Link>
+                    {/* {receiver && <p>{receiver.messages}</p>} */}
 
-                  <Message text={text} time={time} />
-                </li>
-              ))}
+                    <Message text={text} time={time} />
+                  </li>
+                ))}
             </ul>
           </main>
           <footer className={styles.footer}>
