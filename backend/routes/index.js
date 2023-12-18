@@ -4,6 +4,18 @@ const controller = require('../controllers/controller');
 const user_controller = require('../controllers/userController');
 const message_controller = require('../controllers/messageController');
 const group_controller = require('../controllers/groupController');
+const jwt = require('jsonwebtoken');
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (token == null) return res.sendStatus(401);
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+}
 
 // GET home page(test)
 router.get('/api', controller.index_get);
@@ -18,7 +30,7 @@ router.post('/api/user/create', user_controller.user_post);
 // GET request for one User
 router.get('/api/user/:id', user_controller.user_detail);
 // Get request for list of all Users
-router.get('/api/users', user_controller.user_list);
+router.get('/api/users', authenticateToken, user_controller.user_list);
 
 // POST request for User Login
 router.post('/api/user/login', user_controller.user_login);
@@ -35,6 +47,7 @@ router.get('/api/message/:receiver', message_controller.message_user_get);
 // POST message
 router.post(
   '/api/message/:receiver/create',
+  authenticateToken,
   message_controller.message_user_post
 );
 // GET message

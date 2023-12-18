@@ -15,6 +15,28 @@ exports.user_post = asyncHandler(async (req, res, next) => {
   res.json({ user });
 });
 
+// POST User Login
+exports.user_login = asyncHandler(async (req, res, next) => {
+  const { username, password } = req.body;
+  // Authenticate user
+  const userFromDB = await User.findOne({ username });
+  // If user is authenticated...
+  if (userFromDB.password === password) {
+    const user = {
+      // define the _id of the user
+      _id: userFromDB._id,
+      username,
+    };
+
+    // Sign the token with username AND _id
+    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+
+    res.send({ user_login: 'Success', token });
+  } else {
+    res.send({ user_login: 'Failure' });
+  }
+});
+
 // GET one user
 exports.user_detail = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id)
@@ -23,7 +45,6 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
       model: 'message',
     })
     .exec();
-  console.log(user);
   if (user === null) {
     // No results.
     const err = new Error('User not found');
@@ -36,31 +57,11 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
 
 // GET all users
 exports.user_list = asyncHandler(async (req, res, next) => {
+  console.log(req.user);
+
   const allUser = await User.find().exec();
 
   res.json({ allUser });
-});
-
-// POST User Login
-exports.user_login = asyncHandler(async (req, res, next) => {
-  const { username, password } = req.body;
-
-  const user = await User.findOne({ username });
-  if (user.password === password) {
-    const tokenPayload = {
-      // define the _id of the user
-      _id: user._id,
-      username,
-    };
-
-    const opts = {};
-    const secret = 'SECRET';
-    // Sign the token with username AND _id
-    const token = jwt.sign(tokenPayload, secret, opts);
-
-    res.send({ user_login: 'Success', token });
-  }
-  res.send({ user_login: 'Failure' });
 });
 
 ///TODO///
