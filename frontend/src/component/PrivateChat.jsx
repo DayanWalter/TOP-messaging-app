@@ -11,9 +11,33 @@ export default function ChatRoom() {
 
   const token = localStorage.getItem('jwtoken');
 
-  const [receiver, setReceiver] = useState();
+  const [messages, setMessages] = useState();
+  const [userName, setUsername] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getName = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/user/${receiverId}`
+        );
+        if (!response.ok) {
+          console.error('Error:', response.statusText);
+        }
+
+        const userData = await response.json();
+        setUsername(userData.username);
+        console.log(userData.username);
+      } catch (error) {
+        setError(error.message);
+        setMessages(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getName();
+  }, [receiverId]);
 
   // create chatroom
   useEffect(() => {
@@ -33,41 +57,45 @@ export default function ChatRoom() {
         }
 
         const data = await response.json();
-        setReceiver(data);
+        setMessages(data);
         setError(null);
       } catch (error) {
         setError(error.message);
-        setReceiver(null);
+        setMessages(null);
       } finally {
         setLoading(false);
       }
     };
     getMessagesFromReceiver();
-  }, [loaderData]);
-  console.log(receiver);
+  }, [receiverId]);
+  console.log(messages);
   return (
     <>
       <div className={styles.site}>
         <div className={styles.content}>
           {loading && <p>Loading...</p>}
           {error && <p>Error</p>}
-          {receiver && (
+          {messages && (
             <>
               <header className={styles.header}>
-                <h1>{receiver.username}</h1>
+                {userName && <h1>{userName}</h1>}
               </header>
               <main className={styles.main}>
                 {/* Map over the messages */}
                 <ul>
-                  {receiver &&
-                    receiver.messages.map(({ _id, sender, text, time }) => (
-                      <li key={_id}>
-                        <Link to={`/home/viewprofile/${_id}`}>{sender}</Link>
-                        {/* {receiver && <p>{receiver.messages}</p>} */}
+                  {messages &&
+                    messages.messages.map(
+                      ({ _id, text, sender, timestamp }) => (
+                        <li key={_id}>
+                          <Link to={`/home/viewprofile/${_id}`}>
+                            {sender.username}
+                          </Link>
+                          {/* {receiver && <p>{receiver.messages}</p>} */}
 
-                        <Message text={text} time={time} />
-                      </li>
-                    ))}
+                          <Message text={text} time={timestamp} />
+                        </li>
+                      )
+                    )}
                 </ul>
               </main>
               <footer className={styles.footer}>

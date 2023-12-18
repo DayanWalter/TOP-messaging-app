@@ -1,7 +1,5 @@
-import { Link, useLoaderData } from 'react-router-dom';
-import styles from './PrivateChat.module.css';
-import Message from './Message';
-import { useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function SendMessageForm() {
   // Get params for receiver
@@ -37,6 +35,7 @@ export default function SendMessageForm() {
     // POST text, sender and receiver to backend
     try {
       const response = await fetch(
+        // Receiver is in the params
         `http://localhost:3000/api/message/${receiverId}/create`,
         {
           method: 'POST',
@@ -44,6 +43,7 @@ export default function SendMessageForm() {
           body: JSON.stringify(formData),
 
           headers: {
+            // Sender is in the token
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },

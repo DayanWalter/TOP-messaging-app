@@ -15,7 +15,10 @@ exports.message_user_get = asyncHandler(async (req, res, next) => {
       // receiver is in the token
       { 'receiver.user': userId, sender: receiverId },
     ],
-  }).exec();
+  })
+    // Projection for just the "username"
+    .populate('sender', 'username')
+    .exec();
 
   res.json({ messages });
 });
