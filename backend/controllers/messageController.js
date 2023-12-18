@@ -4,19 +4,22 @@ const asyncHandler = require('express-async-handler');
 
 // GET messages from user
 exports.message_user_get = asyncHandler(async (req, res, next) => {
+  //ReceiverID
+  console.log(req.params.receiver);
+  //SenderID
+  console.log(req.user._id);
   const allUserMessages = await Message.find({
-    'receiver.user': { $exists: true },
-  })
-    // .populate('sender')
-    // .populate('receiver.user')
-    // .populate('messages')
-    .exec();
+    'receiver.user': req.params.receiver,
+    sender: req.user._id,
+  }).exec();
 
   res.json({ allUserMessages });
 });
 // POST message to user
 exports.message_user_post = asyncHandler(async (req, res, next) => {
-  const senderId = req.body.sender;
+  // _id is from jwt.js(user object in done function)
+  const senderId = req.user._id;
+  // The receiver is in the params
   const receiverId = req.params.receiver;
 
   const userMessage = new Message({

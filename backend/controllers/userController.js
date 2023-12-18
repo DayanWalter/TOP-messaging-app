@@ -55,9 +55,9 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
   res.json({ username: user.username, messages: user.messages });
 });
 
-// GET all users
+// GET all users for search for example
 exports.user_list = asyncHandler(async (req, res, next) => {
-  console.log(req.user);
+  console.log(req.user._id);
 
   const allUser = await User.find().exec();
 
