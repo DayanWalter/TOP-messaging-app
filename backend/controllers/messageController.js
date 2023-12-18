@@ -4,16 +4,15 @@ const asyncHandler = require('express-async-handler');
 
 // GET messages from user
 exports.message_user_get = asyncHandler(async (req, res, next) => {
-  //ReceiverID
-  console.log(req.params.receiver);
-  //SenderID
-  console.log(req.user._id);
-  const allUserMessages = await Message.find({
+  // Find all messages in which the...
+  const messages = await Message.find({
+    // receiverID is in params and the...
     'receiver.user': req.params.receiver,
+    // senderID in the logged in user(jsonwebtoken)
     sender: req.user._id,
   }).exec();
 
-  res.json({ allUserMessages });
+  res.json({ messages });
 });
 // POST message to user
 exports.message_user_post = asyncHandler(async (req, res, next) => {
