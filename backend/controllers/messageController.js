@@ -4,12 +4,17 @@ const asyncHandler = require('express-async-handler');
 
 // GET messages from user
 exports.message_user_get = asyncHandler(async (req, res, next) => {
+  const receiverId = req.params.receiver;
+  const userId = req.user._id;
+
   // Find all messages in which the...
   const messages = await Message.find({
-    // receiverID is in params and the...
-    'receiver.user': req.params.receiver,
-    // senderID in the logged in user(jsonwebtoken)
-    sender: req.user._id,
+    $or: [
+      // receiver is in the params, OR...
+      { 'receiver.user': receiverId, sender: userId },
+      // receiver is in the token
+      { 'receiver.user': userId, sender: receiverId },
+    ],
   }).exec();
 
   res.json({ messages });
