@@ -1,6 +1,7 @@
 import styles from './Message.module.css';
 
 export default function Message({ text, time }) {
+  const convertedTime = new Date(time).toLocaleTimeString();
   return (
     <>
       <div className={styles.container}>
@@ -8,7 +9,7 @@ export default function Message({ text, time }) {
           <p>&quot;{text}&quot;</p>
         </div>
         <div className={styles.right}>
-          <p>{time}</p>
+          <p>{convertedTime}</p>
         </div>
       </div>
     </>
