@@ -10,6 +10,10 @@ export default function ChatRoom() {
   const receiverId = loaderData.id;
 
   const token = localStorage.getItem('jwtoken');
+  // Split the payload of the jwt and convert the username-part
+  const payload = JSON.parse(atob(token.split('.')[1]));
+  // Define the username you are looking for
+  const username = payload.username;
 
   const [messages, setMessages] = useState();
   const [userName, setUsername] = useState();
@@ -68,7 +72,6 @@ export default function ChatRoom() {
     };
     getMessagesFromReceiver();
   }, [receiverId]);
-  console.log(messages);
   return (
     <>
       <div className={styles.site}>
@@ -84,9 +87,21 @@ export default function ChatRoom() {
                 {/* Map over the messages */}
                 <ul>
                   {messages &&
-                    messages.messages.map(
-                      ({ _id, text, sender, timestamp }) => (
-                        <li key={_id}>
+                    messages.messages.map(({ _id, text, sender, timestamp }) =>
+                      sender.username !== username ? (
+                        <li
+                          className={styles.messageContainerReceiver}
+                          key={_id}
+                        >
+                          <Link to={`/home/viewprofile/${_id}`}>
+                            {sender.username}
+                          </Link>
+                          {/* {receiver && <p>{receiver.messages}</p>} */}
+
+                          <Message text={text} time={timestamp} />
+                        </li>
+                      ) : (
+                        <li className={styles.messageContainerSender} key={_id}>
                           <Link to={`/home/viewprofile/${_id}`}>
                             {sender.username}
                           </Link>
