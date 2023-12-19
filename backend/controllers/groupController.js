@@ -9,7 +9,7 @@ exports.group_get = asyncHandler(async (req, res, next) => {
   res.json({ allGroups });
 });
 
-// GET one user
+// GET one group
 exports.group_detail = asyncHandler(async (req, res, next) => {
   const group = await Group.findById(req.params.id)
     .populate({

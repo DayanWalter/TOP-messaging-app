@@ -57,11 +57,9 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
   res.json({ userMessage: savedMessage });
 });
 
-///TODO: ALL FOR GROUP AS WELL///
 // GET messages from group
 exports.message_group_get = asyncHandler(async (req, res, next) => {
   const receiverId = req.params.receiver;
-  const userId = req.user._id;
 
   // Find all messages in which the...
   const messages = await Message.find({

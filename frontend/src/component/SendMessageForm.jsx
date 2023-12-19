@@ -59,6 +59,8 @@ export default function SendMessageForm() {
       }
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      setFormData({ text: '' });
     }
   };
   return (

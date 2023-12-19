@@ -8,7 +8,7 @@ export default function SideBar() {
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the username you are looking for
-  const username = payload.username;
+  const activeUser = payload.username;
 
   // Get all friends and display them in the sidebar
   const [user, setUser] = useState(null);
@@ -73,7 +73,7 @@ export default function SideBar() {
     <>
       <div className={styles.sidebar}>
         <Link to={'/home/viewprofile/:id'}>
-          <div className={styles.userIcon}>{username}</div>
+          <div className={styles.userIcon}>{activeUser}</div>
         </Link>
         <div className={styles.searchSection}>
           <input type="text" placeholder="Search User" />
@@ -88,14 +88,16 @@ export default function SideBar() {
           {user && (
             <ul>
               {/* Map over all user an display them */}
-              {user.allUser.map(({ _id, username }) => (
-                <li key={_id}>
-                  {/* Add ${id} for real people */}
-                  <Link to={`/home/user/${_id}`}>
-                    <ListCard name={username} />
-                  </Link>
-                </li>
-              ))}
+              {user.allUser.map(({ _id, username }) =>
+                activeUser !== username ? (
+                  <li key={_id}>
+                    {/* Add ${id} for real people */}
+                    <Link to={`/home/user/${_id}`}>
+                      <ListCard name={username} />
+                    </Link>
+                  </li>
+                ) : null
+              )}
             </ul>
           )}
         </div>
