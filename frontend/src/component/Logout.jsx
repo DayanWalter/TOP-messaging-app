@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './Logout.module.css';
 import logo from '/logo.svg';
+import LoginForm from './LoginForm';
 export default function Logout() {
+  localStorage.clear();
   return (
     <>
       <main className={styles.main}>
@@ -9,23 +11,7 @@ export default function Logout() {
           <img src={logo} alt="" />
           <h1>Bye, see you soon at Chatty</h1>
         </div>
-        <form className={styles.loginForm}>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Username"
-          />
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-          />
-          <button type="submit">Login</button>
-          <Link to={'/signup'}>Sign Up</Link>
-          <Link to={'/home'}>Home</Link>
-        </form>
+        <LoginForm />
       </main>
     </>
   );

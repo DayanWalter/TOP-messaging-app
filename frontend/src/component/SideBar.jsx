@@ -89,6 +89,7 @@ export default function SideBar() {
             <ul>
               {/* Map over all user an display them */}
               {user.allUser.map(({ _id, username }) =>
+                // Display alle users, except logged in user
                 activeUser !== username ? (
                   <li key={_id}>
                     {/* Add ${id} for real people */}
