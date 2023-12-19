@@ -58,14 +58,12 @@ export default function ViewProfile() {
                 <div className={styles.label}>
                   <div className={styles.labelName}>Description</div>
                   <div className={styles.labelContent}>
-                    {userdata.profile.description}
+                    {userdata.description}
                   </div>
                 </div>
                 <div className={styles.label}>
                   <div className={styles.labelName}>Name</div>
-                  <div className={styles.labelContent}>
-                    {userdata.profile.name}
-                  </div>
+                  <div className={styles.labelContent}>{userdata.name}</div>
                 </div>
                 <div className={styles.label}>
                   <div className={styles.labelName}>Username</div>
