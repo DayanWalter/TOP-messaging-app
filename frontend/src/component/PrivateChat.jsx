@@ -20,6 +20,7 @@ export default function ChatRoom() {
   const [name, setName] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [refetch, setRefetch] = useState(false);
 
   useEffect(() => {
     const getName = async () => {
@@ -68,11 +69,12 @@ export default function ChatRoom() {
         setError(error.message);
         setMessages(null);
       } finally {
+        setRefetch(false);
         setLoading(false);
       }
     };
     getMessagesFromReceiver();
-  }, [receiverId]);
+  }, [receiverId, refetch]);
   console.log(messages);
   return (
     <>
@@ -118,7 +120,7 @@ export default function ChatRoom() {
                 </ul>
               </main>
               <footer className={styles.footer}>
-                <SendMessageForm />
+                <SendMessageForm refetch={() => setRefetch(true)} />
               </footer>
             </>
           )}

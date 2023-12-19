@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import { useState } from 'react';
 
-export default function SendMessageForm() {
+export default function SendMessageForm({ refetch }) {
   // Get params for receiver
   const loaderData = useLoaderData();
   const receiverId = loaderData.id;
@@ -60,6 +60,7 @@ export default function SendMessageForm() {
     } catch (error) {
       console.error('Error:', error);
     } finally {
+      refetch();
       setFormData({ text: '' });
     }
   };
