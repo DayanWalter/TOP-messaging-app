@@ -65,13 +65,10 @@ exports.message_group_get = asyncHandler(async (req, res, next) => {
 
   // Find all messages in which the...
   const messages = await Message.find({
-    $or: [
-      // receiver is in the params, OR...
-      { 'receiver.group': receiverId, sender: userId },
-      // receiver is in the token
-      { 'receiver.group': userId, sender: receiverId },
-    ],
-  });
+    'receiver.group': receiverId,
+  })
+    .populate('sender', 'username')
+    .exec();
   res.json({ messages });
 });
 // POST message to group

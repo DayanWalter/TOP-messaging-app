@@ -73,6 +73,7 @@ export default function ChatRoom() {
     };
     getMessagesFromReceiver();
   }, [receiverId]);
+  console.log(messages);
   return (
     <>
       <div className={styles.site}>
