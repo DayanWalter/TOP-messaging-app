@@ -60,15 +60,31 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
 ///TODO: ALL FOR GROUP AS WELL///
 // GET messages from group
 exports.message_group_get = asyncHandler(async (req, res, next) => {
-  const messages = [];
+  const receiverId = req.params.receiver;
+  const userId = req.user._id;
+
+  // Find all messages in which the...
+  const messages = await Message.find({
+    $or: [
+      // receiver is in the params, OR...
+      { 'receiver.group': receiverId, sender: userId },
+      // receiver is in the token
+      { 'receiver.group': userId, sender: receiverId },
+    ],
+  });
   res.json({ messages });
 });
 // POST message to group
 exports.message_group_post = asyncHandler(async (req, res, next) => {
+  // _id is from jwt.js(user object in done function)
+  const senderId = req.user._id;
+  // The receiver is in the params
+  const receiverId = req.params.receiver;
+
   const groupMessage = new Message({
-    sender: req.body.sender,
+    sender: senderId,
     receiver: {
-      group: req.body.receiver,
+      group: receiverId,
     },
     text: req.body.text,
   });
@@ -76,12 +92,19 @@ exports.message_group_post = asyncHandler(async (req, res, next) => {
   // save message in backend
   const savedMessage = await groupMessage.save();
 
-  // add message to group
-  await Group.findByIdAndUpdate(
-    req.body.receiver,
-    { $push: { messages: savedMessage._id } },
-    { new: true }
-  );
+  // // add message._id to sender
+  // await User.findByIdAndUpdate(
+  //   senderId,
+  //   { $push: { messages: savedMessage._id } },
+  //   { new: true }
+  // );
+
+  // // add message._id to receiver
+  // await Group.findByIdAndUpdate(
+  //   receiverId,
+  //   { $push: { messages: savedMessage._id } },
+  //   { new: true }
+  // );
 
   res.json({ groupMessage: savedMessage });
 });

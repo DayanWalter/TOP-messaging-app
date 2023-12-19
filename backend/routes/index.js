@@ -60,11 +60,13 @@ router.post(
 // GET message
 router.get(
   '/api/message/group/:receiver',
+  protectedRoute,
   message_controller.message_group_get
 );
 // POST message
 router.post(
   '/api/message/group/:receiver/create',
+  protectedRoute,
   message_controller.message_group_post
 );
 

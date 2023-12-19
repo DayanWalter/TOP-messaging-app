@@ -5,6 +5,7 @@ export default function SendMessageForm() {
   // Get params for receiver
   const loaderData = useLoaderData();
   const receiverId = loaderData.id;
+  const receiverType = loaderData.type;
   // console.log(loaderData.id);
 
   const token = localStorage.getItem('jwtoken');
@@ -36,7 +37,7 @@ export default function SendMessageForm() {
     try {
       const response = await fetch(
         // Receiver is in the params
-        `http://localhost:3000/api/message/user/${receiverId}/create`,
+        `http://localhost:3000/api/message/${receiverType}/${receiverId}/create`,
         {
           method: 'POST',
           // Just the text is send via body
