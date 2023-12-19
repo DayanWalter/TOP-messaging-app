@@ -61,8 +61,6 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
 
 // GET all users for search for example
 exports.user_list = asyncHandler(async (req, res, next) => {
-  console.log(req.user._id);
-
   const allUser = await User.find().exec();
 
   res.json({ allUser });
