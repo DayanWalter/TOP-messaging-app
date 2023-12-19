@@ -82,9 +82,11 @@ export default function ChatRoom() {
           {error && <p>Error</p>}
           {messages && (
             <>
-              <header className={styles.header}>
-                {name && <h1>{name}</h1>}
-              </header>
+              <Link to={`/home/viewprofile/${receiverId}`}>
+                <header className={styles.header}>
+                  {name && <h1>{name}</h1>}
+                </header>
+              </Link>
               <main className={styles.main}>
                 {/* Map over the messages */}
                 <ul>

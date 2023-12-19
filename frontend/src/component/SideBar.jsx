@@ -9,6 +9,7 @@ export default function SideBar() {
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the username you are looking for
   const activeUser = payload.username;
+  const activeUserId = payload._id;
 
   // Get all friends and display them in the sidebar
   const [user, setUser] = useState(null);
@@ -72,7 +73,7 @@ export default function SideBar() {
   return (
     <>
       <div className={styles.sidebar}>
-        <Link to={'/home/viewprofile/:id'}>
+        <Link to={`/home/viewprofile/${activeUserId}`}>
           <div className={styles.userIcon}>{activeUser}</div>
         </Link>
         <div className={styles.searchSection}>
