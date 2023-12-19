@@ -37,7 +37,8 @@ router.get('/api/user/:id', user_controller.user_detail);
 router.get('/api/users', protectedRoute, user_controller.user_list);
 // POST request for User Login(works)
 router.post('/api/user/login', user_controller.user_login);
-
+// PUT request for updating user
+router.put('/api/user/editprofile', protectedRoute, user_controller.user_put);
 ///TODO///
 // // DELETE request for delete User
 // router.delete('/api/user/:id/delete', user_controller.user_delete);

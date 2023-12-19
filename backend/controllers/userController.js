@@ -55,7 +55,8 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
   res.json({
     username: user.username,
     messages: user.messages,
-    profile: user.profile,
+    name: user.name,
+    description: user.description,
   });
 });
 
@@ -68,4 +69,19 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 
 ///TODO///
 // user_put for users
+exports.user_put = asyncHandler(async (req, res, next) => {
+  const senderId = req.user._id;
+  const newUserData = req.body;
+  // console.log(req.user._id);
+  const user = new User({
+    _id: req.user._id,
+    name: req.body.name,
+    username: req.body.username,
+    description: req.body.description,
+  });
+  console.log(user);
+  // add message._id to sender
+  const updatedUser = await User.findByIdAndUpdate(senderId, user);
+  res.json({ updatedUser });
+});
 // user_delete for admins

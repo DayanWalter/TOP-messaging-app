@@ -2,17 +2,10 @@ import { Link, useLoaderData } from 'react-router-dom';
 import styles from './ViewProfile.module.css';
 import { useEffect, useState } from 'react';
 
-// Offline
-const profile = {
-  description: 'I love reading books',
-  name: 'Jonathan Frakes',
-  username: 'JFrakes',
-};
 export default function ViewProfile() {
   // Get params for receiver
   const loaderData = useLoaderData();
   const receiverId = loaderData.id;
-  const receiverType = loaderData.type;
 
   const token = localStorage.getItem('jwtoken');
   // Split the payload of the jwt and convert the username-part
