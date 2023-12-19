@@ -95,7 +95,7 @@ export default function ChatRoom() {
                           className={styles.messageContainerReceiver}
                           key={_id}
                         >
-                          <Link to={`/home/viewprofile/${_id}`}>
+                          <Link to={`/home/viewprofile/${sender._id}`}>
                             {sender.username}
                           </Link>
                           {/* {receiver && <p>{receiver.messages}</p>} */}
@@ -104,7 +104,7 @@ export default function ChatRoom() {
                         </li>
                       ) : (
                         <li className={styles.messageContainerSender} key={_id}>
-                          <Link to={`/home/viewprofile/${_id}`}>
+                          <Link to={`/home/viewprofile/${sender._id}`}>
                             {sender.username}
                           </Link>
                           {/* {receiver && <p>{receiver.messages}</p>} */}

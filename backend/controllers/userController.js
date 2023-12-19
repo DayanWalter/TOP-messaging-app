@@ -52,7 +52,11 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.json({ username: user.username, messages: user.messages });
+  res.json({
+    username: user.username,
+    messages: user.messages,
+    profile: user.profile,
+  });
 });
 
 // GET all users for search for example
