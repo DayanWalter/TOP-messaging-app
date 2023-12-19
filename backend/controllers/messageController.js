@@ -60,14 +60,8 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
 ///TODO: ALL FOR GROUP AS WELL///
 // GET messages from group
 exports.message_group_get = asyncHandler(async (req, res, next) => {
-  const allGroupMessages = await Message.find({
-    'receiver.group': { $exists: true },
-  })
-    .populate('sender')
-    .populate('receiver.group')
-    .exec();
-
-  res.json({ allGroupMessages });
+  const messages = [];
+  res.json({ messages });
 });
 // POST message to group
 exports.message_group_post = asyncHandler(async (req, res, next) => {

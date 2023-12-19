@@ -50,7 +50,7 @@ export default function SideBar() {
   useEffect(() => {
     const getGroups = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/group`);
+        const response = await fetch(`http://localhost:3000/api/groups`);
         if (!response.ok) {
           console.error('Error:', response.statusText);
         }
@@ -91,7 +91,7 @@ export default function SideBar() {
               {user.allUser.map(({ _id, username }) => (
                 <li key={_id}>
                   {/* Add ${id} for real people */}
-                  <Link to={`/home/privatechat/${_id}`}>
+                  <Link to={`/home/user/${_id}`}>
                     <ListCard name={username} />
                   </Link>
                 </li>

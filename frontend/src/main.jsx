@@ -40,8 +40,8 @@ const router = createBrowserRouter([
             element: <Greeting />,
           },
           {
-            path: '/home/group/:id',
-            element: <Group />,
+            path: '/home/:type/:id',
+            element: <PrivateChat />,
             loader({ params }) {
               return params;
             },
@@ -50,13 +50,13 @@ const router = createBrowserRouter([
             path: '/home/editprofile',
             element: <EditProfile />,
           },
-          {
-            path: '/home/privatechat/:id',
-            element: <PrivateChat />,
-            loader({ params }) {
-              return params;
-            },
-          },
+          // {
+          //   path: '/home/privatechat/:id',
+          //   element: <PrivateChat />,
+          //   loader({ params }) {
+          //     return params;
+          //   },
+          // },
           {
             path: '/home/viewprofile/:id',
             element: <ViewProfile />,

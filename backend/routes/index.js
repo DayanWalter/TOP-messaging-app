@@ -29,15 +29,13 @@ router.post('/api', controller.index_post);
 
 /// USER ROUTES ///
 
-// POST request for creating User
+// POST request for creating User (works)
 router.post('/api/user/create', user_controller.user_post);
-
-// GET request for one User
+// GET request for one User(works)
 router.get('/api/user/:id', user_controller.user_detail);
-// Get request for list of all Users
+// Get request for list of all Users(works)
 router.get('/api/users', protectedRoute, user_controller.user_list);
-
-// POST request for User Login
+// POST request for User Login(works)
 router.post('/api/user/login', user_controller.user_login);
 
 ///TODO///
@@ -47,25 +45,34 @@ router.post('/api/user/login', user_controller.user_login);
 // router.put('/api/user/:id/update', user_controller.user_put);
 ///TODO END///
 
-// GET message
+// GET message(works)
 router.get(
-  '/api/message/:receiver',
+  '/api/message/user/:receiver',
   protectedRoute,
   message_controller.message_user_get
 );
-// POST message
+// POST message(works)
 router.post(
-  '/api/message/:receiver/create',
+  '/api/message/user/:receiver/create',
   protectedRoute,
   message_controller.message_user_post
 );
 // GET message
-router.get('/messageGroup', message_controller.message_group_get);
+router.get(
+  '/api/message/group/:receiver',
+  message_controller.message_group_get
+);
 // POST message
-router.post('/messageGroup', message_controller.message_group_post);
+router.post(
+  '/api/message/group/:receiver/create',
+  message_controller.message_group_post
+);
 
-// GET group
-router.get('/group', group_controller.group_get);
+// GET group(works)
+router.get('/api/groups', group_controller.group_get);
+// GET request for one User(works)
+router.get('/api/group/:id', group_controller.group_detail);
+
 // POST group
 router.post('/group', group_controller.group_post);
 

@@ -36,7 +36,7 @@ export default function SendMessageForm() {
     try {
       const response = await fetch(
         // Receiver is in the params
-        `http://localhost:3000/api/message/${receiverId}/create`,
+        `http://localhost:3000/api/message/user/${receiverId}/create`,
         {
           method: 'POST',
           // Just the text is send via body

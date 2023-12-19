@@ -8,6 +8,7 @@ export default function ChatRoom() {
   // Get params for receiver
   const loaderData = useLoaderData();
   const receiverId = loaderData.id;
+  const receiverType = loaderData.type;
 
   const token = localStorage.getItem('jwtoken');
   // Split the payload of the jwt and convert the username-part
@@ -16,7 +17,7 @@ export default function ChatRoom() {
   const username = payload.username;
 
   const [messages, setMessages] = useState();
-  const [userName, setUsername] = useState();
+  const [name, setName] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -24,15 +25,15 @@ export default function ChatRoom() {
     const getName = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/user/${receiverId}`
+          `http://localhost:3000/api/${receiverType}/${receiverId}`
         );
         if (!response.ok) {
           console.error('Error:', response.statusText);
         }
 
-        const userData = await response.json();
-        setUsername(userData.username);
-        console.log(userData.username);
+        const data = await response.json();
+        data.username ? setName(data.username) : setName(data.name);
+        // setName(data.username);
       } catch (error) {
         setError(error.message);
         setMessages(null);
@@ -48,7 +49,7 @@ export default function ChatRoom() {
     const getMessagesFromReceiver = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/message/${receiverId}`,
+          `http://localhost:3000/api/message/${receiverType}/${receiverId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -81,7 +82,7 @@ export default function ChatRoom() {
           {messages && (
             <>
               <header className={styles.header}>
-                {userName && <h1>{userName}</h1>}
+                {name && <h1>{name}</h1>}
               </header>
               <main className={styles.main}>
                 {/* Map over the messages */}
