@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useNavigate, useLoaderData } from 'react-router-dom';
 import styles from './EditProfile.module.css';
 import { useEffect, useState } from 'react';
 
@@ -12,7 +12,7 @@ export default function EditProfile() {
   const [userdata, setUserdata] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   //fetch data for user
   useEffect(() => {
     const getUserdata = async () => {
@@ -25,7 +25,6 @@ export default function EditProfile() {
         }
 
         const data = await response.json();
-        console.log(data);
         setUserdata(data);
       } catch (error) {
         setError(error.message);
@@ -38,11 +37,11 @@ export default function EditProfile() {
   }, [activeUserId]);
 
   const handleChange = (key, e) => {
-    const newProfile = {
+    const newUserdata = {
       ...userdata,
       [key]: e.currentTarget.value,
     };
-    setUserdata(newProfile);
+    setUserdata(newUserdata);
   };
 
   // PUT user data
@@ -67,7 +66,7 @@ export default function EditProfile() {
 
       if (response.ok) {
         const json = await response.json();
-        // console.log(json);
+        navigate('/home');
       } else {
         console.error('Failed to send message');
       }
@@ -75,7 +74,6 @@ export default function EditProfile() {
       console.error('Error:', error);
     }
   };
-  // console.log(userdata);
   return (
     <>
       <div className={styles.site}>

@@ -9,7 +9,7 @@ export default function Login() {
     <>
       <main className={styles.main}>
         <div className={styles.companyLogo}>
-          <img src={logo} alt="" />
+          <img src={logo} alt="Chatty Logo" />
           <h1>Chatty</h1>
         </div>
         <LoginForm />

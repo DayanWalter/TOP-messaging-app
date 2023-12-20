@@ -30,7 +30,6 @@ export default function ViewProfile() {
 
         const data = await response.json();
         setUserdata(data);
-        console.log(data);
       } catch (error) {
         setError(error.message);
         setUserdata(null);

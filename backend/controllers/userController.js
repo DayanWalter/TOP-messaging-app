@@ -67,21 +67,35 @@ exports.user_list = asyncHandler(async (req, res, next) => {
   res.json({ allUser });
 });
 
-///TODO///
 // user_put for users
 exports.user_put = asyncHandler(async (req, res, next) => {
   const senderId = req.user._id;
-  const newUserData = req.body;
-  // console.log(req.user._id);
-  const user = new User({
-    _id: req.user._id,
-    name: req.body.name,
-    username: req.body.username,
-    description: req.body.description,
-  });
-  console.log(user);
-  // add message._id to sender
-  const updatedUser = await User.findByIdAndUpdate(senderId, user);
+
+  // update User
+  const updatedUser = await User.findByIdAndUpdate(
+    senderId,
+    {
+      name: req.body.name,
+      username: req.body.username,
+      description: req.body.description,
+    },
+    { new: true }
+  );
+
   res.json({ updatedUser });
+
+  // const senderId = req.user._id;
+  // const newUserData = req.body;
+  // // console.log(req.user._id);
+  // const user = new User({
+  //   _id: req.user._id,
+  //   name: req.body.name,
+  //   username: req.body.username,
+  //   description: req.body.description,
+  // });
+  // console.log(user);
+  // // add message._id to sender
+  // const updatedUser = await User.findByIdAndUpdate(senderId, user);
+  // res.json({ updatedUser });
 });
 // user_delete for admins
