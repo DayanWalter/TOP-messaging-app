@@ -25,7 +25,8 @@
   height: 4rem;
   border-radius: 50%;
 }
-.main {
+
+.form {
   background-color: antiquewhite;
   flex: 1;
   padding: 25px;

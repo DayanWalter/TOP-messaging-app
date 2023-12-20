@@ -89,59 +89,56 @@ export default function EditProfile() {
                   <div className={styles.userIcon}></div>
                 </Link>
               </header>
-              <main className={styles.main}>
-                <form onSubmit={formSubmit}>
-                  <div className={styles.label}>
-                    <div className={styles.labelName}>Description</div>
-                    <div className={styles.labelContent}>
-                      <input
-                        type="text"
-                        name="description"
-                        id="description"
-                        defaultValue={userdata.description}
-                        onChange={(e) => {
-                          handleChange('description', e);
-                        }}
-                      />
-                    </div>
+              <form className={styles.form} onSubmit={formSubmit}>
+                <div className={styles.label}>
+                  <div className={styles.labelName}>Description</div>
+                  <div className={styles.labelContent}>
+                    <input
+                      type="text"
+                      name="description"
+                      id="description"
+                      defaultValue={userdata.description}
+                      onChange={(e) => {
+                        handleChange('description', e);
+                      }}
+                    />
                   </div>
-                  <div className={styles.label}>
-                    <div className={styles.labelName}>Name</div>
-                    <div className={styles.labelContent}>
-                      <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        defaultValue={userdata.name}
-                        onChange={(e) => {
-                          handleChange('name', e);
-                        }}
-                      />
-                    </div>
+                </div>
+                <div className={styles.label}>
+                  <div className={styles.labelName}>Name</div>
+                  <div className={styles.labelContent}>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      defaultValue={userdata.name}
+                      onChange={(e) => {
+                        handleChange('name', e);
+                      }}
+                    />
                   </div>
-                  <div className={styles.label}>
-                    <div className={styles.labelName}>Username</div>
-                    <div className={styles.labelContent}>
-                      <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        defaultValue={userdata.username}
-                        onChange={(e) => {
-                          handleChange('username', e);
-                        }}
-                      />
-                    </div>
+                </div>
+                <div className={styles.label}>
+                  <div className={styles.labelName}>Username</div>
+                  <div className={styles.labelContent}>
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      defaultValue={userdata.username}
+                      onChange={(e) => {
+                        handleChange('username', e);
+                      }}
+                    />
                   </div>
-                  <div className={styles.button}>
-                    {/* <Link to={'/home'}> */}
-                    {/* Send changed profile to server */}
-                    <button type="submit">Save changes</button>
-                    {/* </Link> */}
-                  </div>
-                </form>
-              </main>
-              <footer className={styles.footer}></footer>
+                </div>
+                <div className={styles.button}>
+                  {/* <Link to={'/home'}> */}
+                  {/* Send changed profile to server */}
+                  <button type="submit">Save changes</button>
+                  {/* </Link> */}
+                </div>
+              </form>
             </>
           )}
         </div>
