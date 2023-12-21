@@ -39,6 +39,11 @@ router.get('/api/users', protectedRoute, user_controller.user_list);
 router.post('/api/user/login', user_controller.user_login);
 // PUT request for updating user
 router.put('/api/user/editprofile', protectedRoute, user_controller.user_put);
+// POST request for adding user to friendlist
+router.post('/api/user/:id/add', protectedRoute, user_controller.user_add);
+// GET request for friendlist
+router.get('/api/friends', protectedRoute, user_controller.friendlist_get);
+
 ///TODO///
 // // DELETE request for delete User
 // router.delete('/api/user/:id/delete', user_controller.user_delete);

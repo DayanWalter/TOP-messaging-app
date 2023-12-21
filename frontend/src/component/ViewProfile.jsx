@@ -45,7 +45,7 @@ export default function ViewProfile() {
       <div className={styles.site}>
         <div className={styles.content}>
           {loading && <p>Loading...</p>}
-          {error && <p>Error</p>}
+          {error && <p>Error {error}</p>}
           {userdata && (
             <>
               <header className={styles.header}>

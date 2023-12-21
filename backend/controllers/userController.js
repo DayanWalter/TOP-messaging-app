@@ -85,19 +85,24 @@ exports.user_put = asyncHandler(async (req, res, next) => {
   );
 
   res.json({ updatedUser });
+});
 
-  // const senderId = req.user._id;
-  // const newUserData = req.body;
-  // // console.log(req.user._id);
-  // const user = new User({
-  //   _id: req.user._id,
-  //   name: req.body.name,
-  //   username: req.body.username,
-  //   description: req.body.description,
-  // });
-  // console.log(user);
-  // // add message._id to sender
-  // const updatedUser = await User.findByIdAndUpdate(senderId, user);
-  // res.json({ updatedUser });
+// user_add
+exports.user_add = asyncHandler(async (req, res, next) => {
+  const senderId = req.user._id;
+  const friendId = req.params.id;
+  // add message._id to sender
+  await User.findByIdAndUpdate(
+    senderId,
+    { $push: { friends: friendId } },
+    { new: true }
+  );
+  res.json({ user_add: req.user });
+});
+// GET Friendlist
+exports.friendlist_get = asyncHandler(async (req, res, next) => {
+  const user = await User.find({ _id: { $in: req.user.friends } });
+
+  res.json({ user });
 });
 // user_delete for admins
