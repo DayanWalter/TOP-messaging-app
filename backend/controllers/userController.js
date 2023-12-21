@@ -101,8 +101,8 @@ exports.user_add = asyncHandler(async (req, res, next) => {
 });
 // GET Friendlist
 exports.friendlist_get = asyncHandler(async (req, res, next) => {
-  const user = await User.find({ _id: { $in: req.user.friends } });
+  const friends = await User.find({ _id: { $in: req.user.friends } });
 
-  res.json({ user });
+  res.json({ friends });
 });
 // user_delete for admins

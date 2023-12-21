@@ -25,7 +25,7 @@ export default function SideBar() {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/users`, {
+        const response = await fetch(`http://localhost:3000/api/friends`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -70,7 +70,6 @@ export default function SideBar() {
     };
     getGroups();
   }, []);
-
   return (
     <>
       <div className={styles.sidebar}>
@@ -82,7 +81,7 @@ export default function SideBar() {
           <SearchUser />
         </div>
 
-        <h1>User</h1>
+        <h1>Friends</h1>
 
         <div className={styles.personContainer}>
           {userLoading && <p>Loading...</p>}
@@ -90,7 +89,7 @@ export default function SideBar() {
           {user && (
             <ul>
               {/* Map over all user an display them */}
-              {user.allUser.map(({ _id, username }) =>
+              {user.friends.map(({ _id, username }) =>
                 // Display alle users, except logged in user
                 activeUser !== username ? (
                   <li key={_id}>
@@ -105,7 +104,7 @@ export default function SideBar() {
           )}
         </div>
 
-        <h1>Group</h1>
+        <h1>Groups</h1>
 
         <div className={styles.groupContainer}>
           {groupLoading && <p>Loading...</p>}

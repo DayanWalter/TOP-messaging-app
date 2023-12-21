@@ -77,10 +77,10 @@ export default function ViewProfile() {
                   <div className={styles.labelContent}>{userdata.username}</div>
                 </div>
                 <div className={styles.button}>
-                  <Link to={'/home'}>
+                  <Link to={`/home/${receiverId}/add`}>
                     <button>Add to friends</button>
                   </Link>
-                  <Link to={'/home/privatechat'}>
+                  <Link to={`/home/user/${receiverId}`}>
                     <button>Start to chat</button>
                   </Link>
                 </div>

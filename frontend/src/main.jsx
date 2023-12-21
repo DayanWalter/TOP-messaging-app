@@ -13,6 +13,7 @@ import SignUp from './component/SignUp.jsx';
 import Group from './component/Group.jsx';
 import Greeting from './component/Greeting.jsx';
 import UserList from './component/UserList.jsx';
+import AddFriend from './component/AddFriend.jsx';
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,13 @@ const router = createBrowserRouter([
           {
             path: '/home/userlist',
             element: <UserList />,
+          },
+          {
+            path: '/home/:id/add',
+            element: <AddFriend />,
+            loader({ params }) {
+              return params;
+            },
           },
         ],
       },
