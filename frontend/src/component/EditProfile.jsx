@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLoaderData } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './EditProfile.module.css';
 import { useEffect, useState } from 'react';
 

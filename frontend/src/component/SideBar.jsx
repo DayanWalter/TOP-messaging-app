@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './SideBar.module.css';
 import { useEffect, useState } from 'react';
 import ListCard from './ListCard';
+import SearchUser from './SearchUser';
 
 export default function SideBar() {
   const token = localStorage.getItem('jwtoken');
@@ -73,12 +74,12 @@ export default function SideBar() {
   return (
     <>
       <div className={styles.sidebar}>
+        {/* Change to view own profile */}
         <Link to={`/home/viewprofile/${activeUserId}`}>
           <div className={styles.userIcon}>{activeUser}</div>
         </Link>
         <div className={styles.searchSection}>
-          <input type="text" placeholder="Search User" />
-          <button>Search</button>
+          <SearchUser />
         </div>
 
         <h1>User</h1>

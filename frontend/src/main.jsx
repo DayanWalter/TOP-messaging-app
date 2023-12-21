@@ -12,6 +12,7 @@ import Logout from './component/Logout.jsx';
 import SignUp from './component/SignUp.jsx';
 import Group from './component/Group.jsx';
 import Greeting from './component/Greeting.jsx';
+import UserList from './component/UserList.jsx';
 
 const router = createBrowserRouter([
   {
@@ -50,19 +51,16 @@ const router = createBrowserRouter([
             path: '/home/editprofile',
             element: <EditProfile />,
           },
-          // {
-          //   path: '/home/privatechat/:id',
-          //   element: <PrivateChat />,
-          //   loader({ params }) {
-          //     return params;
-          //   },
-          // },
           {
             path: '/home/viewprofile/:id',
             element: <ViewProfile />,
             loader({ params }) {
               return params;
             },
+          },
+          {
+            path: '/home/userlist',
+            element: <UserList />,
           },
         ],
       },
