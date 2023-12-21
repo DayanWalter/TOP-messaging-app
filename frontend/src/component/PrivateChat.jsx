@@ -26,7 +26,13 @@ export default function ChatRoom() {
     const getName = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/${receiverType}/${receiverId}`
+          `http://localhost:3000/api/${receiverType}/${receiverId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }
         );
         if (!response.ok) {
           console.error('Error:', response.statusText);

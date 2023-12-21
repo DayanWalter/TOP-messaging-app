@@ -32,7 +32,7 @@ router.post('/api', controller.index_post);
 // POST request for creating User (works)
 router.post('/api/user/create', user_controller.user_post);
 // GET request for one User(works)
-router.get('/api/user/:id', user_controller.user_detail);
+router.get('/api/user/:id', protectedRoute, user_controller.user_detail);
 // Get request for list of all Users(works)
 router.get('/api/users', protectedRoute, user_controller.user_list);
 // POST request for User Login(works)

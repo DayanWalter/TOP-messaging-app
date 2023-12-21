@@ -18,7 +18,13 @@ export default function EditProfile() {
     const getUserdata = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/user/${activeUserId}`
+          `http://localhost:3000/api/user/${activeUserId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }
         );
         if (!response.ok) {
           console.error('Error:', response.statusText);

@@ -22,7 +22,14 @@ export default function ViewProfile() {
     const getUserdata = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/user/${receiverId}`
+          `http://localhost:3000/api/user/${receiverId}`,
+
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }
         );
         if (!response.ok) {
           console.error('Error:', response.statusText);
