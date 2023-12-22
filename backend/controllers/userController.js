@@ -64,7 +64,7 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
 exports.user_list = asyncHandler(async (req, res, next) => {
   const searchQuery = req.query.username;
   const query = searchQuery ? { username: searchQuery } : {};
-
+  console.log(query);
   const allUser = await User.find(query).exec();
   res.json({ allUser });
 });

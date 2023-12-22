@@ -2,20 +2,13 @@ const Group = require('../models/group');
 
 const asyncHandler = require('express-async-handler');
 
-// GET groups
-exports.group_get = asyncHandler(async (req, res, next) => {
-  const allGroups = await Group.find().exec();
-
-  res.json({ allGroups });
-});
-
 // GET all groups for search for example
 exports.group_list = asyncHandler(async (req, res, next) => {
-  console.log(req.query.groupname);
   const searchQuery = req.query.groupname;
-  const query = searchQuery ? { groupname: searchQuery } : {};
-
+  const query = searchQuery ? { name: searchQuery } : {};
+  // console.log(query);
   const allGroups = await Group.find(query).exec();
+  console.log(allGroups);
   res.json({ allGroups });
 });
 
