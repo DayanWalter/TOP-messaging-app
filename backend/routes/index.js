@@ -77,11 +77,11 @@ router.post(
 );
 
 // GET group(works)
-router.get('/api/groups', group_controller.group_get);
+router.get('/api/groups', protectedRoute, group_controller.group_list);
 // GET request for one User(works)
 router.get('/api/group/:id', group_controller.group_detail);
 
-// POST group
-router.post('/group', group_controller.group_post);
+// POST/create group
+router.post('/api/group/create', protectedRoute, group_controller.group_add);
 
 module.exports = router;

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './SideBar.module.css';
 import { useEffect, useState } from 'react';
 import ListCard from './ListCard';
-import SearchUser from './SearchUser';
+import Search from './Search';
 
 export default function SideBar() {
   const token = localStorage.getItem('jwtoken');
@@ -52,7 +52,16 @@ export default function SideBar() {
   useEffect(() => {
     const getGroups = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/groups`);
+        const response = await fetch(
+          `http://localhost:3000/api/groups`,
+
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
         if (!response.ok) {
           console.error('Error:', response.statusText);
         }
@@ -78,7 +87,7 @@ export default function SideBar() {
           <div className={styles.userIcon}>{activeUser}</div>
         </Link>
         <div className={styles.searchSection}>
-          <SearchUser />
+          <Search type={'user'} />
         </div>
 
         <h1>Friends</h1>
@@ -102,6 +111,10 @@ export default function SideBar() {
               )}
             </ul>
           )}
+        </div>
+
+        <div className={styles.searchSection}>
+          <Search type={'group'} />
         </div>
 
         <h1>Groups</h1>
