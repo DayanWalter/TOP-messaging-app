@@ -6,15 +6,14 @@ import App from './App.jsx';
 import Login from './component/Login.jsx';
 import Home from './component/Home.jsx';
 import EditProfile from './component/EditProfile.jsx';
-import PrivateChat from './component/PrivateChat.jsx';
 import ViewProfile from './component/ViewProfile.jsx';
 import Logout from './component/Logout.jsx';
 import SignUp from './component/SignUp.jsx';
-import Group from './component/Group.jsx';
 import Greeting from './component/Greeting.jsx';
 import UserList from './component/UserList.jsx';
 import GroupList from './component/GroupList.jsx';
 import AddFriend from './component/AddFriend.jsx';
+import ChatRoom from './component/ChatRoom.jsx';
 
 const router = createBrowserRouter([
   {
@@ -44,7 +43,7 @@ const router = createBrowserRouter([
           },
           {
             path: '/home/:type/:id',
-            element: <PrivateChat />,
+            element: <ChatRoom />,
             loader({ params }) {
               return params;
             },
