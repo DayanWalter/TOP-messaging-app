@@ -64,7 +64,7 @@ const router = createBrowserRouter([
             element: <UserList />,
           },
           {
-            path: '/home/:id/add',
+            path: '/home/user/:id/add',
             element: <AddFriend />,
             loader({ params }) {
               return params;
