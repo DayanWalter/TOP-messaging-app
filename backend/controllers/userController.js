@@ -1,6 +1,5 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-
 const asyncHandler = require('express-async-handler');
 
 // POST user/Create user
@@ -44,7 +43,7 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id).exec();
   // If no user is found, send an error
   if (user === null) {
-    // No results.
+    // No results
     const err = new Error('User not found');
     err.status = 404;
     return next(err);

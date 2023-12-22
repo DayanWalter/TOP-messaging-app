@@ -12,12 +12,12 @@ const protectedRoute = passport.authenticate('jwt', { session: false });
 
 // POST request for creating User (works)
 router.post('/api/user/create', user_controller.user_post);
+// POST request for User Login(works)
+router.post('/api/user/login', user_controller.user_login);
 // GET request for one User(works)
 router.get('/api/user/:id', protectedRoute, user_controller.user_detail);
 // Get request for list of all Users(works)
 router.get('/api/users', protectedRoute, user_controller.user_search);
-// POST request for User Login(works)
-router.post('/api/user/login', user_controller.user_login);
 // PUT request for updating user
 router.put(
   '/api/user/editprofile',
@@ -32,6 +32,10 @@ router.put(
 );
 // GET request for friendlist
 router.get('/api/friends', protectedRoute, user_controller.friendlist_get);
+
+/// END USER ROUTES ///
+
+/// MESSAGE ROUTES ///
 
 // GET message(works)
 router.get(
@@ -58,12 +62,17 @@ router.post(
   message_controller.message_group_post
 );
 
+/// END MESSAGES ROUTES ///
+
+/// GROUP ROUTES ///
+
 // GET group(works)
-router.get('/api/groups', protectedRoute, group_controller.group_list);
+router.get('/api/groups', protectedRoute, group_controller.group_search);
 // GET request for one User(works)
 router.get('/api/group/:id', group_controller.group_detail);
 
 // POST/create group
 router.post('/api/group/create', protectedRoute, group_controller.group_add);
 
+/// END GROUP ROUTES ///
 module.exports = router;
