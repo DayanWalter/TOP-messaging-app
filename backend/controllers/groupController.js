@@ -8,7 +8,6 @@ exports.group_list = asyncHandler(async (req, res, next) => {
   const query = searchQuery ? { name: searchQuery } : {};
   // console.log(query);
   const allGroups = await Group.find(query).exec();
-  console.log(allGroups);
   res.json({ allGroups });
 });
 

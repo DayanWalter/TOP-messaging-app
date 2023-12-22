@@ -47,7 +47,6 @@ export default function GroupList() {
       setGroupLoading(false);
     }
   };
-  console.log(group);
   return (
     <>
       <div className={styles.site}>
