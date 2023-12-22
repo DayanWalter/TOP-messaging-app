@@ -16,8 +16,8 @@ export default function ChatRoom() {
   // Define the username you are looking for
   const username = payload.username;
 
-  const [messages, setMessages] = useState();
   const [name, setName] = useState();
+  const [messages, setMessages] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [refetch, setRefetch] = useState(false);
