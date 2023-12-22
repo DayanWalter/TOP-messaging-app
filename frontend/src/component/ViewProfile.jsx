@@ -18,7 +18,7 @@ export default function ViewProfile() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  //fetch data for user
+  //fetch user_detail
   useEffect(() => {
     const getUserdata = async () => {
       try {

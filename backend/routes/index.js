@@ -1,31 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/controller');
 const user_controller = require('../controllers/userController');
 const message_controller = require('../controllers/messageController');
 const group_controller = require('../controllers/groupController');
-const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
 // change in strategy the done(true) to done(user.username)
 const protectedRoute = passport.authenticate('jwt', { session: false });
-
-// longer version
-// function authenticateToken(req, res, next) {
-//   const authHeader = req.headers['authorization'];
-//   const token = authHeader && authHeader.split(' ')[1];
-//   if (token == null) return res.sendStatus(401);
-//   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-//     if (err) return res.sendStatus(403);
-//     req.user = user;
-//     next();
-//   });
-// }
-
-// GET home page(test)
-router.get('/api', controller.index_get);
-// POST home page(test)
-router.post('/api', controller.index_post);
 
 /// USER ROUTES ///
 
@@ -34,22 +15,23 @@ router.post('/api/user/create', user_controller.user_post);
 // GET request for one User(works)
 router.get('/api/user/:id', protectedRoute, user_controller.user_detail);
 // Get request for list of all Users(works)
-router.get('/api/users', protectedRoute, user_controller.user_list);
+router.get('/api/users', protectedRoute, user_controller.user_search);
 // POST request for User Login(works)
 router.post('/api/user/login', user_controller.user_login);
 // PUT request for updating user
-router.put('/api/user/editprofile', protectedRoute, user_controller.user_put);
-// POST request for adding user to friendlist
-router.post('/api/user/:id/add', protectedRoute, user_controller.user_add);
+router.put(
+  '/api/user/editprofile',
+  protectedRoute,
+  user_controller.user_update
+);
+// PUT request for adding user to friendlist
+router.put(
+  '/api/user/:id/add',
+  protectedRoute,
+  user_controller.user_add_to_friendlist
+);
 // GET request for friendlist
 router.get('/api/friends', protectedRoute, user_controller.friendlist_get);
-
-///TODO///
-// // DELETE request for delete User
-// router.delete('/api/user/:id/delete', user_controller.user_delete);
-// // PUT request for update User
-// router.put('/api/user/:id/update', user_controller.user_put);
-///TODO END///
 
 // GET message(works)
 router.get(

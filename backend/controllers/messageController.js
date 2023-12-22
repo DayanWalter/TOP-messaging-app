@@ -1,6 +1,7 @@
 const Message = require('../models/message');
 const asyncHandler = require('express-async-handler');
 /// MESSAGECONTROLLER DONE ///
+/// USER ///
 // GET messages from user(done)
 exports.message_user_get = asyncHandler(async (req, res, next) => {
   // _id is from jwt.js(user object in done function)
@@ -45,7 +46,7 @@ exports.message_user_post = asyncHandler(async (req, res, next) => {
   // send saved message to frontend
   res.json({ userMessage: savedMessage });
 });
-
+/// GROUPS ///
 // GET messages from group(done)
 exports.message_group_get = asyncHandler(async (req, res, next) => {
   const receiverId = req.params.receiver;
