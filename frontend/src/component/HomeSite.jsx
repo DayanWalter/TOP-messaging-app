@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import styles from './HomeSite.module.css';
-import SideBar from './Sidebar/SideBar';
+import SideBar from './SideBar';
 
 export default function HomeSite() {
   return (

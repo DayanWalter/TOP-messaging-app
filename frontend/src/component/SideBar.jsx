@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './SideBar.module.css';
 
-import SearchButton from '../../SearchButton';
-import FriendContainer from './FriendContainer/FriendContainer';
-import GroupContainer from './GroupContainer/GroupContainer';
+import SearchButton from './SearchButton';
+import FriendContainer from './FriendContainer';
+import GroupContainer from './GroupContainer';
 
 export default function SideBar() {
   const token = localStorage.getItem('jwtoken');
