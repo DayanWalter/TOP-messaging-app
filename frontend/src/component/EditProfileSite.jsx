@@ -82,71 +82,73 @@ export default function EditProfileSite() {
   };
   return (
     <>
-      <div className={styles.site}>
-        <div className={styles.content}>
-          {loading && <p>Loading...</p>}
-          {error && <p>Error:{error}</p>}
-          {userdata && (
-            <>
-              <header className={styles.header}>
-                <Link to={'/home/viewprofile'}>
-                  <div className={styles.userIcon}></div>
-                </Link>
-              </header>
-              <form className={styles.form} onSubmit={formSubmit}>
-                <div className={styles.label}>
-                  <div className={styles.labelName}>Description</div>
-                  <div className={styles.labelContent}>
-                    <input
-                      type="text"
-                      name="description"
-                      id="description"
-                      defaultValue={userdata.description}
-                      onChange={(e) => {
-                        handleChange('description', e);
-                      }}
-                    />
+      <Site>
+        <div className={styles.site}>
+          <div className={styles.content}>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error:{error}</p>}
+            {userdata && (
+              <>
+                <header className={styles.header}>
+                  <Link to={'/home/viewprofile'}>
+                    <div className={styles.userIcon}></div>
+                  </Link>
+                </header>
+                <form className={styles.form} onSubmit={formSubmit}>
+                  <div className={styles.label}>
+                    <div className={styles.labelName}>Description</div>
+                    <div className={styles.labelContent}>
+                      <input
+                        type="text"
+                        name="description"
+                        id="description"
+                        defaultValue={userdata.description}
+                        onChange={(e) => {
+                          handleChange('description', e);
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className={styles.label}>
-                  <div className={styles.labelName}>Name</div>
-                  <div className={styles.labelContent}>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      defaultValue={userdata.name}
-                      onChange={(e) => {
-                        handleChange('name', e);
-                      }}
-                    />
+                  <div className={styles.label}>
+                    <div className={styles.labelName}>Name</div>
+                    <div className={styles.labelContent}>
+                      <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        defaultValue={userdata.name}
+                        onChange={(e) => {
+                          handleChange('name', e);
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className={styles.label}>
-                  <div className={styles.labelName}>Username</div>
-                  <div className={styles.labelContent}>
-                    <input
-                      type="text"
-                      name="username"
-                      id="username"
-                      defaultValue={userdata.username}
-                      onChange={(e) => {
-                        handleChange('username', e);
-                      }}
-                    />
+                  <div className={styles.label}>
+                    <div className={styles.labelName}>Username</div>
+                    <div className={styles.labelContent}>
+                      <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        defaultValue={userdata.username}
+                        onChange={(e) => {
+                          handleChange('username', e);
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className={styles.button}>
-                  {/* <Link to={'/home'}> */}
-                  {/* Send changed profile to server */}
-                  <button type="submit">Save changes</button>
-                  {/* </Link> */}
-                </div>
-              </form>
-            </>
-          )}
+                  <div className={styles.button}>
+                    {/* <Link to={'/home'}> */}
+                    {/* Send changed profile to server */}
+                    <button type="submit">Save changes</button>
+                    {/* </Link> */}
+                  </div>
+                </form>
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      </Site>
     </>
   );
 }

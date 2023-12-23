@@ -33,39 +33,37 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <HomeSite />,
-    children: [
-      // OUTLETS
-      {
-        index: true,
-        element: <GreetingSite />,
-      },
-      {
-        path: '/home/:type/:id',
-        element: <ChatRoomSite />,
-        loader({ params }) {
-          return params;
-        },
-      },
-      {
-        path: '/home/editprofile',
-        element: <EditProfileSite />,
-      },
-      {
-        path: '/home/viewprofile/:id',
-        element: <ViewProfileSite />,
-        loader({ params }) {
-          return params;
-        },
-      },
-      {
-        path: '/home/userlist',
-        element: <UserList />,
-      },
-      {
-        path: '/home/grouplist',
-        element: <GroupList />,
-      },
-    ],
+  },
+  // OUTLETS
+  {
+    index: true,
+    element: <GreetingSite />,
+  },
+  {
+    path: '/home/:type/:id',
+    element: <ChatRoomSite />,
+    loader({ params }) {
+      return params;
+    },
+  },
+  {
+    path: '/home/editprofile',
+    element: <EditProfileSite />,
+  },
+  {
+    path: '/home/viewprofile/:id',
+    element: <ViewProfileSite />,
+    loader({ params }) {
+      return params;
+    },
+  },
+  {
+    path: '/home/userlist',
+    element: <UserList />,
+  },
+  {
+    path: '/home/grouplist',
+    element: <GroupList />,
   },
 ]);
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './UserList.module.css';
 import { Link, useLocation } from 'react-router-dom';
 import ListCard from './ListCard';
+import Site from './Site';
 
 export default function UserList() {
   const token = localStorage.getItem('jwtoken');
@@ -49,50 +50,52 @@ export default function UserList() {
   };
   return (
     <>
-      <div className={styles.site}>
-        <div className={styles.content}>
-          {/* {loading && <p>Loading...</p>}
+      <Site>
+        <div className={styles.site}>
+          <div className={styles.content}>
+            {/* {loading && <p>Loading...</p>}
           {error && <p>Error</p>}
           {userdata && ( */}
-          <>
-            <header className={styles.header}></header>
-            <main className={styles.main}>
-              <form onSubmit={getFriends}>
-                <input
-                  type="text"
-                  placeholder="Enter Username"
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
-                />
-                <button type="submit">Search</button>
-              </form>
-              <div className={styles.personContainer}>
-                {userLoading && (
-                  <p>Enter a name and click &quot;Search&quot;...</p>
-                )}
-                {userError && <p>Error</p>}
-                {user && (
-                  <ul>
-                    {/* Map over all user an display them */}
-                    {user.allUser.map(({ _id, username }) =>
-                      // Display alle users, except logged in user
-                      activeUser !== username ? (
-                        <li key={_id}>
-                          {/* Add ${id} for real people */}
-                          <Link to={`/home/user/${_id}`}>
-                            <ListCard name={username} />
-                          </Link>
-                        </li>
-                      ) : null
-                    )}
-                  </ul>
-                )}
-              </div>
-            </main>
-            <footer className={styles.footer}></footer>
-          </>
+            <>
+              <header className={styles.header}></header>
+              <main className={styles.main}>
+                <form onSubmit={getFriends}>
+                  <input
+                    type="text"
+                    placeholder="Enter Username"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                  />
+                  <button type="submit">Search</button>
+                </form>
+                <div className={styles.personContainer}>
+                  {userLoading && (
+                    <p>Enter a name and click &quot;Search&quot;...</p>
+                  )}
+                  {userError && <p>Error</p>}
+                  {user && (
+                    <ul>
+                      {/* Map over all user an display them */}
+                      {user.allUser.map(({ _id, username }) =>
+                        // Display alle users, except logged in user
+                        activeUser !== username ? (
+                          <li key={_id}>
+                            {/* Add ${id} for real people */}
+                            <Link to={`/home/user/${_id}`}>
+                              <ListCard name={username} />
+                            </Link>
+                          </li>
+                        ) : null
+                      )}
+                    </ul>
+                  )}
+                </div>
+              </main>
+              <footer className={styles.footer}></footer>
+            </>
+          </div>
         </div>
-      </div>
+      </Site>
     </>
   );
 }

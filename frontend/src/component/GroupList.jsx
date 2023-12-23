@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './GroupList.module.css';
 import { Link, useLocation } from 'react-router-dom';
 import ListCard from './ListCard';
+import Site from './Site';
 
 export default function GroupList() {
   const token = localStorage.getItem('jwtoken');
@@ -49,44 +50,46 @@ export default function GroupList() {
   };
   return (
     <>
-      <div className={styles.site}>
-        <div className={styles.content}>
-          <>
-            <header className={styles.header}></header>
-            <main className={styles.main}>
-              <form onSubmit={getGroups}>
-                <input
-                  type="text"
-                  placeholder="Enter Groupname"
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
-                />
-                <button type="submit">Search</button>
-              </form>
-              <div className={styles.personContainer}>
-                {groupLoading && (
-                  <p>Enter a name and click &quot;Search&quot;...</p>
-                )}
-                {groupError && <p>Error</p>}
-                {group && (
-                  <ul>
-                    {/* Map over all groups and display them */}
-                    {group.allGroups.map(({ _id, name }) => (
-                      <li key={_id}>
-                        {/* Add ${id} for real groups */}
-                        <Link to={`/home/group/${_id}`}>
-                          <ListCard name={name} />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </main>
-            <footer className={styles.footer}></footer>
-          </>
+      <Site>
+        <div className={styles.site}>
+          <div className={styles.content}>
+            <>
+              <header className={styles.header}></header>
+              <main className={styles.main}>
+                <form onSubmit={getGroups}>
+                  <input
+                    type="text"
+                    placeholder="Enter Groupname"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                  />
+                  <button type="submit">Search</button>
+                </form>
+                <div className={styles.personContainer}>
+                  {groupLoading && (
+                    <p>Enter a name and click &quot;Search&quot;...</p>
+                  )}
+                  {groupError && <p>Error</p>}
+                  {group && (
+                    <ul>
+                      {/* Map over all groups and display them */}
+                      {group.allGroups.map(({ _id, name }) => (
+                        <li key={_id}>
+                          {/* Add ${id} for real groups */}
+                          <Link to={`/home/group/${_id}`}>
+                            <ListCard name={name} />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </main>
+              <footer className={styles.footer}></footer>
+            </>
+          </div>
         </div>
-      </div>
+      </Site>
     </>
   );
 }

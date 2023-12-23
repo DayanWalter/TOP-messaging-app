@@ -2,6 +2,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import styles from './ViewProfileSite.module.css';
 import { useEffect, useState } from 'react';
 import AddFriendButton from './AddFriendButton';
+import Site from './Site';
 
 export default function ViewProfileSite() {
   // Get params for receiver
@@ -50,45 +51,49 @@ export default function ViewProfileSite() {
 
   return (
     <>
-      <div className={styles.site}>
-        <div className={styles.content}>
-          {loading && <p>Loading...</p>}
-          {error && <p>Error {error}</p>}
-          {userdata && (
-            <>
-              <header className={styles.header}>
-                <Link to={'/home/viewprofile'}>
-                  <div className={styles.userIcon}></div>
-                </Link>
-              </header>
-              <main className={styles.main}>
-                <div className={styles.label}>
-                  <div className={styles.labelName}>Description</div>
-                  <div className={styles.labelContent}>
-                    {userdata.description}
-                  </div>
-                </div>
-                <div className={styles.label}>
-                  <div className={styles.labelName}>Name</div>
-                  <div className={styles.labelContent}>{userdata.name}</div>
-                </div>
-                <div className={styles.label}>
-                  <div className={styles.labelName}>Username</div>
-                  {/* Username */}
-                  <div className={styles.labelContent}>{userdata.username}</div>
-                </div>
-                <div className={styles.button}>
-                  <AddFriendButton friendId={receiverId} />
-                  <Link to={`/home/user/${receiverId}`}>
-                    <button>Start to chat</button>
+      <Site>
+        <div className={styles.site}>
+          <div className={styles.content}>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error {error}</p>}
+            {userdata && (
+              <>
+                <header className={styles.header}>
+                  <Link to={'/home/viewprofile'}>
+                    <div className={styles.userIcon}></div>
                   </Link>
-                </div>
-              </main>
-              <footer className={styles.footer}></footer>
-            </>
-          )}
+                </header>
+                <main className={styles.main}>
+                  <div className={styles.label}>
+                    <div className={styles.labelName}>Description</div>
+                    <div className={styles.labelContent}>
+                      {userdata.description}
+                    </div>
+                  </div>
+                  <div className={styles.label}>
+                    <div className={styles.labelName}>Name</div>
+                    <div className={styles.labelContent}>{userdata.name}</div>
+                  </div>
+                  <div className={styles.label}>
+                    <div className={styles.labelName}>Username</div>
+                    {/* Username */}
+                    <div className={styles.labelContent}>
+                      {userdata.username}
+                    </div>
+                  </div>
+                  <div className={styles.button}>
+                    <AddFriendButton friendId={receiverId} />
+                    <Link to={`/home/user/${receiverId}`}>
+                      <button>Start to chat</button>
+                    </Link>
+                  </div>
+                </main>
+                <footer className={styles.footer}></footer>
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      </Site>
     </>
   );
 }

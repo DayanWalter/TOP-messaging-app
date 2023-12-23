@@ -3,6 +3,7 @@ import styles from './ChatRoomSite.module.css';
 import Message from './MessageCard';
 import { useEffect, useState } from 'react';
 import SendMessageForm from './SendMessageForm';
+import Site from './Site';
 
 export default function ChatRoomSite() {
   // Get params for receiver
@@ -83,54 +84,60 @@ export default function ChatRoomSite() {
   }, [receiverId, refetch]);
   return (
     <>
-      <div className={styles.site}>
-        <div className={styles.content}>
-          {loading && <p>Loading...</p>}
-          {error && <p>Error</p>}
-          {messages && (
-            <>
-              <Link to={`/home/viewprofile/${receiverId}`}>
-                <header className={styles.header}>
-                  {name && <h1>{name}</h1>}
-                </header>
-              </Link>
-              <main className={styles.main}>
-                {/* Map over the messages */}
-                <ul>
-                  {messages &&
-                    messages.messages.map(({ _id, text, sender, timestamp }) =>
-                      sender.username !== username ? (
-                        <li
-                          className={styles.messageContainerReceiver}
-                          key={_id}
-                        >
-                          <Link to={`/home/viewprofile/${sender._id}`}>
-                            {sender.username}
-                          </Link>
-                          {/* {receiver && <p>{receiver.messages}</p>} */}
+      <Site>
+        <div className={styles.site}>
+          <div className={styles.content}>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error</p>}
+            {messages && (
+              <>
+                <Link to={`/home/viewprofile/${receiverId}`}>
+                  <header className={styles.header}>
+                    {name && <h1>{name}</h1>}
+                  </header>
+                </Link>
+                <main className={styles.main}>
+                  {/* Map over the messages */}
+                  <ul>
+                    {messages &&
+                      messages.messages.map(
+                        ({ _id, text, sender, timestamp }) =>
+                          sender.username !== username ? (
+                            <li
+                              className={styles.messageContainerReceiver}
+                              key={_id}
+                            >
+                              <Link to={`/home/viewprofile/${sender._id}`}>
+                                {sender.username}
+                              </Link>
+                              {/* {receiver && <p>{receiver.messages}</p>} */}
 
-                          <Message text={text} time={timestamp} />
-                        </li>
-                      ) : (
-                        <li className={styles.messageContainerSender} key={_id}>
-                          <Link to={`/home/viewprofile/${sender._id}`}>
-                            {sender.username}
-                          </Link>
-                          {/* {receiver && <p>{receiver.messages}</p>} */}
+                              <Message text={text} time={timestamp} />
+                            </li>
+                          ) : (
+                            <li
+                              className={styles.messageContainerSender}
+                              key={_id}
+                            >
+                              <Link to={`/home/viewprofile/${sender._id}`}>
+                                {sender.username}
+                              </Link>
+                              {/* {receiver && <p>{receiver.messages}</p>} */}
 
-                          <Message text={text} time={timestamp} />
-                        </li>
-                      )
-                    )}
-                </ul>
-              </main>
-              <footer className={styles.footer}>
-                <SendMessageForm refetch={() => setRefetch(true)} />
-              </footer>
-            </>
-          )}
+                              <Message text={text} time={timestamp} />
+                            </li>
+                          )
+                      )}
+                  </ul>
+                </main>
+                <footer className={styles.footer}>
+                  <SendMessageForm refetch={() => setRefetch(true)} />
+                </footer>
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      </Site>
     </>
   );
 }
