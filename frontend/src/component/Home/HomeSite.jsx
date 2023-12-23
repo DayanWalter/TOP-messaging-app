@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import styles from './Home.module.css';
-import SideBar from './SideBar';
+import styles from './HomeSite.module.css';
+import SideBar from './Sidebar/SideBar';
 
-export default function Home() {
+export default function HomeSite() {
   return (
     <>
       <div className={styles.site}>

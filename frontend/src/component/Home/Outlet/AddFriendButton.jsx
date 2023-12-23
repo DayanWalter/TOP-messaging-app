@@ -1,7 +1,6 @@
 import { Link, useLoaderData } from 'react-router-dom';
-import styles from './ViewProfile.module.css';
 import { useEffect, useState } from 'react';
-export default function AddFriend({ friendId }) {
+export default function AddFriendButton({ friendId }) {
   const token = localStorage.getItem('jwtoken');
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));

@@ -1,10 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './Login.module.css';
+import styles from './LoginSite.module.css';
 import logo from '/logo.svg';
 import { useState } from 'react';
 import LoginForm from './LoginForm';
 
-export default function Login() {
+export default function LoginSite() {
   return (
     <>
       <main className={styles.main}>

@@ -1,10 +1,10 @@
 import { Link, useLoaderData } from 'react-router-dom';
-import styles from './ChatRoom.module.css';
-import Message from './Message';
+import styles from './ChatRoomSite.module.css';
+import Message from '../../MessageCard';
 import { useEffect, useState } from 'react';
-import SendMessageForm from './SendMessageForm';
+import SendMessageForm from '../../SendMessageForm';
 
-export default function ChatRoom() {
+export default function ChatRoomSite() {
   // Get params for receiver
   const loaderData = useLoaderData();
   const receiverId = loaderData.id;

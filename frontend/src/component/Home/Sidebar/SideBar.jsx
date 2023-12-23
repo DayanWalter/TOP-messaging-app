@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './SideBar.module.css';
 
-import Search from './Search';
-import FriendContainer from './FriendContainer';
-import GroupContainer from './GroupContainer';
+import SearchButton from '../../SearchButton';
+import FriendContainer from './FriendContainer/FriendContainer';
+import GroupContainer from './GroupContainer/GroupContainer';
 
 export default function SideBar() {
   const token = localStorage.getItem('jwtoken');
@@ -21,7 +21,7 @@ export default function SideBar() {
           <div className={styles.userIcon}>{activeUser}</div>
         </Link>
         <div className={styles.searchSection}>
-          <Search type={'user'} />
+          <SearchButton type={'user'} />
         </div>
 
         <h1>Friends</h1>
@@ -31,7 +31,7 @@ export default function SideBar() {
         </div>
 
         <div className={styles.searchSection}>
-          <Search type={'group'} />
+          <SearchButton type={'group'} />
         </div>
 
         <h1>Groups</h1>

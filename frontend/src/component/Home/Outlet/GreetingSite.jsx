@@ -1,6 +1,6 @@
-import styles from './Greeting.module.css';
+import styles from './GreetingSite.module.css';
 
-export default function Greeting() {
+export default function GreetingSite() {
   const token = localStorage.getItem('jwtoken');
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));

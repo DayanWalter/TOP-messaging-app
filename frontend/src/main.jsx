@@ -4,54 +4,55 @@ import './style.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Login from './component/Login.jsx';
-import Home from './component/Home.jsx';
-import EditProfile from './component/EditProfile.jsx';
-import ViewProfile from './component/ViewProfile.jsx';
-import Logout from './component/Logout.jsx';
-import SignUp from './component/SignUp.jsx';
-import Greeting from './component/Greeting.jsx';
-import UserList from './component/UserList.jsx';
-import GroupList from './component/GroupList.jsx';
-import AddFriend from './component/AddFriend.jsx';
-import ChatRoom from './component/ChatRoom.jsx';
+import UserList from './component/Home/Outlet/UserList.jsx';
+import GroupList from './component/Home/Outlet/GroupList.jsx';
+import AddFriendButton from './component/Home/Outlet/AddFriendButton.jsx';
+import LoginSite from './component/LoginSite.jsx';
+import LogoutSite from './component/LogoutSite.jsx';
+import SignUpSite from './component/SignUpSite.jsx';
+import HomeSite from './component/Home/HomeSite.jsx';
+import EditProfileSite from './component/Home/Outlet/EditProfileSite.jsx';
+import ViewProfileSite from './component/Home/Outlet/ViewProfileSite.jsx';
+import ChatRoomSite from './component/Home/Outlet/ChatRoomSite.jsx';
+import GreetingSite from './component/Home/Outlet/GreetingSite.jsx';
 
 const router = createBrowserRouter([
   {
     index: true,
-    element: <Login />,
+    element: <LoginSite />,
   },
   {
     path: '/logout',
-    element: <Logout />,
+    element: <LogoutSite />,
   },
   {
     path: '/signup',
-    element: <SignUp />,
+    element: <SignUpSite />,
   },
 
   {
     path: '/home',
-    element: <Home />,
+    element: <HomeSite />,
     children: [
+      // OUTLETS
       {
         index: true,
-        element: <Greeting />,
+        element: <GreetingSite />,
       },
       {
         path: '/home/:type/:id',
-        element: <ChatRoom />,
+        element: <ChatRoomSite />,
         loader({ params }) {
           return params;
         },
       },
       {
         path: '/home/editprofile',
-        element: <EditProfile />,
+        element: <EditProfileSite />,
       },
       {
         path: '/home/viewprofile/:id',
-        element: <ViewProfile />,
+        element: <ViewProfileSite />,
         loader({ params }) {
           return params;
         },
@@ -67,7 +68,7 @@ const router = createBrowserRouter([
 
       {
         path: '/home/user/:id/add',
-        element: <AddFriend />,
+        element: <AddFriendButton />,
         loader({ params }) {
           return params;
         },

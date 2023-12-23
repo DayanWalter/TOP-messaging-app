@@ -1,6 +1,6 @@
-import styles from './Message.module.css';
+import styles from './MessageCard.module.css';
 
-export default function Message({ text, time }) {
+export default function MessageCard({ text, time }) {
   const convertedTime = new Date(time).toLocaleTimeString();
   return (
     <>

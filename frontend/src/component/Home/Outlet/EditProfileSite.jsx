@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './EditProfile.module.css';
+import styles from './EditProfileSite.module.css';
 import { useEffect, useState } from 'react';
 
-export default function EditProfile() {
+export default function EditProfileSite() {
   const token = localStorage.getItem('jwtoken');
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));

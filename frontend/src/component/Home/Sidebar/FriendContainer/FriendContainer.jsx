@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ListCard from './ListCard';
+import ListCard from '../../../ListCard';
 
 export default function FriendContainer() {
   const token = localStorage.getItem('jwtoken');
@@ -8,7 +8,6 @@ export default function FriendContainer() {
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the username you are looking for
   const activeUser = payload.username;
-  const activeUserId = payload._id;
 
   // Get all friends and display them in the sidebar
   const [user, setUser] = useState(null);

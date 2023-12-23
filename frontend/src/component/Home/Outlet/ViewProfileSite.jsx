@@ -1,9 +1,9 @@
 import { Link, useLoaderData } from 'react-router-dom';
-import styles from './ViewProfile.module.css';
+import styles from './ViewProfileSite.module.css';
 import { useEffect, useState } from 'react';
-import AddFriend from './AddFriend';
+import AddFriendButton from './AddFriendButton';
 
-export default function ViewProfile() {
+export default function ViewProfileSite() {
   // Get params for receiver
   const loaderData = useLoaderData();
   const receiverId = loaderData.id;
@@ -78,7 +78,7 @@ export default function ViewProfile() {
                   <div className={styles.labelContent}>{userdata.username}</div>
                 </div>
                 <div className={styles.button}>
-                  <AddFriend friendId={receiverId} />
+                  <AddFriendButton friendId={receiverId} />
                   <Link to={`/home/user/${receiverId}`}>
                     <button>Start to chat</button>
                   </Link>

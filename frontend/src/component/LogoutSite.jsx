@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import styles from './Logout.module.css';
+import styles from './LogoutSite.module.css';
 import logo from '/logo.svg';
 import LoginForm from './LoginForm';
-export default function Logout() {
+export default function LogoutSite() {
   localStorage.clear();
   return (
     <>

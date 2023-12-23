@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './SignUp.module.css';
+import styles from './SignUpSite.module.css';
 import logo from '/logo.svg';
 import { useState } from 'react';
-export default function SignUp() {
+export default function SignUpSite() {
   const navigate = useNavigate();
 
   const [formdata, setFormdata] = useState({
