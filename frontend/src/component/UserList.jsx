@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './UserList.module.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ListCard from './ListCard';
 import Site from './Site';
+import Button from './Button';
+import Input from './Input';
 
 export default function UserList() {
   const token = localStorage.getItem('jwtoken');
@@ -53,20 +55,20 @@ export default function UserList() {
       <Site>
         <div className={styles.site}>
           <div className={styles.content}>
-            {/* {loading && <p>Loading...</p>}
-          {error && <p>Error</p>}
-          {userdata && ( */}
             <>
               <header className={styles.header}></header>
               <main className={styles.main}>
                 <form onSubmit={getFriends}>
-                  <input
-                    type="text"
-                    placeholder="Enter Username"
+                  <Input
+                    type={'text'}
+                    placeholder={'Enter Username'}
                     value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
+                    onChange={(e) => {
+                      setSearchText(e.target.value);
+                    }}
                   />
-                  <button type="submit">Search</button>
+
+                  <Button text={'Search'} />
                 </form>
                 <div className={styles.personContainer}>
                   {userLoading && (
