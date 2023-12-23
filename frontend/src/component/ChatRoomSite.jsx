@@ -22,7 +22,7 @@ export default function ChatRoomSite() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [refetch, setRefetch] = useState(false);
-
+  const [headerVisible, setHeaderVisible] = useState(true);
   useEffect(() => {
     const getName = async () => {
       try {
@@ -41,6 +41,7 @@ export default function ChatRoomSite() {
 
         const data = await response.json();
         data.username ? setName(data.username) : setName(data.groupname);
+        data.username ? setHeaderVisible(true) : setHeaderVisible(false);
       } catch (error) {
         setError(error.message);
         setMessages(null);
@@ -90,11 +91,17 @@ export default function ChatRoomSite() {
             {error && <p>Error</p>}
             {messages && (
               <>
-                <Link to={`/home/viewprofile/${receiverId}`}>
+                {headerVisible ? (
+                  <Link to={`/home/viewprofile/${receiverId}`}>
+                    <header className={styles.header}>
+                      {name && <h1>{name}</h1>}
+                    </header>
+                  </Link>
+                ) : (
                   <header className={styles.header}>
                     {name && <h1>{name}</h1>}
                   </header>
-                </Link>
+                )}
                 <main className={styles.main}>
                   <ul>
                     {messages.messages.map(({ _id, text, sender, timestamp }) =>

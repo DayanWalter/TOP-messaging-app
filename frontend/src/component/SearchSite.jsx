@@ -138,11 +138,11 @@ export default function SearchSite() {
                   {group && (
                     <ul>
                       {/* Map over all groups and display them */}
-                      {group.allGroups.map(({ _id, name }) => (
+                      {group.allGroups.map(({ _id, groupname }) => (
                         <li key={_id}>
                           {/* Add ${id} for real groups */}
                           <Link to={`/home/group/${_id}`}>
-                            <ListCard name={name} />
+                            <ListCard name={groupname} />
                           </Link>
                         </li>
                       ))}
