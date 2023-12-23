@@ -100,7 +100,7 @@ export default function SearchSite() {
                 <form onSubmit={handleGetData}>
                   <Input
                     type={'text'}
-                    placeholder={'Enter Username'}
+                    placeholder={'Enter Username e.g.'}
                     value={searchText}
                     onChange={(e) => {
                       setSearchText(e.target.value);
@@ -111,9 +111,7 @@ export default function SearchSite() {
                 </form>
 
                 <div className={styles.personContainer}>
-                  {userLoading && (
-                    <p>Enter a name and click &quot;Search&quot;...</p>
-                  )}
+                  {userLoading && <p>Enter a username...</p>}
                   {userError && <p>Error</p>}
                   {user && (
                     <ul>
@@ -134,7 +132,7 @@ export default function SearchSite() {
                 </div>
                 <div className={styles.personContainer}>
                   {groupLoading && (
-                    <p>Enter a name and click &quot;Search&quot;...</p>
+                    <p>...or a groupname and click &quot;Search&quot;...</p>
                   )}
                   {groupError && <p>Error</p>}
                   {group && (
