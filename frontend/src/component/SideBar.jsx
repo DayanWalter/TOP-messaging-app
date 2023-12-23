@@ -5,6 +5,8 @@ import SearchButton from './SearchButton';
 import FriendContainer from './FriendContainer';
 import GroupContainer from './GroupContainer';
 import Button from './Button';
+import Input from './Input';
+import AddGroupForm from './AddGroupForm';
 
 export default function SideBar() {
   const token = localStorage.getItem('jwtoken');
@@ -34,9 +36,7 @@ export default function SideBar() {
         <div className={styles.searchSection}>
           <SearchButton type={'group'} />
         </div>
-
-        <Button text={'Add Group'} />
-
+        <AddGroupForm />
         <h1>Groups</h1>
 
         <div className={styles.groupContainer}>

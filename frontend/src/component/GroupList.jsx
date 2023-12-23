@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './GroupList.module.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ListCard from './ListCard';
 import Site from './Site';
+import Input from './Input';
+import Button from './Button';
 
 export default function GroupList() {
   const token = localStorage.getItem('jwtoken');
@@ -57,13 +59,15 @@ export default function GroupList() {
               <header className={styles.header}></header>
               <main className={styles.main}>
                 <form onSubmit={getGroups}>
-                  <input
-                    type="text"
-                    placeholder="Enter Groupname"
+                  <Input
+                    type={'text'}
+                    placeholder={'Enter Groupname'}
                     value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
+                    onChange={(e) => {
+                      setSearchText(e.target.value);
+                    }}
                   />
-                  <button type="submit">Search</button>
+                  <Button text={'Search'} />
                 </form>
                 <div className={styles.personContainer}>
                   {groupLoading && (
