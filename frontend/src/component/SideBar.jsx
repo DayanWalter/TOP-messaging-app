@@ -24,7 +24,9 @@ export default function SideBar() {
           <div className={styles.userIcon}>{activeUser}</div>
         </Link>
         <div className={styles.searchSection}>
-          <SearchButton type={'user'} />
+          <Link to={`/home/search`}>
+            <Button text={'Search'} />
+          </Link>
         </div>
 
         <h1>Friends</h1>
@@ -33,9 +35,7 @@ export default function SideBar() {
           <FriendContainer />
         </div>
 
-        <div className={styles.searchSection}>
-          <SearchButton type={'group'} />
-        </div>
+        <div className={styles.searchSection}></div>
         <AddGroupForm />
         <h1>Groups</h1>
 

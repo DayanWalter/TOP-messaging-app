@@ -69,25 +69,6 @@ export default function GroupList() {
                   />
                   <Button text={'Search'} />
                 </form>
-                <div className={styles.personContainer}>
-                  {groupLoading && (
-                    <p>Enter a name and click &quot;Search&quot;...</p>
-                  )}
-                  {groupError && <p>Error</p>}
-                  {group && (
-                    <ul>
-                      {/* Map over all groups and display them */}
-                      {group.allGroups.map(({ _id, name }) => (
-                        <li key={_id}>
-                          {/* Add ${id} for real groups */}
-                          <Link to={`/home/group/${_id}`}>
-                            <ListCard name={name} />
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
               </main>
               <footer className={styles.footer}></footer>
             </>

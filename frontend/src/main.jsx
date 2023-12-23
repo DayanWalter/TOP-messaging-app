@@ -15,6 +15,7 @@ import EditProfileSite from './component/EditProfileSite.jsx';
 import ViewProfileSite from './component/ViewProfileSite.jsx';
 import ChatRoomSite from './component/ChatRoomSite.jsx';
 import GreetingSite from './component/GreetingSite.jsx';
+import SearchSite from './component/SearchSite.jsx';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,12 @@ const router = createBrowserRouter([
       return params;
     },
   },
+
+  {
+    path: '/home/search',
+    element: <SearchSite />,
+  },
+
   {
     path: '/home/userlist',
     element: <UserList />,
