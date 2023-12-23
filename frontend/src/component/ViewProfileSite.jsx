@@ -13,7 +13,7 @@ export default function ViewProfileSite() {
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the username you are looking for
-  const username = payload.username;
+  const userId = payload._id;
 
   const [userdata, setUserdata] = useState();
   const [error, setError] = useState(null);
@@ -59,9 +59,7 @@ export default function ViewProfileSite() {
             {userdata && (
               <>
                 <header className={styles.header}>
-                  <Link to={'/home/viewprofile'}>
-                    <div className={styles.userIcon}></div>
-                  </Link>
+                  <div className={styles.userIcon}></div>
                 </header>
                 <main className={styles.main}>
                   <div className={styles.label}>
@@ -82,10 +80,15 @@ export default function ViewProfileSite() {
                     </div>
                   </div>
                   <div className={styles.button}>
-                    <AddFriendButton friendId={receiverId} />
-                    <Link to={`/home/user/${receiverId}`}>
-                      <button>Start to chat</button>
-                    </Link>
+                    {/* If receiverId is not the id of logged in userm display button for adding friend and starting chat */}
+                    {receiverId !== userId ? (
+                      <>
+                        <AddFriendButton friendId={receiverId} />
+                        <Link to={`/home/user/${receiverId}`}>
+                          <button>Start to chat</button>
+                        </Link>
+                      </>
+                    ) : null}
                   </div>
                 </main>
                 <footer className={styles.footer}></footer>
