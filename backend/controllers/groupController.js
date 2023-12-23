@@ -24,7 +24,7 @@ exports.group_detail = asyncHandler(async (req, res, next) => {
   }
 
   res.json({
-    name: group.name,
+    groupname: group.groupname,
   });
 });
 
@@ -32,7 +32,7 @@ exports.group_detail = asyncHandler(async (req, res, next) => {
 exports.group_add = asyncHandler(async (req, res, next) => {
   // VALIDATE INPUT, BEFORE CREATING NEW GROUP!!!
   const group = new Group({
-    name: req.body.name,
+    groupname: req.body.groupname,
   });
   await group.save();
   res.json({ group });

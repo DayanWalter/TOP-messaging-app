@@ -40,18 +40,17 @@ export default function GroupContainer() {
     };
     getGroups();
   }, []);
-
   return (
     <>
       {groupLoading && <p>Loading...</p>}
       {groupError && <p>Error</p>}
       {group && (
         <ul>
-          {group.allGroups.map(({ _id, name }) => (
+          {group.allGroups.map(({ _id, groupname }) => (
             <li key={_id}>
               {/* Add ${id} for real rooms*/}
               <Link to={`/home/group/${_id}`}>
-                <ListCard name={name} />
+                <ListCard name={groupname} />
               </Link>
             </li>
           ))}

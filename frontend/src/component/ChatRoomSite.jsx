@@ -40,8 +40,7 @@ export default function ChatRoomSite() {
         }
 
         const data = await response.json();
-        data.username ? setName(data.username) : setName(data.name);
-        // setName(data.username);
+        data.username ? setName(data.username) : setName(data.groupname);
       } catch (error) {
         setError(error.message);
         setMessages(null);
