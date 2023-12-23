@@ -1,20 +1,16 @@
 import { useLoaderData } from 'react-router-dom';
 import { useState } from 'react';
+import Input from './Input';
 
 export default function SendMessageForm({ refetch }) {
   // Get params for receiver
   const loaderData = useLoaderData();
   const receiverId = loaderData.id;
   const receiverType = loaderData.type;
-  // console.log(loaderData.id);
 
   const token = localStorage.getItem('jwtoken');
-  // Split the payload of the jwt and convert the username-part
-  const payload = JSON.parse(atob(token.split('.')[1]));
-  // Define the Username you are looking for
-  const senderId = payload._id;
 
-  // Save input from form
+  // Save text from input
   const [formData, setFormData] = useState({
     text: '',
   });
@@ -53,13 +49,13 @@ export default function SendMessageForm({ refetch }) {
 
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
       } else {
         console.error('Failed to send message');
       }
     } catch (error) {
       console.error('Error:', error);
     } finally {
+      // Refetch for immediate display
       refetch();
       setFormData({ text: '' });
     }
@@ -67,10 +63,10 @@ export default function SendMessageForm({ refetch }) {
   return (
     <>
       <form onSubmit={formSubmit}>
-        <input
-          name="text"
-          type="text"
-          placeholder="Enter message..."
+        <Input
+          name={'text'}
+          type={'text'}
+          placeholder={'Enter message...'}
           value={formData.text}
           onChange={handleChange}
         />
