@@ -65,14 +65,6 @@ const router = createBrowserRouter([
         path: '/home/grouplist',
         element: <GroupList />,
       },
-
-      {
-        path: '/home/user/:id/add',
-        element: <AddFriendButton />,
-        loader({ params }) {
-          return params;
-        },
-      },
     ],
   },
 ]);
