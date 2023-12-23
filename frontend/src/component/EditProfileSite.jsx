@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './EditProfileSite.module.css';
 import { useEffect, useState } from 'react';
+import Site from './Site';
 
 export default function EditProfileSite() {
   const token = localStorage.getItem('jwtoken');
@@ -90,8 +91,8 @@ export default function EditProfileSite() {
             {userdata && (
               <>
                 <header className={styles.header}>
-                  <Link to={'/home/viewprofile'}>
-                    <div className={styles.userIcon}></div>
+                  <Link to={`/home/viewprofile/${activeUserId}`}>
+                    <div className={styles.userIcon}>{userdata.username}</div>
                   </Link>
                 </header>
                 <form className={styles.form} onSubmit={formSubmit}>

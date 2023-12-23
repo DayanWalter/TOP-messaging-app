@@ -40,15 +40,9 @@
   transition: all 0.25s;
   flex: 1;
 }
-.messageContainerReceiver {
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: end; */
-  /* align-items: end; */
-}
+
 .messageContainerSender {
   display: flex;
   flex-direction: column;
-  /* justify-content: end; */
   align-items: end;
 }

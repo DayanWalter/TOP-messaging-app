@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import styles from './ChatRoomSite.module.css';
-import Message from './MessageCard';
+import MessageCard from './MessageCard';
 import { useEffect, useState } from 'react';
 import SendMessageForm from './SendMessageForm';
 import Site from './Site';
@@ -97,37 +97,26 @@ export default function ChatRoomSite() {
                   </header>
                 </Link>
                 <main className={styles.main}>
-                  {/* Map over the messages */}
                   <ul>
-                    {messages &&
-                      messages.messages.map(
-                        ({ _id, text, sender, timestamp }) =>
-                          sender.username !== username ? (
-                            <li
-                              className={styles.messageContainerReceiver}
-                              key={_id}
-                            >
-                              <Link to={`/home/viewprofile/${sender._id}`}>
-                                {sender.username}
-                              </Link>
-                              {/* {receiver && <p>{receiver.messages}</p>} */}
-
-                              <Message text={text} time={timestamp} />
-                            </li>
-                          ) : (
-                            <li
-                              className={styles.messageContainerSender}
-                              key={_id}
-                            >
-                              <Link to={`/home/viewprofile/${sender._id}`}>
-                                {sender.username}
-                              </Link>
-                              {/* {receiver && <p>{receiver.messages}</p>} */}
-
-                              <Message text={text} time={timestamp} />
-                            </li>
-                          )
-                      )}
+                    {messages.messages.map(({ _id, text, sender, timestamp }) =>
+                      sender.username !== username ? (
+                        <li key={_id}>
+                          <MessageCard
+                            text={text}
+                            time={timestamp}
+                            sender={sender}
+                          />
+                        </li>
+                      ) : (
+                        <li className={styles.messageContainerSender} key={_id}>
+                          <MessageCard
+                            text={text}
+                            time={timestamp}
+                            sender={sender}
+                          />
+                        </li>
+                      )
+                    )}
                   </ul>
                 </main>
                 <footer className={styles.footer}>
