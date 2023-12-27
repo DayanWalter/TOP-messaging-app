@@ -45,12 +45,12 @@ exports.user_post = [
 // POST User Login
 exports.user_login = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
-  // Authenticate user
   const user = await User.findOne({ username });
-  // If user is authenticated...
-  if (user.password === password) {
+  const match = await bcrypt.compare(password, user.password);
+
+  if (match) {
     const autheticatedUser = {
-      // set the _id of authenticatedUser
+      // set the _id and username of authenticatedUser
       _id: user._id,
       username,
     };
