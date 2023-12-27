@@ -45,11 +45,11 @@ export default function SideBar() {
 
         <div className={styles.editLogoutContainer}>
           <Link to={'/home/editprofile'}>
-            <button>Edit Profile</button>
+            <Button text={'Edit Profile'} />
           </Link>
 
           <Link to={'/logout'}>
-            <button>Logout</button>
+            <Button text={'Logout'} />
           </Link>
         </div>
       </div>
