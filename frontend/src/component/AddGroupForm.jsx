@@ -10,6 +10,8 @@ export default function AddGroupForm() {
   const [formdata, setFormdata] = useState({
     groupname: '',
   });
+
+  // Errors for input validation
   const [errors, setErrors] = useState('');
 
   const handleInputChange = (e) => {

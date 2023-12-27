@@ -11,11 +11,24 @@ export default function SignUpSite() {
     password: '',
     confirmpassword: '',
   });
+  const [errors, setErrors] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // POST the signup values from input
     try {
+      if (formdata.username.length < 5) {
+        setErrors('Username must be at least 5 chars long');
+        return;
+      }
+      if (formdata.password.length < 3) {
+        setErrors('Password must be at least 3 chars long');
+        return;
+      }
+      if (formdata.password !== formdata.confirmpassword) {
+        setErrors('Passwords are not the same');
+        return;
+      }
       const response = await fetch(`http://localhost:3000/api/user/create`, {
         method: 'POST',
         body: JSON.stringify(formdata),
@@ -92,6 +105,8 @@ export default function SignUpSite() {
             value={formdata.confirmpassword}
             onChange={handleInputChange}
           />
+          {errors && <p style={{ color: 'red' }}>{errors}</p>}
+
           <button type="submit">Sign Up</button>
           <Link to={'/'}>Login</Link>
         </form>
