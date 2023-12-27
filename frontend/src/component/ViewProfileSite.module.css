@@ -25,7 +25,8 @@
 }
 .labelName,
 .labelContent {
-  background-color: rgb(230, 230, 230);
+  background-color: rgba(43, 82, 120, 1);
+  color: white;
   border: 1px solid black;
   border-radius: 15px;
   font-size: 24px;

@@ -59,14 +59,10 @@ export default function ViewProfileSite() {
         <Site>
           <SiteContainer>
             <header className={styles.header}>
-              {' '}
-              Header
               <div className={styles.userIcon}></div>
             </header>
 
             <main className={styles.main}>
-              {' '}
-              Main
               <div className={styles.label}>
                 <div className={styles.labelName}>Description</div>
                 <div className={styles.labelContent}>
@@ -79,7 +75,6 @@ export default function ViewProfileSite() {
               </div>
               <div className={styles.label}>
                 <div className={styles.labelName}>Username</div>
-                {/* Username */}
                 <div className={styles.labelContent}>{userdata.username}</div>
               </div>
             </main>
