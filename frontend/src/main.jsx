@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import UserList from './component/UserList.jsx';
 import GroupList from './component/GroupList.jsx';
-import AddFriendButton from './component/AddFriendButton.jsx';
 import LoginSite from './component/LoginSite.jsx';
 import LogoutSite from './component/LogoutSite.jsx';
 import SignUpSite from './component/SignUpSite.jsx';

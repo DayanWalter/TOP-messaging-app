@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: rgba(23, 33, 43, 255);
+  background-color: rgba(23, 33, 43, 1);
+  color: white;
 }
 .userIcon {
   background-color: rgba(23, 43, 77);

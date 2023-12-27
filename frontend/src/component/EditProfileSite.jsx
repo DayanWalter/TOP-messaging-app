@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './EditProfileSite.module.css';
 import { useEffect, useState } from 'react';
 import Site from './Site';
+import SiteContainer from './SiteContainer';
 
 export default function EditProfileSite() {
   const token = localStorage.getItem('jwtoken');
@@ -84,71 +85,69 @@ export default function EditProfileSite() {
   return (
     <>
       <Site>
-        <div className={styles.site}>
-          <div className={styles.content}>
-            {loading && <p>Loading...</p>}
-            {error && <p>Error:{error}</p>}
-            {userdata && (
-              <>
-                <header className={styles.header}>
-                  <Link to={`/home/viewprofile/${activeUserId}`}>
-                    <div className={styles.userIcon}>{userdata.username}</div>
-                  </Link>
-                </header>
-                <form className={styles.form} onSubmit={formSubmit}>
-                  <div className={styles.label}>
-                    <div className={styles.labelName}>Description</div>
-                    <div className={styles.labelContent}>
-                      <input
-                        type="text"
-                        name="description"
-                        id="description"
-                        defaultValue={userdata.description}
-                        onChange={(e) => {
-                          handleChange('description', e);
-                        }}
-                      />
-                    </div>
+        {loading && <p>Loading...</p>}
+        {error && <p>Error:{error}</p>}
+        {userdata && (
+          <>
+            <SiteContainer>
+              <header className={styles.header}>
+                <Link to={`/home/viewprofile/${activeUserId}`}>
+                  <div className={styles.userIcon}>{userdata.username}</div>
+                </Link>
+              </header>
+              <form className={styles.form} onSubmit={formSubmit}>
+                <div className={styles.label}>
+                  <div className={styles.labelName}>Description</div>
+                  <div className={styles.labelContent}>
+                    <input
+                      type="text"
+                      name="description"
+                      id="description"
+                      defaultValue={userdata.description}
+                      onChange={(e) => {
+                        handleChange('description', e);
+                      }}
+                    />
                   </div>
-                  <div className={styles.label}>
-                    <div className={styles.labelName}>Name</div>
-                    <div className={styles.labelContent}>
-                      <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        defaultValue={userdata.name}
-                        onChange={(e) => {
-                          handleChange('name', e);
-                        }}
-                      />
-                    </div>
+                </div>
+                <div className={styles.label}>
+                  <div className={styles.labelName}>Name</div>
+                  <div className={styles.labelContent}>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      defaultValue={userdata.name}
+                      onChange={(e) => {
+                        handleChange('name', e);
+                      }}
+                    />
                   </div>
-                  <div className={styles.label}>
-                    <div className={styles.labelName}>Username</div>
-                    <div className={styles.labelContent}>
-                      <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        defaultValue={userdata.username}
-                        onChange={(e) => {
-                          handleChange('username', e);
-                        }}
-                      />
-                    </div>
+                </div>
+                <div className={styles.label}>
+                  <div className={styles.labelName}>Username</div>
+                  <div className={styles.labelContent}>
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      defaultValue={userdata.username}
+                      onChange={(e) => {
+                        handleChange('username', e);
+                      }}
+                    />
                   </div>
-                  <div className={styles.button}>
-                    {/* <Link to={'/home'}> */}
-                    {/* Send changed profile to server */}
-                    <button type="submit">Save changes</button>
-                    {/* </Link> */}
-                  </div>
-                </form>
-              </>
-            )}
-          </div>
-        </div>
+                </div>
+                <div className={styles.button}>
+                  {/* <Link to={'/home'}> */}
+                  {/* Send changed profile to server */}
+                  <button type="submit">Save changes</button>
+                  {/* </Link> */}
+                </div>
+              </form>
+            </SiteContainer>
+          </>
+        )}
       </Site>
     </>
   );

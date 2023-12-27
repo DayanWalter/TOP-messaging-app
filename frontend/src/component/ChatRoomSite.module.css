@@ -12,7 +12,7 @@
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  background-color: rgba(23, 33, 43, 255);
+  background-color: rgba(23, 33, 43, 1);
 }
 .header {
   /* background-color: rgb(208, 208, 208); */

@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-export default function AddFriendButton({ friendId }) {
+import Button from './Button';
+export default function AddFriendForm({ friendId }) {
   const token = localStorage.getItem('jwtoken');
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));
@@ -42,7 +43,11 @@ export default function AddFriendButton({ friendId }) {
 
   return (
     <>
-      <button onClick={addFriend}>Add Friend</button>
+      <form onSubmit={addFriend}>
+        <Button text={'Add Friend'} />
+      </form>
+
+      {/* <button onClick={addFriend}>Add Friend</button> */}
     </>
   );
 }
