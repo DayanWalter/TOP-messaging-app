@@ -1,20 +1,47 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
+const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 // POST user/Create user
-exports.user_post = asyncHandler(async (req, res, next) => {
-  // VALIDATE INPUT, BEFORE CREATING NEW USER!!!
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-  });
-  await user.save();
+exports.user_post = [
+  body('username', 'Name must not be empty')
+    .trim()
+    .isLength({ min: 5 })
+    .escape(),
+  body('password', 'Password too short(min 3)').isLength({
+    min: 3,
+  }),
+  body('confirmpassword', "Passwords aren't the same").custom(
+    (value, { req }) => {
+      return value === req.body.password;
+    }
+  ),
+  asyncHandler(async (req, res, next) => {
+    console.log(req.body);
 
-  res.json({ user });
-});
+    // VALIDATE INPUT, BEFORE CREATING NEW USER!!!
+    const result = validationResult(req);
+    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+      const user = new User({
+        username: req.body.username,
+        password: hashedPassword,
+        email: req.body.email,
+      });
 
+      if (result.isEmpty()) {
+        await user.save();
+        res.json({ user });
+      } else {
+        // ERROR
+        console.error('Error');
+        result.array().map((error) => console.log(error.msg));
+      }
+    });
+  }),
+];
 // POST User Login
 exports.user_login = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;

@@ -9,6 +9,7 @@ export default function SignUpSite() {
     username: '',
     email: '',
     password: '',
+    confirmpassword: '',
   });
 
   const handleSubmit = async (e) => {
@@ -85,9 +86,11 @@ export default function SignUpSite() {
           {/* TODO: Compare the entered passwords */}
           <input
             type="password"
-            name="repeatPassword"
-            id="repeatPassword"
+            name="confirmpassword"
+            id="confirmpassword"
             placeholder="Repeat Password"
+            value={formdata.confirmpassword}
+            onChange={handleInputChange}
           />
           <button type="submit">Sign Up</button>
           <Link to={'/'}>Login</Link>
