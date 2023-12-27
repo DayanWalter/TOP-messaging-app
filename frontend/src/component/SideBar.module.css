@@ -5,8 +5,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   background-color: rgba(23, 33, 43, 1);
   color: white;
+  gap: 15px;
 }
 .userIcon {
   background-color: rgba(23, 43, 77);
@@ -38,6 +40,7 @@
   border: 1px solid black;
   border-radius: 0.25rem;
   height: 200px;
+  width: 90%;
   padding: 1rem;
 }
 

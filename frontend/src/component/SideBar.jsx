@@ -35,7 +35,7 @@ export default function SideBar() {
           <FriendContainer />
         </div>
 
-        <div className={styles.searchSection}></div>
+        {/* <div className={styles.searchSection}></div> */}
         <AddGroupForm />
 
         <h1>Groups</h1>
