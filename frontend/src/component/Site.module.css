@@ -1,0 +1,12 @@
+.site {
+  display: flex;
+}
+.sidebar {
+  width: 300px;
+  height: 100vh;
+}
+.main {
+  background-color: rgba(14, 22, 33, 255);
+
+  flex: 1;
+}

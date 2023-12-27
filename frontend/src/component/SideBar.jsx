@@ -37,6 +37,7 @@ export default function SideBar() {
 
         <div className={styles.searchSection}></div>
         <AddGroupForm />
+
         <h1>Groups</h1>
 
         <div className={styles.groupContainer}>

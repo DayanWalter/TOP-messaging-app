@@ -2,6 +2,7 @@ import Input from './Input';
 import Button from './Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './AddGroupForm.module.css';
 
 export default function AddGroupForm() {
   const token = localStorage.getItem('jwtoken');
@@ -63,16 +64,19 @@ export default function AddGroupForm() {
   };
 
   return (
-    <form onSubmit={handleAddGroup}>
+    <form onSubmit={handleAddGroup} className={styles.form}>
+      <hr />
       <Input
         name={'groupname'}
         id={'groupname'}
         value={formdata.groupname}
         placeholder={'Enter new groupname'}
         onChange={handleInputChange}
+        className={styles.input}
       />
-      {errors && <p style={{ color: 'red' }}>{errors}</p>}
       <Button text={'Add Group'} />
+      {errors && <p style={{ color: 'red' }}>{errors}</p>}
+      <hr />
     </form>
   );
 }

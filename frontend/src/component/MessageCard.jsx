@@ -8,7 +8,7 @@ export default function MessageCard({ text, time, sender }) {
       <Link to={`/home/viewprofile/${sender._id}`}>{sender.username}</Link>
       <div className={styles.container}>
         <div className={styles.left}>
-          <p>&quot;{text}&quot;</p>
+          <p>{text}</p>
         </div>
         <div className={styles.right}>
           <p>{convertedTime}</p>

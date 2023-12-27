@@ -5,18 +5,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: rgba(23, 33, 43, 255);
 }
 .userIcon {
   background-color: rgba(23, 43, 77);
   color: white;
-  width: 5rem;
-  height: 5rem;
+  width: 6rem;
+  height: 6rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bolder;
-  font-size: 12px;
+  font-size: 1rem;
 }
 .searchSection {
   display: flex;

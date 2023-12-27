@@ -9,31 +9,39 @@
 
   width: 90%;
   height: 90%;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
+  background-color: rgba(23, 33, 43, 255);
 }
 .header {
-  background-color: rgb(208, 208, 208);
+  /* background-color: rgb(208, 208, 208); */
   height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid black;
 }
 .main {
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
   overflow-y: auto;
   flex: 1;
   padding: 15px;
 }
+.footer {
+  border-top: 1px solid black;
+}
 .footer form {
   height: 80px;
-  background-color: rgb(208, 208, 208);
+  /* background-color: rgb(208, 208, 208); */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0px 50px;
 }
 .footer input {
-  color: black;
-  background-color: white;
-  outline: none;
+  color: white;
+  background-color: rgba(43, 82, 120, 1);
   border: 1px solid black;
   padding: 5px;
   border-radius: 5px;
