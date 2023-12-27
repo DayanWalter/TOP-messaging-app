@@ -2,6 +2,8 @@ const Group = require('../models/group');
 
 const asyncHandler = require('express-async-handler');
 
+const { body, validationResult } = require('express-validator');
+
 // GET all groups for search for example
 exports.group_search = asyncHandler(async (req, res, next) => {
   const searchQuery = req.query.groupname;
@@ -29,11 +31,28 @@ exports.group_detail = asyncHandler(async (req, res, next) => {
 });
 
 // POST group/Create group
-exports.group_add = asyncHandler(async (req, res, next) => {
+exports.group_add = [
   // VALIDATE INPUT, BEFORE CREATING NEW GROUP!!!
-  const group = new Group({
-    groupname: req.body.groupname,
-  });
-  await group.save();
-  res.json({ group });
-});
+  body('groupname', 'Name must not be empty')
+    .trim()
+    .isLength({ min: 5 })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const result = validationResult(req);
+
+    const group = new Group({
+      groupname: req.body.groupname,
+    });
+
+    if (result.isEmpty()) {
+      await group.save();
+      res.json({ group });
+    } else {
+      res.json({ errors: result.array()[0].msg });
+    }
+
+    // const errors = result.array().map((error) => console.log(error.msg));
+    // console.log(result.array());
+  }),
+];

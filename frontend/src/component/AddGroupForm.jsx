@@ -10,6 +10,8 @@ export default function AddGroupForm() {
   const [formdata, setFormdata] = useState({
     groupname: '',
   });
+  const [errors, setErrors] = useState('');
+
   const handleInputChange = (e) => {
     // Destructure e.target.value and fieldname
     const { name, value } = e.target;
@@ -22,9 +24,14 @@ export default function AddGroupForm() {
     setFormdata(newFormdata);
   };
   const handleAddGroup = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     // POST the signup values from input
     try {
+      if (formdata.groupname.length < 5) {
+        setErrors('Groupname must be at least 5 chars long');
+        return;
+      }
+
       const response = await fetch(`http://localhost:3000/api/group/create`, {
         method: 'POST',
         body: JSON.stringify(formdata),
@@ -39,10 +46,15 @@ export default function AddGroupForm() {
         console.error('Error:', response.statusText);
       }
       // else: successfull signup
-      const json = await response.json();
-      console.log(json);
+      const data = await response.json();
+      console.log(data);
+      if (data.group) {
+        console.log('Group created:', data.group);
+      } else if (data.errors) {
+        setErrors(data.errors);
+        console.error(errors);
+      }
       // Navigate after successful SignUp to login page
-      navigate('/home');
     } catch (error) {
       console.error('Error', error);
     }
@@ -57,6 +69,7 @@ export default function AddGroupForm() {
         placeholder={'Enter new groupname'}
         onChange={handleInputChange}
       />
+      {errors && <p style={{ color: 'red' }}>{errors}</p>}
       <Button text={'Add Group'} />
     </form>
   );
