@@ -3,6 +3,7 @@ import styles from './EditProfileSite.module.css';
 import { useEffect, useState } from 'react';
 import Site from './Site';
 import SiteContainer from './SiteContainer';
+import Button from './Button';
 
 export default function EditProfileSite() {
   const token = localStorage.getItem('jwtoken');
@@ -140,7 +141,8 @@ export default function EditProfileSite() {
               <div className={styles.button}>
                 {/* <Link to={'/home'}> */}
                 {/* Send changed profile to server */}
-                <button type="submit">Save changes</button>
+                <Button text={'Save Changes'} />
+                {/* <button type="submit">Save changes</button> */}
                 {/* </Link> */}
               </div>
             </form>
