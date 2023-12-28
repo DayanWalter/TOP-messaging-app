@@ -18,6 +18,12 @@
   flex-direction: column;
   align-items: center;
 } */
+.labelContainer {
+  /* flex: 1; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .label {
   margin-bottom: 50px;

@@ -13,21 +13,19 @@
   align-items: center;
   justify-content: center;
 }
-
-/* .form {
-  flex: 1;
-  padding: 25px;
+/* this is the "labelContainer" */
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
-} */
+}
+/* labelContainer end */
 .button {
   display: flex;
   gap: 50px;
 }
 
 .label {
-  margin-bottom: 50px;
   width: 80%;
 }
 .labelName,

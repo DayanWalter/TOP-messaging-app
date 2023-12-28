@@ -61,17 +61,21 @@ export default function ViewProfileSite() {
           </header>
 
           <main className={styles.main}>
-            <div className={styles.label}>
-              <div className={styles.labelName}>Description</div>
-              <div className={styles.labelContent}>{userdata.description}</div>
-            </div>
-            <div className={styles.label}>
-              <div className={styles.labelName}>Name</div>
-              <div className={styles.labelContent}>{userdata.name}</div>
-            </div>
-            <div className={styles.label}>
-              <div className={styles.labelName}>Username</div>
-              <div className={styles.labelContent}>{userdata.username}</div>
+            <div className={styles.labelContainer}>
+              <div className={styles.label}>
+                <div className={styles.labelName}>Description</div>
+                <div className={styles.labelContent}>
+                  {userdata.description}
+                </div>
+              </div>
+              <div className={styles.label}>
+                <div className={styles.labelName}>Name</div>
+                <div className={styles.labelContent}>{userdata.name}</div>
+              </div>
+              <div className={styles.label}>
+                <div className={styles.labelName}>Username</div>
+                <div className={styles.labelContent}>{userdata.username}</div>
+              </div>
             </div>
           </main>
 
