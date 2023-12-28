@@ -7,6 +7,9 @@
 }
 .main {
   background-color: rgba(14, 22, 33, 1);
-
   flex: 1;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

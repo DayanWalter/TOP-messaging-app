@@ -1,12 +1,5 @@
-.site {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .content {
   border: 1px solid black;
-
   width: 90%;
   /* height: 90%; */
   border-radius: 15px;
