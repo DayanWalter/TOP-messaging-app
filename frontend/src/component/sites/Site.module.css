@@ -21,7 +21,7 @@
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  background-color: rgba(23, 33, 43, 255);
+  background-color: rgba(23, 33, 43, 1);
 }
 /* Style header,main and footer from children */
 header {
@@ -30,6 +30,7 @@ header {
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid black;
+  color: white;
 }
 main {
   overflow-y: auto;
@@ -38,4 +39,5 @@ main {
 }
 footer {
   border-top: 1px solid black;
+  height: 80px;
 }

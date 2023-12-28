@@ -146,7 +146,7 @@ export default function EditProfileSite() {
               </div>
             </form>
           </main>
-          <footer>Footer</footer>
+          <footer></footer>
         </Site>
       )}
     </>
