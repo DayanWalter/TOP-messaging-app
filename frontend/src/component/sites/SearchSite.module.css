@@ -1,24 +1,9 @@
-/* .header {
-  background-color: rgb(208, 208, 208);
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
 .userIcon {
   background-color: rgba(23, 43, 77);
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
 }
-/* .main {
-  background-color: antiquewhite;
-  flex: 1;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
 
 /* this is the "labelContainer" */
 .form {
@@ -61,4 +46,8 @@
 .labelName {
   text-align: center;
   font-weight: bolder;
+}
+.personContainer p {
+  color: white;
+  text-align: center;
 }
