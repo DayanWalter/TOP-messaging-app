@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './LoginSite.module.css';
 import logo from '/logo.svg';
 import { useState } from 'react';
-import LoginForm from './LoginForm';
+import LoginForm from '../forms/LoginForm';
 
 export default function LoginSite() {
   return (

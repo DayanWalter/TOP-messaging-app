@@ -1,8 +1,8 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import styles from './ChatRoomSite.module.css';
-import MessageCard from './MessageCard';
+import MessageCard from '../MessageCard';
 import { useEffect, useState } from 'react';
-import SendMessageForm from './SendMessageForm';
+import SendMessageForm from '../forms/SendMessageForm';
 import Site from './Site';
 
 export default function ChatRoomSite() {

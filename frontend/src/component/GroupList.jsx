@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './GroupList.module.css';
 import { Link } from 'react-router-dom';
 import ListCard from './ListCard';
-import Site from './Site';
+import Site from './sites/Site';
 import Input from './Input';
 import Button from './Button';
 

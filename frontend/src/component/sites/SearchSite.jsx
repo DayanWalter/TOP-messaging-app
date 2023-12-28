@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import styles from './UserList.module.css';
+import styles from './SearchSite.module.css';
 import { Link } from 'react-router-dom';
-import ListCard from './ListCard';
+import ListCard from '../ListCard';
 import Site from './Site';
-import Button from './Button';
-import Input from './Input';
+import Button from '../Button';
+import Input from '../Input';
 
 export default function SearchSite() {
   const token = localStorage.getItem('jwtoken');

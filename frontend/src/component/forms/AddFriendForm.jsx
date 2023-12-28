@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Button from './Button';
+import Button from '../Button';
 export default function AddFriendForm({ friendId }) {
   const token = localStorage.getItem('jwtoken');
   // Split the payload of the jwt and convert the username-part

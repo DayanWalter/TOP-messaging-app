@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import { useState } from 'react';
-import Input from './Input';
+import Input from '../Input';
 
 export default function SendMessageForm({ refetch }) {
   // Get params for receiver

@@ -1,5 +1,5 @@
-import Input from './Input';
-import Button from './Button';
+import Input from '../Input';
+import Button from '../Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AddGroupForm.module.css';

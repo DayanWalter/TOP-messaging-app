@@ -2,8 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './EditProfileSite.module.css';
 import { useEffect, useState } from 'react';
 import Site from './Site';
-import SiteContainer from './SiteContainer';
-import Button from './Button';
+import SiteContainer from '../container/SiteContainer';
+import Button from '../Button';
 
 export default function EditProfileSite() {
   const token = localStorage.getItem('jwtoken');

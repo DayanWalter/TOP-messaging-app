@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ListCard from './ListCard';
+import ListCard from '../ListCard';
 
 export default function FriendContainer() {
   const token = localStorage.getItem('jwtoken');

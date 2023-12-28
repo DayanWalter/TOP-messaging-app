@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import styles from './SideBar.module.css';
 
 import SearchButton from './SearchButton';
-import FriendContainer from './FriendContainer';
-import GroupContainer from './GroupContainer';
+import FriendContainer from './container/FriendContainer';
+import GroupContainer from './container/GroupContainer';
 import Button from './Button';
 import Input from './Input';
-import AddGroupForm from './AddGroupForm';
+import AddGroupForm from './forms/AddGroupForm';
 
 export default function SideBar() {
   const token = localStorage.getItem('jwtoken');

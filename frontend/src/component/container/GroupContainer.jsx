@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import ListCard from './ListCard';
+import ListCard from '../ListCard';
 import { useEffect, useState } from 'react';
 
 export default function GroupContainer() {

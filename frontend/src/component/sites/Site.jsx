@@ -1,5 +1,5 @@
 import styles from './Site.module.css';
-import SideBar from './SideBar';
+import SideBar from '../SideBar';
 
 export default function Site({ children }) {
   return (

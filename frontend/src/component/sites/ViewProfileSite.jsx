@@ -2,9 +2,9 @@ import { Link, useLoaderData } from 'react-router-dom';
 import styles from './ViewProfileSite.module.css';
 import { useEffect, useState } from 'react';
 import Site from './Site';
-import SiteContainer from './SiteContainer';
-import Button from './Button';
-import AddFriendForm from './AddFriendForm';
+import SiteContainer from '../container/SiteContainer';
+import Button from '../Button';
+import AddFriendForm from '../forms/AddFriendForm';
 
 export default function ViewProfileSite() {
   // Get params for receiver

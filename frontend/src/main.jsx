@@ -6,15 +6,15 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import UserList from './component/UserList.jsx';
 import GroupList from './component/GroupList.jsx';
-import LoginSite from './component/LoginSite.jsx';
-import LogoutSite from './component/LogoutSite.jsx';
-import SignUpSite from './component/SignUpSite.jsx';
-import HomeSite from './component/HomeSite.jsx';
-import EditProfileSite from './component/EditProfileSite.jsx';
-import ViewProfileSite from './component/ViewProfileSite.jsx';
-import ChatRoomSite from './component/ChatRoomSite.jsx';
-import GreetingSite from './component/GreetingSite.jsx';
-import SearchSite from './component/SearchSite.jsx';
+import LoginSite from './component/sites/LoginSite.jsx';
+import LogoutSite from './component/sites/LogoutSite.jsx';
+import SignUpSite from './component/sites/SignUpSite.jsx';
+import HomeSite from './component/sites/HomeSite.jsx';
+import EditProfileSite from './component/sites/EditProfileSite.jsx';
+import ViewProfileSite from './component/sites/ViewProfileSite.jsx';
+import ChatRoomSite from './component/sites/ChatRoomSite.jsx';
+import GreetingSite from './component/sites/GreetingSite.jsx';
+import SearchSite from './component/sites/SearchSite.jsx';
 
 const router = createBrowserRouter([
   {
