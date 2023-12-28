@@ -1,38 +1,33 @@
-.site {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.content {
-  border: 1px solid black;
-  min-width: 500px;
-  width: 50%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-}
-.header {
+/* .header {
   background-color: rgb(208, 208, 208);
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 .userIcon {
   background-color: rgba(23, 43, 77);
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
 }
-.main {
+/* .main {
   background-color: antiquewhite;
   flex: 1;
   padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
+} */
+
+/* this is the "labelContainer" */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+/* labelContainer end */
+
 .button {
   display: flex;
   gap: 50px;

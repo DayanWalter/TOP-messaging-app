@@ -92,68 +92,62 @@ export default function SearchSite() {
   return (
     <>
       <Site>
-        <div className={styles.site}>
-          <div className={styles.content}>
-            <>
-              <header className={styles.header}></header>
-              <main className={styles.main}>
-                <form onSubmit={handleGetData}>
-                  <Input
-                    type={'text'}
-                    placeholder={'Enter Username e.g.'}
-                    value={searchText}
-                    onChange={(e) => {
-                      setSearchText(e.target.value);
-                    }}
-                  />
+        <header className={styles.header}></header>
+        <main className={styles.main}>
+          <form className={styles.form} onSubmit={handleGetData}>
+            <Input
+              type={'text'}
+              placeholder={'Enter Username e.g.'}
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+              }}
+            />
 
-                  <Button text={'Search'} />
-                </form>
+            <Button text={'Search'} />
+          </form>
 
-                <div className={styles.personContainer}>
-                  {userLoading && <p>Enter a username...</p>}
-                  {userError && <p>Error</p>}
-                  {user && (
-                    <ul>
-                      {/* Map over all user an display them */}
-                      {user.allUser.map(({ _id, username }) =>
-                        // Display alle users, except logged in user
-                        activeUser !== username ? (
-                          <li key={_id}>
-                            {/* Add ${id} for real people */}
-                            <Link to={`/home/user/${_id}`}>
-                              <ListCard name={username} />
-                            </Link>
-                          </li>
-                        ) : null
-                      )}
-                    </ul>
-                  )}
-                </div>
-                <div className={styles.personContainer}>
-                  {groupLoading && (
-                    <p>...or a groupname and click &quot;Search&quot;...</p>
-                  )}
-                  {groupError && <p>Error</p>}
-                  {group && (
-                    <ul>
-                      {/* Map over all groups and display them */}
-                      {group.allGroups.map(({ _id, groupname }) => (
-                        <li key={_id}>
-                          {/* Add ${id} for real groups */}
-                          <Link to={`/home/group/${_id}`}>
-                            <ListCard name={groupname} />
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </main>
-              <footer className={styles.footer}></footer>
-            </>
+          <div className={styles.personContainer}>
+            {userLoading && <p>Enter a username...</p>}
+            {userError && <p>Error</p>}
+            {user && (
+              <ul>
+                {/* Map over all user an display them */}
+                {user.allUser.map(({ _id, username }) =>
+                  // Display alle users, except logged in user
+                  activeUser !== username ? (
+                    <li key={_id}>
+                      {/* Add ${id} for real people */}
+                      <Link to={`/home/user/${_id}`}>
+                        <ListCard name={username} />
+                      </Link>
+                    </li>
+                  ) : null
+                )}
+              </ul>
+            )}
           </div>
-        </div>
+          <div className={styles.personContainer}>
+            {groupLoading && (
+              <p>...or a groupname and click &quot;Search&quot;...</p>
+            )}
+            {groupError && <p>Error</p>}
+            {group && (
+              <ul>
+                {/* Map over all groups and display them */}
+                {group.allGroups.map(({ _id, groupname }) => (
+                  <li key={_id}>
+                    {/* Add ${id} for real groups */}
+                    <Link to={`/home/group/${_id}`}>
+                      <ListCard name={groupname} />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </main>
+        <footer className={styles.footer}></footer>
       </Site>
     </>
   );
