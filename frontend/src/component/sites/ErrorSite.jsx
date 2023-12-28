@@ -8,11 +8,8 @@ export default function ErrorSite() {
         <h1>Oh no, this route doesn&apos;t exist!</h1>
         <li>
           <Link to="/">
-            You can go back to the home page by clicking here, though!
+            Go back to the login page by clicking here, though!
           </Link>
-        </li>
-        <li>
-          <Link to="/home">Home</Link>
         </li>
       </div>
     </div>
