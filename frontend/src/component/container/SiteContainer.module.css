@@ -1,9 +1,0 @@
-.content {
-  border: 1px solid black;
-  width: 90%;
-  /* height: 90%; */
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(23, 33, 43, 255);
-}

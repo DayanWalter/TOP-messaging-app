@@ -5,11 +5,37 @@
   width: 300px;
   height: 100vh;
 }
-.main {
+.content {
   background-color: rgba(14, 22, 33, 1);
   flex: 1;
   height: 100vh;
   display: flex;
+  /* Center children */
   justify-content: center;
   align-items: center;
+}
+.children {
+  border: 1px solid black;
+  width: 90%;
+  height: 90%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(23, 33, 43, 255);
+}
+/* Style header,main and footer from children */
+header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid black;
+}
+main {
+  overflow-y: auto;
+  flex: 1;
+  padding: 15px;
+}
+footer {
+  border-top: 1px solid black;
 }

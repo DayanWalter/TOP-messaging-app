@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './EditProfileSite.module.css';
 import { useEffect, useState } from 'react';
 import Site from './Site';
-import SiteContainer from '../container/SiteContainer';
 import Button from '../Button';
 
 export default function EditProfileSite() {
@@ -89,12 +88,12 @@ export default function EditProfileSite() {
       {error && <p>Error:{error}</p>}
       {userdata && (
         <Site>
-          <SiteContainer>
-            <header className={styles.header}>
-              <Link to={`/home/viewprofile/${activeUserId}`}>
-                <div className={styles.userIcon}>{userdata.username}</div>
-              </Link>
-            </header>
+          <header className={styles.header}>
+            <Link to={`/home/viewprofile/${activeUserId}`}>
+              <div className={styles.userIcon}>{userdata.username}</div>
+            </Link>
+          </header>
+          <main>
             <form className={styles.form} onSubmit={formSubmit}>
               <div className={styles.label}>
                 <div className={styles.labelName}>Description</div>
@@ -146,7 +145,8 @@ export default function EditProfileSite() {
                 {/* </Link> */}
               </div>
             </form>
-          </SiteContainer>
+          </main>
+          <footer>Footer</footer>
         </Site>
       )}
     </>

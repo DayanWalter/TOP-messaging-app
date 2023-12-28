@@ -1,23 +1,23 @@
-.header {
+/* .header {
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid black;
-}
+} */
 .userIcon {
   background-color: rgba(23, 43, 77);
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
 }
-.main {
-  /* flex: 1; */
-  padding: 25px;
+/* .main {
+  flex: 1;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
 .label {
   margin-bottom: 50px;
@@ -33,14 +33,14 @@
   padding: 10px;
   margin-bottom: 15px;
 }
-.footer {
+/* .footer {
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-top: 1px solid black;
   gap: 10rem;
-}
+} */
 /* .labelName {
   text-align: center;
   font-weight: bolder;

@@ -1,9 +1,9 @@
-.header {
+/* .header {
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 .userIcon {
   background-color: rgba(14, 22, 33, 1);
   width: 4rem;
@@ -14,13 +14,13 @@
   justify-content: center;
 }
 
-.form {
+/* .form {
   flex: 1;
   padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 .button {
   display: flex;
   gap: 50px;

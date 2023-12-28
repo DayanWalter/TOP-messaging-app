@@ -2,7 +2,6 @@ import { Link, useLoaderData } from 'react-router-dom';
 import styles from './ViewProfileSite.module.css';
 import { useEffect, useState } from 'react';
 import Site from './Site';
-import SiteContainer from '../container/SiteContainer';
 import Button from '../Button';
 import AddFriendForm from '../forms/AddFriendForm';
 
@@ -57,40 +56,36 @@ export default function ViewProfileSite() {
       {error && <p>Error {error}</p>}
       {userdata && (
         <Site>
-          <SiteContainer>
-            <header className={styles.header}>
-              <div className={styles.userIcon}></div>
-            </header>
+          <header className={styles.header}>
+            <div className={styles.userIcon}></div>
+          </header>
 
-            <main className={styles.main}>
-              <div className={styles.label}>
-                <div className={styles.labelName}>Description</div>
-                <div className={styles.labelContent}>
-                  {userdata.description}
-                </div>
-              </div>
-              <div className={styles.label}>
-                <div className={styles.labelName}>Name</div>
-                <div className={styles.labelContent}>{userdata.name}</div>
-              </div>
-              <div className={styles.label}>
-                <div className={styles.labelName}>Username</div>
-                <div className={styles.labelContent}>{userdata.username}</div>
-              </div>
-            </main>
+          <main className={styles.main}>
+            <div className={styles.label}>
+              <div className={styles.labelName}>Description</div>
+              <div className={styles.labelContent}>{userdata.description}</div>
+            </div>
+            <div className={styles.label}>
+              <div className={styles.labelName}>Name</div>
+              <div className={styles.labelContent}>{userdata.name}</div>
+            </div>
+            <div className={styles.label}>
+              <div className={styles.labelName}>Username</div>
+              <div className={styles.labelContent}>{userdata.username}</div>
+            </div>
+          </main>
 
-            <footer className={styles.footer}>
-              {receiverId !== userId ? (
-                <>
-                  <AddFriendForm friendId={receiverId} />
+          <footer className={styles.footer}>
+            {receiverId !== userId ? (
+              <>
+                <AddFriendForm friendId={receiverId} />
 
-                  <Link to={`/home/user/${receiverId}`}>
-                    <Button text={'Start to chat'} />
-                  </Link>
-                </>
-              ) : null}
-            </footer>
-          </SiteContainer>
+                <Link to={`/home/user/${receiverId}`}>
+                  <Button text={'Start to chat'} />
+                </Link>
+              </>
+            ) : null}
+          </footer>
         </Site>
       )}
     </>
