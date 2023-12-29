@@ -47,7 +47,7 @@ export default function DataFetch({ url, isActive, type }) {
   console.log(data);
   return (
     <>
-      {loading && <div>Enter a name...</div>}
+      {loading && <div>...</div>}
       {error && <div>{`There is a problem fetching the data - ${error}`}</div>}
 
       <ul>

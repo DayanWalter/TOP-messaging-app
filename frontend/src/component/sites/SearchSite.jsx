@@ -33,7 +33,7 @@ export default function SearchSite() {
             <Button text={'Search'} />
           </form>
 
-          <div className={styles.personContainer}>
+          <div className={styles.container}>
             <p>User:</p>
 
             <DataFetch
@@ -44,7 +44,7 @@ export default function SearchSite() {
               type={'user'}
             />
           </div>
-          <div className={styles.personContainer}>
+          <div className={styles.container}>
             <p>Groups:</p>
 
             <DataFetch
