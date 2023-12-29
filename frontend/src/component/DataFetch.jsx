@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import ListCard from './ListCard';
 
-export default function DataFetch({ url }) {
+export default function DataFetch({ url, isActive, type }) {
   const token = localStorage.getItem('jwtoken');
+  // Split the payload of the jwt and convert the username-part
+  const payload = JSON.parse(atob(token.split('.')[1]));
+  // Define the username you are looking for
+  const activeUser = payload.username;
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -33,24 +39,29 @@ export default function DataFetch({ url }) {
     }
   }
   useEffect(() => {
-    fetchData();
-  }, [url]);
+    if (isActive) {
+      fetchData();
+    }
+  }, [url, isActive]);
 
   console.log(data);
   return (
-    <div className="App">
-      <h1>API Posts</h1>
-      {loading && <div>A moment please...</div>}
+    <>
+      {loading && <div>Enter a name...</div>}
       {error && <div>{`There is a problem fetching the data - ${error}`}</div>}
 
       <ul>
         {data &&
-          data.all.map(({ _id, name }) => (
-            <li key={_id}>
-              <h3>{name}</h3>
-            </li>
-          ))}
+          data.all.map(({ _id, name, username }) =>
+            activeUser !== username ? (
+              <li key={_id}>
+                <Link to={`/home/${type}/${_id}`}>
+                  <ListCard name={name} />
+                </Link>
+              </li>
+            ) : null
+          )}
       </ul>
-    </div>
+    </>
   );
 }

@@ -1,95 +1,19 @@
 import { useState } from 'react';
 import styles from './SearchSite.module.css';
-import { Link } from 'react-router-dom';
-import ListCard from '../ListCard';
 import Site from './Site';
 import Button from '../Button';
 import Input from '../Input';
 import DataFetch from '../DataFetch';
 
 export default function SearchSite() {
-  const token = localStorage.getItem('jwtoken');
-  // Split the payload of the jwt and convert the username-part
-  const payload = JSON.parse(atob(token.split('.')[1]));
-  // Define the username you are looking for
-  const activeUser = payload.username;
-  const activeUserId = payload._id;
-
-  // Get all friends and display them in the sidebar
-  const [user, setUser] = useState(null);
-  const [userError, setUserError] = useState(null);
-  const [userLoading, setUserLoading] = useState(true);
-
   const [searchText, setSearchText] = useState('');
 
-  // Get all friends and display them in the sidebar
-  const [group, setGroup] = useState(null);
-  const [groupError, setGroupError] = useState(null);
-  const [groupLoading, setGroupLoading] = useState(true);
+  const [dataFetchActive, setDataFetchActive] = useState(false);
 
-  const getGroups = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/groups?groupname=${encodeURIComponent(
-          searchText
-        )}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      if (!response.ok) {
-        console.error('Error:', response.statusText);
-      }
-
-      const groups = await response.json();
-
-      setGroup(groups);
-      setGroupError(null);
-    } catch (error) {
-      setGroupError(error.message);
-      setGroup(null);
-    } finally {
-      setGroupLoading(false);
-    }
+  const handleGetData = () => {
+    setDataFetchActive(true);
   };
 
-  const getFriends = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/users?username=${encodeURIComponent(
-          searchText
-        )}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      if (!response.ok) {
-        console.error('Error:', response.statusText);
-      }
-
-      const users = await response.json();
-
-      setUser(users);
-      setUserError(null);
-    } catch (error) {
-      setUserError(error.message);
-      setUser(null);
-    } finally {
-      setUserLoading(false);
-    }
-  };
-  const handleGetData = (e) => {
-    getGroups(e);
-    getFriends(e);
-  };
   return (
     <>
       <Site>
@@ -110,55 +34,26 @@ export default function SearchSite() {
 
           <div className={styles.personContainer}>
             <p>People:</p>
-            {userLoading && <p>Enter a username...</p>}
-            {userError && <p>Error</p>}
-            {user && (
-              <ul>
-                {/* Map over all user an display them */}
-                {user.all.map(({ _id, username }) =>
-                  // Display alle users, except logged in user
-                  activeUser !== username ? (
-                    <li key={_id}>
-                      {/* Add ${id} for real people */}
-                      <Link to={`/home/user/${_id}`}>
-                        <ListCard name={username} />
-                      </Link>
-                    </li>
-                  ) : null
-                )}
-              </ul>
-            )}
+
+            <DataFetch
+              url={`http://localhost:3000/api/users?username=${encodeURIComponent(
+                searchText
+              )}`}
+              isActive={dataFetchActive}
+              type={'user'}
+            />
           </div>
           <div className={styles.personContainer}>
             <p>Groups:</p>
-            {groupLoading && (
-              <p>...or a groupname and click &quot;Search&quot;...</p>
-            )}
-            {groupError && <p>Error</p>}
-            {group && (
-              <ul>
-                {/* Map over all groups and display them */}
-                {group.all.map(({ _id, name }) => (
-                  <li key={_id}>
-                    {/* Add ${id} for real groups */}
-                    <Link to={`/home/group/${_id}`}>
-                      <ListCard name={name} />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
+
+            <DataFetch
+              url={`http://localhost:3000/api/groups?groupname=${encodeURIComponent(
+                searchText
+              )}`}
+              isActive={dataFetchActive}
+              type={'group'}
+            />
           </div>
-          <DataFetch
-            url={`http://localhost:3000/api/groups?groupname=${encodeURIComponent(
-              searchText
-            )}`}
-          />
-          <DataFetch
-            url={`http://localhost:3000/api/users?username=${encodeURIComponent(
-              searchText
-            )}`}
-          />
         </main>
         <footer className={styles.footer}></footer>
       </Site>
