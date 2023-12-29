@@ -6,7 +6,7 @@ export default function SignUpSite() {
   const navigate = useNavigate();
 
   const [formdata, setFormdata] = useState({
-    username: '',
+    name: '',
     email: '',
     password: '',
     confirmpassword: '',
@@ -17,8 +17,8 @@ export default function SignUpSite() {
     e.preventDefault();
     // POST the signup values from input
     try {
-      if (formdata.username.length < 5) {
-        setErrors('Username must be at least 5 chars long');
+      if (formdata.name.length < 5) {
+        setErrors('Name must be at least 5 chars long');
         return;
       }
       if (formdata.password.length < 3) {
@@ -72,10 +72,10 @@ export default function SignUpSite() {
         <form className={styles.loginForm} onSubmit={handleSubmit}>
           <input
             type="text"
-            name="username"
-            id="username"
-            placeholder="Choose Username"
-            value={formdata.username}
+            name="name"
+            id="name"
+            placeholder="Choose name"
+            value={formdata.name}
             onChange={handleInputChange}
           />
 

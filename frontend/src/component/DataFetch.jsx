@@ -7,7 +7,7 @@ export default function DataFetch({ url, isActive, type }) {
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the username you are looking for
-  const activeUser = payload.username;
+  const activeUser = payload.name;
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -52,8 +52,9 @@ export default function DataFetch({ url, isActive, type }) {
 
       <ul>
         {data &&
-          data.all.map(({ _id, name, username }) =>
-            activeUser !== username ? (
+          data.all.map(({ _id, name }) =>
+            // Don't show logged in user
+            activeUser !== name ? (
               <li key={_id}>
                 <Link to={`/home/${type}/${_id}`}>
                   <ListCard name={name} />

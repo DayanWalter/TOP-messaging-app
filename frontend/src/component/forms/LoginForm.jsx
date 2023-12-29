@@ -7,7 +7,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
   // Save input from form
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     password: '',
   });
 
@@ -48,10 +48,10 @@ export default function LoginForm() {
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <input
           type="text"
-          name="username"
-          id="username"
-          placeholder="Username"
-          value={formData.username}
+          name="name"
+          id="name"
+          placeholder="name"
+          value={formData.name}
           onChange={handleChange}
         />
         <input

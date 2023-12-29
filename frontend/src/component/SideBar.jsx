@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './SideBar.module.css';
 
-import SearchButton from './SearchButton';
 import FriendContainer from './container/FriendContainer';
 import GroupContainer from './container/GroupContainer';
 import Button from './Button';
-import Input from './Input';
 import AddGroupForm from './forms/AddGroupForm';
 
 export default function SideBar() {
@@ -13,7 +11,7 @@ export default function SideBar() {
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the username you are looking for
-  const activeUser = payload.username;
+  const activeUser = payload.name;
   const activeUserId = payload._id;
 
   return (

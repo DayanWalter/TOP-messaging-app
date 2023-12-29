@@ -7,10 +7,7 @@ const passport = require('passport');
 
 // POST user/Create user
 exports.user_post = [
-  body('username', 'Name must not be empty')
-    .trim()
-    .isLength({ min: 5 })
-    .escape(),
+  body('name', 'Name must not be empty').trim().isLength({ min: 5 }).escape(),
   body('password', 'Password too short(min 3)').isLength({
     min: 3,
   }),
@@ -26,7 +23,7 @@ exports.user_post = [
     const result = validationResult(req);
     bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
       const user = new User({
-        username: req.body.username,
+        name: req.body.name,
         password: hashedPassword,
         email: req.body.email,
       });
@@ -44,18 +41,18 @@ exports.user_post = [
 ];
 // POST User Login
 exports.user_login = asyncHandler(async (req, res, next) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username });
+  const { name, password } = req.body;
+  const user = await User.findOne({ name });
   const match = await bcrypt.compare(password, user.password);
 
   if (match) {
     const autheticatedUser = {
-      // set the _id and username of authenticatedUser
+      // set the _id and name of authenticatedUser
       _id: user._id,
-      username,
+      name,
     };
 
-    // Sign the token with username AND _id(autheticatedUser)
+    // Sign the token with name AND _id(autheticatedUser)
     const token = jwt.sign(autheticatedUser, process.env.ACCESS_TOKEN_SECRET);
 
     res.send({ user_login: 'Success', token });
@@ -85,9 +82,9 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
 
 // GET all users for search for example
 exports.user_search = asyncHandler(async (req, res, next) => {
-  const searchQuery = req.query.username;
-  // Check if the query is true(has a value), if yes, take query as value for username
-  const query = searchQuery ? { username: searchQuery } : {};
+  const searchQuery = req.query.name;
+  // Check if the query is true(has a value), if yes, take query as value for name
+  const query = searchQuery ? { name: searchQuery } : {};
   const all = await User.find(query).exec();
   res.json({ all });
 });

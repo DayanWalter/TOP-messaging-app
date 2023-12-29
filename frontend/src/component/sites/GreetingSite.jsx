@@ -5,12 +5,10 @@ export default function GreetingSite() {
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the username you are looking for
-  const username = payload.username;
+  const name = payload.name;
   return (
     <>
-      <div className={styles.site}>
-        Hello, {username}. Nice to see you again.
-      </div>
+      <div className={styles.site}>Hello, {name}. Nice to see you again.</div>
     </>
   );
 }
