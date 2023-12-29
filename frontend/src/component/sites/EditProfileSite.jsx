@@ -3,6 +3,7 @@ import styles from './EditProfileSite.module.css';
 import { useEffect, useState } from 'react';
 import Site from './Site';
 import Button from '../Button';
+import UserIcon from '../UserIcon';
 
 export default function EditProfileSite() {
   const token = localStorage.getItem('jwtoken');
@@ -89,9 +90,7 @@ export default function EditProfileSite() {
       {userdata && (
         <Site>
           <header className={styles.header}>
-            <Link to={`/home/viewprofile/${activeUserId}`}>
-              <div className={styles.userIcon}>{userdata.username}</div>
-            </Link>
+            <UserIcon />
           </header>
           <main>
             <form className={styles.form} onSubmit={formSubmit}>

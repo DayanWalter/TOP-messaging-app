@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Site from './Site';
 import Button from '../Button';
 import AddFriendForm from '../forms/AddFriendForm';
+import UserIcon from '../UserIcon';
 
 export default function ViewProfileSite() {
   // Get params for receiver
@@ -57,7 +58,7 @@ export default function ViewProfileSite() {
       {userdata && (
         <Site>
           <header className={styles.header}>
-            <div className={styles.userIcon}></div>
+            <UserIcon />
           </header>
 
           <main className={styles.main}>
