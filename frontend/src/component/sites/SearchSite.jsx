@@ -5,7 +5,6 @@ import ListCard from '../ListCard';
 import Site from './Site';
 import Button from '../Button';
 import Input from '../Input';
-import List from '../List';
 import DataFetch from '../DataFetch';
 
 export default function SearchSite() {
@@ -139,11 +138,11 @@ export default function SearchSite() {
             {group && (
               <ul>
                 {/* Map over all groups and display them */}
-                {group.all.map(({ _id, groupname }) => (
+                {group.all.map(({ _id, name }) => (
                   <li key={_id}>
                     {/* Add ${id} for real groups */}
                     <Link to={`/home/group/${_id}`}>
-                      <ListCard name={groupname} />
+                      <ListCard name={name} />
                     </Link>
                   </li>
                 ))}
@@ -152,6 +151,11 @@ export default function SearchSite() {
           </div>
           <DataFetch
             url={`http://localhost:3000/api/groups?groupname=${encodeURIComponent(
+              searchText
+            )}`}
+          />
+          <DataFetch
+            url={`http://localhost:3000/api/users?username=${encodeURIComponent(
               searchText
             )}`}
           />
