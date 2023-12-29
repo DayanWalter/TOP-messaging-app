@@ -10,7 +10,8 @@ export default function SearchSite() {
 
   const [dataFetchActive, setDataFetchActive] = useState(false);
 
-  const handleGetData = () => {
+  const handleGetData = (e) => {
+    e.preventDefault();
     setDataFetchActive(true);
   };
 
@@ -33,7 +34,7 @@ export default function SearchSite() {
           </form>
 
           <div className={styles.personContainer}>
-            <p>People:</p>
+            <p>User:</p>
 
             <DataFetch
               url={`http://localhost:3000/api/users?username=${encodeURIComponent(
