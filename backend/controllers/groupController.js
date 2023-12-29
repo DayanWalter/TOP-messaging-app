@@ -9,8 +9,8 @@ exports.group_search = asyncHandler(async (req, res, next) => {
   const searchQuery = req.query.groupname;
   // Check if the query is true(has a value), if yes, take query as value for username
   const query = searchQuery ? { name: searchQuery } : {};
-  const allGroups = await Group.find(query).exec();
-  res.json({ allGroups });
+  const all = await Group.find(query).exec();
+  res.json({ all });
 });
 
 // GET detail from one group
@@ -26,23 +26,20 @@ exports.group_detail = asyncHandler(async (req, res, next) => {
   }
 
   res.json({
-    groupname: group.groupname,
+    name: group.name,
   });
 });
 
 // POST group/Create group
 exports.group_add = [
   // VALIDATE INPUT, BEFORE CREATING NEW GROUP!!!
-  body('groupname', 'Name must not be empty')
-    .trim()
-    .isLength({ min: 5 })
-    .escape(),
+  body('name', 'Name must not be empty').trim().isLength({ min: 5 }).escape(),
 
   asyncHandler(async (req, res, next) => {
     const result = validationResult(req);
 
     const group = new Group({
-      groupname: req.body.groupname,
+      name: req.body.name,
     });
 
     if (result.isEmpty()) {

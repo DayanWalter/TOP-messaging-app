@@ -5,6 +5,8 @@ import ListCard from '../ListCard';
 import Site from './Site';
 import Button from '../Button';
 import Input from '../Input';
+import List from '../List';
+import DataFetch from '../DataFetch';
 
 export default function SearchSite() {
   const token = localStorage.getItem('jwtoken');
@@ -108,12 +110,13 @@ export default function SearchSite() {
           </form>
 
           <div className={styles.personContainer}>
+            <p>People:</p>
             {userLoading && <p>Enter a username...</p>}
             {userError && <p>Error</p>}
             {user && (
               <ul>
                 {/* Map over all user an display them */}
-                {user.allUser.map(({ _id, username }) =>
+                {user.all.map(({ _id, username }) =>
                   // Display alle users, except logged in user
                   activeUser !== username ? (
                     <li key={_id}>
@@ -128,6 +131,7 @@ export default function SearchSite() {
             )}
           </div>
           <div className={styles.personContainer}>
+            <p>Groups:</p>
             {groupLoading && (
               <p>...or a groupname and click &quot;Search&quot;...</p>
             )}
@@ -135,7 +139,7 @@ export default function SearchSite() {
             {group && (
               <ul>
                 {/* Map over all groups and display them */}
-                {group.allGroups.map(({ _id, groupname }) => (
+                {group.all.map(({ _id, groupname }) => (
                   <li key={_id}>
                     {/* Add ${id} for real groups */}
                     <Link to={`/home/group/${_id}`}>
@@ -146,6 +150,11 @@ export default function SearchSite() {
               </ul>
             )}
           </div>
+          <DataFetch
+            url={`http://localhost:3000/api/groups?groupname=${encodeURIComponent(
+              searchText
+            )}`}
+          />
         </main>
         <footer className={styles.footer}></footer>
       </Site>

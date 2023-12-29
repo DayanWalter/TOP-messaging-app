@@ -1,15 +1,13 @@
 import Input from '../Input';
 import Button from '../Button';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './AddGroupForm.module.css';
 
 export default function AddGroupForm() {
   const token = localStorage.getItem('jwtoken');
-  const navigate = useNavigate();
 
   const [formdata, setFormdata] = useState({
-    groupname: '',
+    name: '',
   });
 
   // Errors for input validation
@@ -30,7 +28,7 @@ export default function AddGroupForm() {
     e.preventDefault();
     // POST the signup values from input
     try {
-      if (formdata.groupname.length < 5) {
+      if (formdata.name.length < 5) {
         setErrors('Groupname must be at least 5 chars long');
         return;
       }
@@ -50,7 +48,6 @@ export default function AddGroupForm() {
       }
       // else: successfull signup
       const data = await response.json();
-      console.log(data);
       if (data.group) {
         console.log('Group created:', data.group);
       } else if (data.errors) {
@@ -62,14 +59,13 @@ export default function AddGroupForm() {
       console.error('Error', error);
     }
   };
-
   return (
     <form onSubmit={handleAddGroup} className={styles.form}>
       <hr />
       <Input
-        name={'groupname'}
-        id={'groupname'}
-        value={formdata.groupname}
+        name={'name'}
+        id={'name'}
+        value={formdata.name}
         placeholder={'Enter new groupname'}
         onChange={handleInputChange}
         className={styles.input}

@@ -88,8 +88,8 @@ exports.user_search = asyncHandler(async (req, res, next) => {
   const searchQuery = req.query.username;
   // Check if the query is true(has a value), if yes, take query as value for username
   const query = searchQuery ? { username: searchQuery } : {};
-  const allUser = await User.find(query).exec();
-  res.json({ allUser });
+  const all = await User.find(query).exec();
+  res.json({ all });
 });
 
 // PUT for updating one user

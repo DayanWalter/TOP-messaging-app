@@ -51,3 +51,12 @@
   color: white;
   text-align: center;
 }
+
+.personContainer {
+  overflow-y: auto;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  height: 200px;
+  width: 90%;
+  padding: 1rem;
+}
