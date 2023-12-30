@@ -47,9 +47,9 @@ export default function FriendContainer() {
       {userError && <p>Error</p>}
       {user && (
         <ul>
-          {/* Map over all user an display them */}
+          {/* Map over all user and display them */}
           {user.friends.map(({ _id, name }) =>
-            // Display alle users, except logged in user
+            // Display all users, except logged in user
             activeUser !== name ? (
               <li key={_id}>
                 {/* Add ${id} for real people */}
