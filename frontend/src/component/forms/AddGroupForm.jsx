@@ -7,7 +7,7 @@ export default function AddGroupForm() {
   const token = localStorage.getItem('jwtoken');
 
   const [formdata, setFormdata] = useState({
-    name: '',
+    groupname: '',
   });
 
   // Errors for input validation
@@ -25,6 +25,7 @@ export default function AddGroupForm() {
     setFormdata(newFormdata);
   };
   const handleAddGroup = async (e) => {
+    console.log(formdata);
     e.preventDefault();
     // POST the signup values from input
     try {
@@ -63,8 +64,8 @@ export default function AddGroupForm() {
     <form onSubmit={handleAddGroup} className={styles.form}>
       <hr />
       <Input
-        name={'name'}
-        id={'name'}
+        name={'groupname'}
+        id={'groupname'}
         value={formdata.groupname}
         placeholder={'Enter new groupname'}
         onChange={handleInputChange}

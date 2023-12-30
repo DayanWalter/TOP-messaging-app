@@ -33,7 +33,10 @@ exports.group_detail = asyncHandler(async (req, res, next) => {
 // POST group/Create group
 exports.group_add = [
   // VALIDATE INPUT, BEFORE CREATING NEW GROUP!!!
-  body('name', 'Name must not be empty').trim().isLength({ min: 5 }).escape(),
+  body('groupname', 'Name must not be empty')
+    .trim()
+    .isLength({ min: 5 })
+    .escape(),
 
   asyncHandler(async (req, res, next) => {
     const result = validationResult(req);
