@@ -8,7 +8,7 @@ const { body, validationResult } = require('express-validator');
 exports.group_search = asyncHandler(async (req, res, next) => {
   const searchQuery = req.query.groupname;
   // Check if the query is true(has a value), if yes, take query as value for username
-  const query = searchQuery ? { name: searchQuery } : {};
+  const query = searchQuery ? { groupname: searchQuery } : {};
   const all = await Group.find(query).exec();
   res.json({ all });
 });
@@ -26,7 +26,7 @@ exports.group_detail = asyncHandler(async (req, res, next) => {
   }
 
   res.json({
-    name: group.name,
+    name: group.groupname,
   });
 });
 
@@ -39,7 +39,7 @@ exports.group_add = [
     const result = validationResult(req);
 
     const group = new Group({
-      name: req.body.name,
+      groupname: req.body.groupname,
     });
 
     if (result.isEmpty()) {

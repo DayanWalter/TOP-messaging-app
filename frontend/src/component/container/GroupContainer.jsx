@@ -46,11 +46,11 @@ export default function GroupContainer() {
       {groupError && <p>Error</p>}
       {group && (
         <ul>
-          {group.all.map(({ _id, name }) => (
+          {group.all.map(({ _id, groupname }) => (
             <li key={_id}>
               {/* Add ${id} for real rooms*/}
               <Link to={`/home/group/${_id}`}>
-                <ListCard name={name} />
+                <ListCard name={groupname} />
               </Link>
             </li>
           ))}

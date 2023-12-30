@@ -40,8 +40,10 @@ export default function ChatRoomSite() {
         }
 
         const data = await response.json();
-        data.username ? setName(data.username) : setName(data.name);
-        data.username ? setHeaderVisible(true) : setHeaderVisible(false);
+        // If data.username is available setName to username, else setName to name
+        data.name ? setName(data.name) : setName(data.groupname);
+
+        data.name ? setHeaderVisible(true) : setHeaderVisible(false);
       } catch (error) {
         setError(error.message);
         setMessages(null);

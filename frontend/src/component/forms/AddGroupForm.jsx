@@ -28,7 +28,7 @@ export default function AddGroupForm() {
     e.preventDefault();
     // POST the signup values from input
     try {
-      if (formdata.name.length < 5) {
+      if (formdata.groupname.length < 5) {
         setErrors('Groupname must be at least 5 chars long');
         return;
       }
@@ -65,7 +65,7 @@ export default function AddGroupForm() {
       <Input
         name={'name'}
         id={'name'}
-        value={formdata.name}
+        value={formdata.groupname}
         placeholder={'Enter new groupname'}
         onChange={handleInputChange}
         className={styles.input}
