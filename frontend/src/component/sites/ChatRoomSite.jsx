@@ -103,7 +103,7 @@ export default function ChatRoomSite() {
           <main className={styles.main}>
             <ul>
               {messages.messages.map(({ _id, text, sender, timestamp }) =>
-                sender.username !== username ? (
+                sender.name !== name ? (
                   <li key={_id}>
                     <MessageCard text={text} time={timestamp} sender={sender} />
                   </li>

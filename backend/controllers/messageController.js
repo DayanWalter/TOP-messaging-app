@@ -19,7 +19,7 @@ exports.message_user_get = asyncHandler(async (req, res, next) => {
     ],
   })
     // Projection for just the "username"
-    .populate('sender', 'username')
+    .populate('sender', 'name')
     .exec();
 
   res.json({ messages });
@@ -56,7 +56,7 @@ exports.message_group_get = asyncHandler(async (req, res, next) => {
     'receiver.group': receiverId,
   })
     // Projection for just the "username"
-    .populate('sender', 'username')
+    .populate('sender', 'name')
     .exec();
   res.json({ messages });
 });

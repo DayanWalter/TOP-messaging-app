@@ -7,7 +7,7 @@ export default function FriendContainer() {
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the username you are looking for
-  const activeUser = payload.username;
+  const activeUser = payload.name;
 
   // Get all friends and display them in the sidebar
   const [user, setUser] = useState(null);
@@ -48,13 +48,13 @@ export default function FriendContainer() {
       {user && (
         <ul>
           {/* Map over all user an display them */}
-          {user.friends.map(({ _id, username }) =>
+          {user.friends.map(({ _id, name }) =>
             // Display alle users, except logged in user
-            activeUser !== username ? (
+            activeUser !== name ? (
               <li key={_id}>
                 {/* Add ${id} for real people */}
                 <Link to={`/home/user/${_id}`}>
-                  <ListCard name={username} />
+                  <ListCard name={name} />
                 </Link>
               </li>
             ) : null
