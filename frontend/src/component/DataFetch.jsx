@@ -52,15 +52,25 @@ export default function DataFetch({ url, isActive, type }) {
 
       <ul>
         {data &&
-          data.all.map(({ _id, name }) =>
-            // Don't show logged in user
-            activeUser !== name ? (
+          data.all.map(({ _id, name, groupname }) =>
+            // If data is user data...
+            name ? (
+              // (Don't show logged in user)
+              activeUser !== name ? (
+                <li key={_id}>
+                  <Link to={`/home/${type}/${_id}`}>
+                    <ListCard name={name} />
+                  </Link>
+                </li>
+              ) : null
+            ) : (
+              // else show group data
               <li key={_id}>
                 <Link to={`/home/${type}/${_id}`}>
-                  <ListCard name={name} />
+                  <ListCard name={groupname} />
                 </Link>
               </li>
-            ) : null
+            )
           )}
       </ul>
     </>

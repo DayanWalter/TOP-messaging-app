@@ -26,7 +26,7 @@ exports.group_detail = asyncHandler(async (req, res, next) => {
   }
 
   res.json({
-    name: group.groupname,
+    groupname: group.groupname,
   });
 });
 
