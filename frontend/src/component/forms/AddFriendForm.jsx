@@ -1,16 +1,12 @@
-import { Link, useLoaderData } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../Button';
+
 export default function AddFriendForm({ friendId }) {
   const token = localStorage.getItem('jwtoken');
   // Split the payload of the jwt and convert the username-part
   const payload = JSON.parse(atob(token.split('.')[1]));
   // Define the username you are looking for
   const username = payload.username;
-
-  const [userdata, setUserdata] = useState();
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   //fetch data for user
 
@@ -46,8 +42,6 @@ export default function AddFriendForm({ friendId }) {
       <form onSubmit={addFriend}>
         <Button text={'Add Friend'} />
       </form>
-
-      {/* <button onClick={addFriend}>Add Friend</button> */}
     </>
   );
 }

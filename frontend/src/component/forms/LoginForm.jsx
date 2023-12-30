@@ -50,7 +50,7 @@ export default function LoginForm() {
           type="text"
           name="name"
           id="name"
-          placeholder="name"
+          placeholder="Name"
           value={formData.name}
           onChange={handleChange}
         />
